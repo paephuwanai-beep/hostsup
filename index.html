@@ -19,7 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
-    :root { --primary-color: #1e3c72; --secondary-color: #2a5298; --accent-color: #6f42c1; --bg-light: #f4f6f9; }
+    :root { --primary-color: #1e3c72; --secondary-color: #2a5298; --accent-color: #6f42c1; --bg-light: #e0e5ec; }
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
@@ -29,7 +29,7 @@
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
     /* Navigation Menu (Desktop Default) */
-    .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .nav-pills { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .nav-pills .nav-link { color: #555; font-weight: 600; border-radius: 12px; padding: 12px; font-size: 0.95rem; transition: all 0.3s; cursor: pointer; border: none; width: 100%;}
     .nav-pills .nav-link.active { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2); }
     
@@ -51,35 +51,54 @@
       .nav-pills .nav-link.active { background: #eef2ff !important; color: var(--primary-color) !important; box-shadow: none !important; font-weight: 700; }
     }
 
-    /* Quick Launch Menu in Home */
-    .quick-menu-btn { background: white; border-radius: 15px; padding: 15px 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; width: 100%; transition: all 0.2s; color: #555; font-weight: 600;}
-    .quick-menu-btn:hover, .quick-menu-btn:active { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: #fafafa;}
+    /* Glassmorphism Styles */
+    .custom-card, .filter-box, .quick-menu-btn, #chartWrapper { 
+        background: rgba(255, 255, 255, 0.7) !important; 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px); 
+        border: 1px solid rgba(255, 255, 255, 0.8); 
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        border-radius: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    
+    .quick-menu-btn { padding: 15px 5px; width: 100%; transition: all 0.2s; color: #555; font-weight: 600; cursor: pointer;}
+    .quick-menu-btn:hover, .quick-menu-btn:active { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: rgba(255,255,255,0.9) !important;}
     .quick-menu-btn i { font-size: 2rem; margin-bottom: 8px; display: block;}
 
-    .custom-card { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); background: white; margin-bottom: 20px; overflow: hidden; }
-    .card-title-bar { background: #fff; padding: 12px 18px; font-weight: 600; font-size: 1.05rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; color: var(--primary-color); }
+    .card-title-bar { background: transparent; padding: 12px 18px; font-weight: 600; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; color: var(--primary-color); }
     .card-title-bar i { margin-right: 10px; font-size: 1.2rem; opacity: 0.8; }
     .card-body-custom { padding: 15px; } 
-    .form-label { font-weight: 600; font-size: 0.85rem; color: #555; margin-bottom: 6px; }
-    .form-control, .form-select { border-radius: 10px; border: 1px solid #ddd; padding: 10px 12px; font-size: 16px; background-color: #fafafa; }
-    .form-control:focus, .form-select:focus { border-color: var(--accent-color); background-color: #fff; box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1); }
     
-    .signature-wrapper { border: 2px dashed #ced4da; border-radius: 10px; background-color: #fff; position: relative; overflow: hidden; }
+    .form-label { font-weight: 600; font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+    .form-control, .form-select, .select2-container--bootstrap-5 .select2-selection { 
+        border-radius: 10px; 
+        border: 1px solid rgba(255,255,255,0.5); 
+        padding: 10px 12px; 
+        font-size: 16px; 
+        background-color: rgba(255, 255, 255, 0.8) !important; 
+    }
+    .form-control:focus, .form-select:focus { border-color: var(--accent-color); background-color: #fff !important; box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1); }
+    
+    .signature-wrapper { border: 2px dashed #ced4da; border-radius: 10px; background-color: rgba(255,255,255,0.8); position: relative; overflow: hidden; }
     #signaturePad { width: 100%; height: 200px; touch-action: none; cursor: crosshair; }
     .btn-clear-sig { position: absolute; top: 10px; right: 10px; z-index: 10; border-radius: 20px; font-size: 0.8rem; }
     
-    .select2-container--bootstrap-5 .select2-selection { font-size: 16px !important; border-radius: 10px; border-color: #ddd; background-color: #fafafa; min-height: 42px; display: flex; align-items: center; }
-    .stats-container { background: #f8f9fa; border: 1px solid #ececec; border-radius: 12px; padding: 12px; margin-top: 15px; }
+    .select2-container--bootstrap-5 .select2-selection { min-height: 42px; display: flex; align-items: center; }
+    .stats-container { background: rgba(248, 249, 250, 0.5); border: 1px solid rgba(236, 236, 236, 0.5); border-radius: 12px; padding: 12px; margin-top: 15px; }
     .stat-title { font-size: 0.85rem; font-weight: bold; color: #666; margin-bottom: 8px; display: block; }
     .btn-gradient { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; border: none; padding: 14px; font-weight: 600; font-size: 1.1rem; border-radius: 12px; box-shadow: 0 6px 15px rgba(111, 66, 193, 0.25); transition: transform 0.2s; width: 100%;}
-    .btn-gradient:hover { transform: translateY(-2px); color: white; }
+    .btn-gradient:hover:not(:disabled) { transform: translateY(-2px); color: white; }
+    .btn-gradient:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    
     #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; flex-direction:column; justify-content:center; align-items:center; backdrop-filter: blur(4px); }
     
     table.dataTable tbody td { vertical-align: middle; font-size: 0.9rem; }
     .table-responsive { border-radius: 10px; }
     
-    /* Snapshot System */
-    #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; }
+    /* Snapshot System (Hidden normally, used for PDF/Image) */
+    #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; z-index: -100;}
     .snap-header { text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 25px; }
     .snap-header h2 { color: var(--primary-color); font-weight: bold; margin: 0; }
     .snap-header p { margin: 5px 0 0; color: #666; }
@@ -91,7 +110,7 @@
     .snap-block { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
 
     /* Dashboard UI */
-    .dash-card { border-radius: 15px; padding: 20px; color: white; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 130px;}
+    .dash-card { border-radius: 15px; padding: 20px; color: white; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 130px; border: none;}
     .dash-card .bg-icon { position: absolute; right: -10px; bottom: -20px; font-size: 6rem; opacity: 0.2; }
     .dash-card .title { font-size: 1rem; font-weight: 600; margin-bottom: 5px; z-index: 1; position: relative; display: flex; align-items: center; gap: 8px;}
     .dash-card .value { font-size: 2.8rem; font-weight: 700; line-height: 1; z-index: 1; position: relative; margin-top: 5px;}
@@ -101,13 +120,11 @@
     .bg-orange { background: linear-gradient(135deg, #ff9966, #ff5e62); }
     .bg-purple { background: linear-gradient(135deg, #7F00FF, #E100FF); }
     .bg-green { background: linear-gradient(135deg, #11998e, #38ef7d); }
-    .filter-box { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 20px; border: 1px solid #f0f0f0; }
-    #chartWrapper { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
 
     /* Hand-out Infographic UI */
-    .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
+    .ho-bg { background-color: transparent; font-family: 'Sarabun', sans-serif; }
     .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
-    .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative;}
+    .ho-card { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative;}
     .ho-card:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
     .ho-card-header { padding: 1rem; display: flex; align-items: center; gap: 0.75rem; }
     .ho-icon-box { background: white; padding: 0.5rem; border-radius: 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; width: 3rem; height: 3rem; font-size: 1.5rem;}
@@ -135,7 +152,6 @@
 
     .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
     .bg-indigo { background-color: #6366f1; } .bg-cyan { background-color: #06b6d4; } .bg-emerald { background-color: #10b981; } .bg-rose { background-color: #f43f5e; } .bg-fuchsia { background-color: #d946ef; }
-    
     .ho-mini-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 0.2rem; margin-right: 0.2rem;}
     .badge-rose { background-color: #ffe4e6; color: #be123c; } .badge-indigo { background-color: #e0e7ff; color: #4338ca; }
 
@@ -161,7 +177,7 @@
 
 <div id="loadingOverlay">
   <div class="spinner-border text-primary" style="width: 3.5rem; height: 3.5rem;"></div>
-  <h5 class="mt-3 text-primary fw-bold">กำลังประมวลผล...</h5>
+  <h5 class="mt-3 text-primary fw-bold" id="loadingText">กำลังประมวลผล...</h5>
 </div>
 
 <div id="captureArea" class="print-hide">
@@ -195,69 +211,23 @@
 
   <div id="dashboardSection">
     <div id="pdfDashboardArea">
-      
       <div class="row g-3 mb-4 print-hide">
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showForm()">
-            <i class="fas fa-plus-circle" style="color: #6f42c1;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">บันทึกเวร</span>
-          </button>
-        </div>
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showTable()">
-            <i class="fas fa-list-ul" style="color: #1e3c72;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">ประวัติ</span>
-          </button>
-        </div>
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showHandout()">
-            <i class="fas fa-book-medical" style="color: #10b981;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">คู่มือ</span>
-          </button>
-        </div>
+        <div class="col-4"><button class="quick-menu-btn text-center custom-card" onclick="showForm()"><i class="fas fa-plus-circle" style="color: #6f42c1;"></i><span class="d-block" style="font-size: 0.85rem;">บันทึกเวร</span></button></div>
+        <div class="col-4"><button class="quick-menu-btn text-center custom-card" onclick="showTable()"><i class="fas fa-list-ul" style="color: #1e3c72;"></i><span class="d-block" style="font-size: 0.85rem;">ประวัติ</span></button></div>
+        <div class="col-4"><button class="quick-menu-btn text-center custom-card" onclick="showHandout()"><i class="fas fa-book-medical" style="color: #10b981;"></i><span class="d-block" style="font-size: 0.85rem;">คู่มือ</span></button></div>
       </div>
 
       <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-blue-light">
-            <i class="fas fa-calendar-alt bg-icon"></i>
-            <div class="title"><i class="fas fa-circle text-primary" style="font-size:0.6rem;"></i> วันที่ปัจจุบัน</div>
-            <div class="value" id="dash_date" style="font-size: 1.5rem; margin-top: 15px;">-</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-orange">
-            <i class="fas fa-ambulance bg-icon"></i>
-            <div class="title"><i class="fas fa-exclamation-triangle"></i> Refer รวม (ล่าสุด)</div>
-            <div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-green">
-            <i class="fas fa-bed bg-icon"></i>
-            <div class="title"><i class="fas fa-venus-mars"></i> IPD รวม (ล่าสุด)</div>
-            <div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-purple">
-            <i class="fas fa-user-injured bg-icon"></i>
-            <div class="title"><i class="fas fa-procedures"></i> ผู้ป่วย ER (ล่าสุด)</div>
-            <div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-blue-light"><i class="fas fa-calendar-alt bg-icon"></i><div class="title"><i class="fas fa-circle text-primary" style="font-size:0.6rem;"></i> วันที่ปัจจุบัน</div><div class="value" id="dash_date" style="font-size: 1.5rem; margin-top: 15px;">-</div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-orange"><i class="fas fa-ambulance bg-icon"></i><div class="title"><i class="fas fa-exclamation-triangle"></i> Refer (ล่าสุด)</div><div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title"><i class="fas fa-venus-mars"></i> IPD (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-purple"><i class="fas fa-user-injured bg-icon"></i><div class="title"><i class="fas fa-procedures"></i> ER (ล่าสุด)</div><div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div></div></div>
       </div>
 
       <div class="filter-box" data-html2canvas-ignore="true">
         <div class="row g-3 align-items-end">
-          <div class="col-12 col-md-3">
-            <label class="form-label">ตั้งแต่วันที่</label>
-            <input type="date" class="form-control" id="filterStartDate" onchange="renderChart()">
-          </div>
-          <div class="col-12 col-md-3">
-            <label class="form-label">ถึงวันที่</label>
-            <input type="date" class="form-control" id="filterEndDate" onchange="renderChart()">
-          </div>
+          <div class="col-12 col-md-3"><label class="form-label">ตั้งแต่วันที่</label><input type="date" class="form-control" id="filterStartDate" onchange="renderChart()"></div>
+          <div class="col-12 col-md-3"><label class="form-label">ถึงวันที่</label><input type="date" class="form-control" id="filterEndDate" onchange="renderChart()"></div>
           <div class="col-12 col-md-3">
             <label class="form-label">ข้อมูลที่ต้องการวิเคราะห์</label>
             <select class="form-select" id="filterDataSelect" multiple="multiple" style="width: 100%;" onchange="renderChart()">
@@ -273,25 +243,17 @@
           <div class="col-6 col-md-2">
             <label class="form-label">รูปแบบ</label>
             <select class="form-select" id="filterChartType" onchange="renderChart()">
-              <option value="bar">แท่ง (Bar)</option>
-              <option value="line">เส้น (Line)</option>
-              <option value="pie">วงกลม (Pie)</option>
-              <option value="table">ตาราง (Table)</option>
+              <option value="bar">แท่ง (Bar)</option><option value="line">เส้น (Line)</option><option value="pie">วงกลม (Pie)</option><option value="table">ตาราง (Table)</option>
             </select>
           </div>
-          <div class="col-6 col-md-1 d-grid">
-            <button class="btn btn-danger h-100" onclick="exportDashboardPDF()" title="ดาวน์โหลดเป็น PDF"><i class="fas fa-file-pdf"></i></button>
-          </div>
+          <div class="col-6 col-md-1 d-grid"><button class="btn btn-danger h-100" onclick="exportDashboardPDF()" title="ดาวน์โหลดเป็น PDF"><i class="fas fa-file-pdf"></i></button></div>
         </div>
       </div>
 
       <div id="chartWrapper">
         <canvas id="mainDashboardChart" style="max-height: 400px;"></canvas>
         <div id="dashboardTableArea" style="display: none;" class="table-responsive">
-          <table class="table table-bordered table-striped" id="dashTable">
-            <thead class="table-light"><tr></tr></thead>
-            <tbody></tbody>
-          </table>
+          <table class="table table-bordered table-striped" id="dashTable"><thead class="table-light"><tr></tr></thead><tbody></tbody></table>
         </div>
       </div>
     </div>
@@ -309,382 +271,14 @@
   </div>
 
   <div id="handoutSection" style="display:none;" class="ho-bg pb-5">
-    
     <div class="ho-header">
-      <div class="d-flex align-items-center gap-3">
-        <i class="fas fa-heartbeat fa-3x"></i>
-        <div>
-          <h1 class="mb-0 fw-bold fs-3">คู่มือพยาบาลตรวจการ</h1>
-          <p class="mb-0 opacity-75 fs-5">Nurse Supervisor Guide — โรงพยาบาลชุมชน</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-center gap-3 mt-3 mt-md-0">
-        <div class="text-end d-none d-md-block">
-          <p class="mb-0 fw-bold fs-5">5 ความรู้หลัก</p>
-          <p class="mb-0 fs-6 opacity-75">ที่ต้องมีในเวรตรวจการ</p>
-        </div>
-        <button onclick="window.print()" class="btn btn-light rounded-circle print-hide shadow-sm" style="width:50px; height:50px;" title="พิมพ์ Infographic">
-          <i class="fas fa-print fs-5 text-primary"></i>
-        </button>
-      </div>
+      <div class="d-flex align-items-center gap-3"><i class="fas fa-heartbeat fa-3x"></i><div><h1 class="mb-0 fw-bold fs-3">คู่มือพยาบาลตรวจการ</h1><p class="mb-0 opacity-75 fs-5">Nurse Supervisor Guide — โรงพยาบาลชุมชน</p></div></div>
+      <div class="d-flex align-items-center gap-3 mt-3 mt-md-0"><div class="text-end d-none d-md-block"><p class="mb-0 fw-bold fs-5">5 ความรู้หลัก</p><p class="mb-0 fs-6 opacity-75">ที่ต้องมีในเวรตรวจการ</p></div><button onclick="window.print()" class="btn btn-light rounded-circle print-hide shadow-sm" style="width:50px; height:50px;"><i class="fas fa-print fs-5 text-primary"></i></button></div>
     </div>
-
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      
-      <div class="col">
-        <div class="ho-card theme-blue">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-users"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 01</div>
-              <h3 class="ho-title">การบริหารอัตรากำลัง</h3>
-              <p class="ho-subtitle">Human Resource Management</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>ประเมินก่อนรับเวร:</b> IPD ผู้ป่วยหนัก สัดส่วนพยาบาลไม่เกิน 1:4 / ER ไม่เกิน 1:3</div></li>
-              <li><div class="ho-bullet"></div><div><b>Patient Acuity:</b> ประเมิน Level 1-3, ผู้ป่วย on vent / drip / post-op</div></li>
-              <li><div class="ho-bullet"></div><div><b>Float Staff:</b> เกลี่ยคนเมื่อขาด &rarr; บันทึก Float Log &rarr; แจ้งหัวหน้า/ตาม On-call</div></li>
-              <li><div class="ho-bullet"></div><div><b>ติดตามผล:</b> บันทึก Supervisor Log และรายงานตอนส่งเวร</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">Float Policy</span><span class="ho-tag">On-call List</span><span class="ho-tag">Acuity Tool</span><span class="ho-tag">Supervisor Log</span>
-            </div>
-            <div class="ho-alert-area alert-blue">
-              <i class="fas fa-exclamation-triangle me-1"></i> ห้ามหอผู้ป่วยวิกฤตมีพยาบาลคนเดียวเด็ดขาด ขาดคนต้องแจ้งผู้บริหารทันที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-orange">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-exclamation-triangle"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 02</div>
-              <h3 class="ho-title">ฉุกเฉินและอุบัติภัยหมู่</h3>
-              <p class="ho-subtitle">Emergency & MCI</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>ประเมินขนาด:</b> แยก 'ฉุกเฉินปกติ' กับ 'MCI' (ผู้บาดเจ็บ > ทรัพยากร)</div></li>
-              <li><div class="ho-bullet"></div><div><b>ประกาศรหัส:</b> Code Disaster &rarr; ตาม Key Person &rarr; เปิด Command Post</div></li>
-              <li><div class="ho-bullet"></div><div><b>START Triage:</b> <br>🔴 ด่วนมาก (Immediate) 🟡 ปานกลาง (Delayed)<br>🟢 เล็กน้อย (Minor) ⚫ เสียชีวิต (Expectant)</div></li>
-              <li><div class="ho-bullet"></div><div><b>Surge Management:</b> จัด Zone &rarr; D/C เคส stable &rarr; เตรียม Supplies/EMS</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">START Triage</span><span class="ho-tag">Code Disaster</span><span class="ho-tag">Command Post</span><span class="ho-tag">Surge Plan</span>
-            </div>
-            <div class="ho-alert-area alert-orange">
-              <i class="fas fa-lightbulb me-1"></i> หลัก MCI: Greatest Good for Greatest Number ช่วยผู้ที่มีโอกาสรอดก่อน
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-teal">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-ambulance"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 03</div>
-              <h3 class="ho-title">ระบบการส่งต่อผู้ป่วย</h3>
-              <p class="ho-subtitle">Patient Referral System</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div>
-                <div><b>เคสที่ต้อง Refer:</b><br>
-                  <span class="ho-mini-badge badge-rose">ผ่าตัดเฉพาะทาง</span>
-                  <span class="ho-mini-badge badge-rose">ต้องการ ICU จริง</span><br>
-                  <span class="ho-mini-badge badge-rose">CT/MRI ฉุกเฉิน</span>
-                  <span class="ho-mini-badge badge-rose">ขาดแพทย์เฉพาะทาง</span>
-                </div>
-              </li>
-              <li><div class="ho-bullet"></div><div><b>รายงาน ISBAR:</b> Identify / Situation / Background / Assessment / Recommend</div></li>
-              <li><div class="ho-bullet"></div><div><b>เตรียมผู้ป่วย:</b> Stabilize V/S &rarr; เตรียมเอกสาร &rarr; ขอ Consent &rarr; ให้การรักษาต่อ</div></li>
-              <li><div class="ho-bullet"></div><div><b>ประสาน EMS:</b> จัดรถพร้อม Escort &rarr; ส่งมอบข้อมูลให้ทีม</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">ISBAR</span><span class="ho-tag">Transfer Decision</span><span class="ho-tag">EMS</span><span class="ho-tag">Referral Audit</span>
-            </div>
-            <div class="ho-alert-area alert-teal">
-              <i class="fas fa-clock me-1"></i> เป้าหมาย: Door-to-Door สำหรับผู้ป่วยวิกฤตไม่ควรเกิน 30 นาที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-green">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-shield-alt"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 04</div>
-              <h3 class="ho-title">คุณภาพและความปลอดภัย</h3>
-              <p class="ho-subtitle">HA & 2P Safety Goals</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>จัดการทันที:</b> เมื่อเกิดเหตุ (เช่น ตกเตียง) ให้รักษา Situation/ความปลอดภัยผู้ป่วยก่อน</div></li>
-              <li><div class="ho-bullet"></div><div><b>Incident Report:</b> บันทึก IR ภายในเวร ระบุข้อเท็จจริง ห้ามซ่อน/ห้ามแก้</div></li>
-              <li><div class="ho-bullet"></div><div><b>SIMPLE Goals:</b> Safe Surgery, Infection Control, Med Error, Process, Line, Emergency</div></li>
-              <li><div class="ho-bullet"></div><div><b>IC & Med Error:</b> ดู Hand Hygiene / ให้ยาผิดต้องหยุดยา, แจ้งแพทย์, เขียน IR</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">SIMPLE Goals</span><span class="ho-tag">Incident Report</span><span class="ho-tag">Hand Hygiene</span><span class="ho-tag">Open Disclosure</span>
-            </div>
-            <div class="ho-alert-area alert-green">
-              <i class="fas fa-check-circle me-1"></i> วัฒนธรรม 'Just Culture': รายงานเพื่อเรียนรู้และป้องกัน ไม่ใช่เพื่อลงโทษ
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-purple">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-balance-scale"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 05</div>
-              <h3 class="ho-title">กฎหมายและสิทธิผู้ป่วย</h3>
-              <p class="ho-subtitle">Law & Conflict Resolution</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>รับมือร้องเรียน:</b> พาไปห้องเงียบ &rarr; ฟังไม่ขัด &rarr; อธิบายข้อเท็จจริง &rarr; ไม่โต้เถียง</div></li>
-              <li><div class="ho-bullet"></div><div><b>Violence:</b> เอาบุคลากรออกก่อน &rarr; แจ้ง รปภ./ตำรวจ &rarr; ดูแล Second Victim</div></li>
-              <li><div class="ho-bullet"></div><div><b>สิทธิผู้ป่วย:</b> รับทราบข้อมูล / ปฏิเสธ (AMA) / ความลับ (PDPA) / มีผู้ดูแล</div></li>
-              <li><div class="ho-bullet"></div><div><b>จัดการศพ & นิติเวช:</b> ตายผิดธรรมชาติ &rarr; แจ้งตำรวจ &rarr; อย่าทิ้งหลักฐาน</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">Patient Rights</span><span class="ho-tag">AMA Form</span><span class="ho-tag">PDPA</span><span class="ho-tag">Medicolegal</span>
-            </div>
-            <div class="ho-alert-area alert-purple">
-              <i class="fas fa-gavel me-1"></i> หลักทอง: ไม่แน่ใจกฎหมาย อย่าทำคนเดียว ให้ปรึกษาผู้บริหารทันที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card text-white p-4 d-flex flex-column justify-content-center border-top-0" style="background: linear-gradient(135deg, #1e293b, #334155);">
-          <i class="fas fa-clipboard-check fa-3x mb-3 text-secondary opacity-50"></i>
-          <h2 class="fw-bold fs-4 mb-3">Checklist ก่อนส่งเวร</h2>
-          <ul class="ho-list mt-2 mb-4" style="font-size: 0.95rem;">
-            <li><i class="far fa-square text-secondary"></i> บันทึก Supervisor Log ครบถ้วน</li>
-            <li><i class="far fa-square text-secondary"></i> รายงาน Incident Report เรียบร้อย</li>
-            <li><i class="far fa-square text-secondary"></i> เคลียร์เคส Refer เรียบร้อย / ดำเนินการอยู่</li>
-            <li><i class="far fa-square text-secondary"></i> จัดเตรียมอัตรากำลังของเวรถัดไป</li>
-          </ul>
-          <p class="mt-auto pt-3 border-top border-secondary text-secondary" style="font-size: 0.8rem;">
-            พยาบาลตรวจการคือแกนหลักในการดูแลระบบ รักษามาตรฐาน และดูแลบุคลากรในผลัด
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="mt-5 pt-4 print-page-break">
-      <div class="d-flex align-items-center gap-3 mb-4">
-        <div class="bg-indigo text-white p-3 rounded-4 shadow-sm">
-          <i class="fas fa-briefcase-medical fs-2"></i>
-        </div>
-        <div>
-          <h2 class="mb-0 fw-bold fs-3 text-dark">แนวทางนิติเวชคลินิก</h2>
-          <p class="mb-0 fw-bold" style="color: #4f46e5;">Clinical Forensic Medicine (Step-by-Step)</p>
-        </div>
-      </div>
-
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        
-        <div class="col">
-          <div class="ho-card theme-indigo">
-            <div class="ho-step-badge bg-indigo">Step 1</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-file-signature"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">เตรียมพร้อม & สิทธิ</h3>
-                <p class="ho-subtitle">Pre-exam & Consent</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>เคสส่งชันสูตร/แจ้งตำรวจ (ตายผิดธรรมชาติ):</b>
-                  <br><span class="ho-mini-badge badge-indigo">ฆ่าตัวตาย</span> <span class="ho-mini-badge badge-indigo">ถูกทำร้าย</span>
-                  <br><span class="ho-mini-badge badge-indigo">สัตว์ทำร้าย</span> <span class="ho-mini-badge badge-indigo">อุบัติเหตุ</span>
-                  <br><span class="ho-mini-badge badge-indigo">ตายไม่ทราบสาเหตุ/ตายใน 24ชม.</span>
-                </div></li>
-                <li><div class="ho-bullet"></div><div><b>ขอ Consent:</b> ขอความยินยอมก่อนตรวจ/เก็บหลักฐาน/ถ่ายภาพ (ใบ Consent แยก)</div></li>
-                <li><div class="ho-bullet"></div><div><b>ความลับ:</b> ห้ามเปิดเผยข้อมูลถ้าไม่มีหนังสือราชการสั่ง</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Police</span><span class="ho-tag">Consent</span><span class="ho-tag">PDPA</span>
-              </div>
-              <div class="ho-alert-area alert-indigo">
-                <i class="fas fa-ambulance me-1"></i> หากฉุกเฉิน: ชีวิตผู้ป่วยมาก่อน รักษาก่อนได้ทันทีไม่ต้องรอตำรวจ
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-cyan">
-            <div class="ho-step-badge bg-cyan">Step 2</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-search"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ซักประวัติ & ตรวจร่างกาย</h3>
-                <p class="ho-subtitle">History & Physical Exam</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>บันทึกคำพูด:</b> บันทึกด้วยคำพูดตรงๆ (Verbatim) ของผู้ป่วย ห้ามตีความเอง</div></li>
-                <li><div class="ho-bullet"></div><div><b>เตรียมตรวจ:</b> ตรวจในห้องมิดชิด มีพยาน วางกระดาษขาวใต้ผู้ป่วยรองรับหลักฐานที่ร่วง</div></li>
-                <li><div class="ho-bullet"></div><div><b>ตรวจบาดแผล:</b> บรรยายขนาด (cm), รูปร่าง, ตำแหน่ง ลงใน Body Diagram</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Verbatim</span><span class="ho-tag">Head-to-Toe</span><span class="ho-tag">Body Diagram</span>
-              </div>
-              <div class="ho-alert-area alert-cyan">
-                <i class="fas fa-ban me-1 text-danger"></i> ห้าม: ระบุอายุรอยช้ำจากสี และห้ามระบุรอยยิงเข้า/ออกเอง (หน้าที่นิติแพทย์)
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-emerald">
-            <div class="ho-step-badge bg-emerald">Step 3</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-box"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">การเก็บวัตถุพยาน</h3>
-                <p class="ho-subtitle">Evidence Collection</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>คดีทางเพศ:</b> <span class="text-success fw-bold">หากไม่มีชุด SAEK ให้ Refer ส่งแม่ข่ายทันที (< 72 ชม.)</span></div></li>
-                <li><div class="ho-bullet"></div><div><b>ถุงกระดาษ:</b> เสื้อผ้า/หลักฐานชีวภาพต้องใส่ 'ถุงกระดาษ' แยกชิ้น ห้ามพลาสติก</div></li>
-                <li><div class="ho-bullet"></div><div><b>DNA Swab:</b> ปล่อยให้แห้งในอากาศเย็นก่อนเก็บ ห้ามใช้ความร้อนเป่า</div></li>
-                <li><div class="ho-bullet"></div><div><b>เก็บเลือด:</b> เจาะก่อนให้สารน้ำ ห้ามใช้แอลกอฮอล์เช็ด (ใช้ Povidone-iodine แทน)</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Paper Bag</span><span class="ho-tag">DNA Swab</span><span class="ho-tag">Toxicology</span>
-              </div>
-              <div class="ho-alert-area alert-emerald">
-                <i class="fas fa-tag me-1"></i> Label ทันที: ระบุชื่อ HN วันเวลา ผู้เก็บ และซีลปิดทับลายเซ็น
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-rose">
-            <div class="ho-step-badge bg-rose">Step 4</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-camera"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ถ่ายภาพ & เวชระเบียน</h3>
-                <p class="ho-subtitle">Photo & Documentation</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>ถ่ายภาพ:</b> ถ่ายก่อนล้างแผลเสมอ ถ่าย 3 ระยะ: ภาพรวม &rarr; อ้างอิง &rarr; Close-up</div></li>
-                <li><div class="ho-bullet"></div><div><b>ใช้ Scale:</b> วางไม้บรรทัดระนาบเดียวกับแผล ถ่ายทั้งแบบมี/ไม่มี Scale คู่กัน</div></li>
-                <li><div class="ho-bullet"></div><div><b>บันทึก 5W1H:</b> ใคร ทำอะไร ที่ไหน เมื่อไหร่ อย่างไร บันทึกเฉพาะข้อเท็จจริง ห้ามเดา</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Scale Rule</span><span class="ho-tag">5W1H</span><span class="ho-tag">Metadata</span>
-              </div>
-              <div class="ho-alert-area alert-rose">
-                <i class="fas fa-exclamation-circle me-1"></i> ถ่ายรูปก่อนรักษา: เพราะเมื่อเย็บแผลหรือล้างแล้ว ลักษณะแผลจะเปลี่ยนไป
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-fuchsia">
-            <div class="ho-step-badge bg-fuchsia">Step 5</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-link"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ส่งมอบหลักฐาน & ศพ</h3>
-                <p class="ho-subtitle">Chain of Custody & Autopsy</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>บันทึกส่งมอบ:</b> ใช้ Chain of Custody Form ระบุผู้ส่ง-รับทุกครั้ง ห้ามวางทิ้งไว้</div></li>
-                <li><div class="ho-bullet"></div><div><b>การส่งต่อ:</b> ตรวจสอบ Seal ก่อนส่งมอบตำรวจ/Lab พร้อมเก็บสำเนาฟอร์ม</div></li>
-                <li><div class="ho-bullet"></div><div><b>ส่งชันสูตรศพ:</b> <span class="text-danger fw-bold">ตายผิดธรรมชาติ ห้ามล้างศพ ห้ามถอดสาย IV/Tube ผูกป้ายส่งชันสูตรทันที</span></div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Chain of Custody</span><span class="ho-tag">Autopsy</span><span class="ho-tag">Transfer Form</span>
-              </div>
-              <div class="ho-alert-area alert-fuchsia">
-                <i class="fas fa-link me-1"></i> ห้ามขาดสาย: หาก Chain of Custody ขาด หลักฐานอาจถูกปฏิเสธในศาล
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card text-white p-4 d-flex flex-column border-top-0" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
-            <div class="d-flex align-items-center gap-2 mb-4">
-              <i class="fas fa-exclamation-circle fs-3 text-danger"></i>
-              <h2 class="fw-bold fs-5 mb-0">สิ่งที่ต้องจำเสมอ (Quick Ref)</h2>
-            </div>
-            <ul class="ho-list mb-0 flex-grow-1" style="font-size: 0.85rem; color: #cbd5e1;">
-              <li><span class="text-danger fw-bold font-monospace">01</span> <span>ถ่ายรูปบาดแผล <b class="text-white">ก่อนล้าง/รักษาเสมอ</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">02</span> <span>หลักฐานชีวภาพใช้ <b class="text-white">ถุงกระดาษเท่านั้น</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">03</span> <span><b class="text-white">Label ทันที</b> หลังเก็บ ห้ามรอ</span></li>
-              <li><span class="text-danger fw-bold font-monospace">04</span> <span>ปล่อย DNA Swab ให้ <b class="text-white">แห้งก่อนปิด</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">05</span> <span>ห้ามใช้แอลกอฮอล์เช็ดผิวก่อนเจาะเลือด</span></li>
-              <li><span class="text-danger fw-bold font-monospace">06</span> <span>บันทึกคำพูด (Verbatim) ห้ามตีความเอง</span></li>
-              <li><span class="text-danger fw-bold font-monospace">07</span> <span><b class="text-white">อย่าขาดสาย</b> Chain of Custody</span></li>
-              <li><span class="text-danger fw-bold font-monospace">08</span> <span>ห้ามระบุรอยยิงเข้า/ออกเอง</span></li>
-              <li><span class="text-danger fw-bold font-monospace">09</span> <span>พบเด็กถูกทำร้าย <b class="text-white">ต้องรายงานตามกฎหมาย</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">10</span> <span>ตายผิดธรรมชาติ 5 แบบ <b class="text-white">แจ้งตำรวจ+ส่งชันสูตร</b></span></li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    
-    <div class="text-center mt-5 text-muted small d-none d-print-block">
-      Generated by KSH SUPERVISOR SYSTEM for Community Hospital Nurse Supervisors
+      <div class="col"><div class="ho-card theme-blue"><div class="ho-card-header"><div class="ho-icon-box"><i class="fas fa-users"></i></div><div><div class="ho-module-badge">Module 01</div><h3 class="ho-title">การบริหารอัตรากำลัง</h3></div></div><div class="ho-card-body"><ul class="ho-list"><li><div class="ho-bullet"></div><div><b>ประเมินก่อนรับเวร:</b> IPD สัดส่วนพยาบาล 1:4 / ER 1:3</div></li><li><div class="ho-bullet"></div><div><b>Patient Acuity:</b> ประเมิน Level 1-3, on vent</div></li><li><div class="ho-bullet"></div><div><b>Float Staff:</b> เกลี่ยคนเมื่อขาด -> แจ้งหัวหน้า</div></li></ul></div></div></div>
+      <div class="col"><div class="ho-card theme-orange"><div class="ho-card-header"><div class="ho-icon-box"><i class="fas fa-exclamation-triangle"></i></div><div><div class="ho-module-badge">Module 02</div><h3 class="ho-title">ฉุกเฉินและอุบัติภัยหมู่</h3></div></div><div class="ho-card-body"><ul class="ho-list"><li><div class="ho-bullet"></div><div><b>ประกาศรหัส:</b> Code Disaster -> เปิด Command Post</div></li><li><div class="ho-bullet"></div><div><b>START Triage:</b> แดง, เหลือง, เขียว, ดำ</div></li></ul></div></div></div>
+      <div class="col"><div class="ho-card theme-teal"><div class="ho-card-header"><div class="ho-icon-box"><i class="fas fa-ambulance"></i></div><div><div class="ho-module-badge">Module 03</div><h3 class="ho-title">ระบบการส่งต่อผู้ป่วย</h3></div></div><div class="ho-card-body"><ul class="ho-list"><li><div class="ho-bullet"></div><div><b>รายงาน ISBAR:</b> I-S-B-A-R</div></li><li><div class="ho-bullet"></div><div><b>เตรียมผู้ป่วย:</b> Stabilize V/S -> ขอ Consent</div></li></ul></div></div></div>
     </div>
   </div>
 
@@ -839,7 +433,7 @@
       </div>
 
       <div class="d-grid gap-2 mb-5">
-        <button type="submit" class="btn btn-gradient text-white">
+        <button type="submit" id="submitBtn" class="btn btn-gradient text-white">
           <i class="fas fa-save me-2"></i> บันทึกข้อมูลและสร้างรายงาน
         </button>
       </div>
@@ -856,13 +450,15 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  // ***************************************************************
+  // แก้ไข URL เป็นของ Google Apps Script API ตัวใหม่ของคุณตรงนี้ !!
+  // ***************************************************************
   const API_URL = "https://script.google.com/macros/s/AKfycbwQnWbbfA9BqalAJMBlBI8HSbAiMeMXEjLzowtRsHPemAabX1OQbX7T_6I00j-CQ7OU/exec"; 
 
   var allData = [];
   var dashboardChart = null;
 
   $(document).ready(function() { 
-    // โหลดหน้า Dashboard เป็นหน้าแรกสุด (Home)
     showDashboard(); 
     loadTableData(); 
     fetchDropdowns(); 
@@ -893,49 +489,36 @@
     $('.nav-link').removeClass('active');
   }
 
-  function showDashboard() { 
-    hideAllSections(); 
-    $('#dashboardSection').fadeIn(200); 
-    $('#btnTabDash').addClass('active'); 
-    updateDashboardCards();
-    renderChart();
-    window.scrollTo(0,0); 
-  }
-
-  function showForm() { 
-    hideAllSections(); 
-    $('#formSection').fadeIn(200, function() { resizeCanvas(); }); 
-    $('#btnTabForm').addClass('active'); 
-    initSelect2(); 
-    window.scrollTo(0,0); 
-  }
-
-  function showTable() { 
-    hideAllSections(); 
-    $('#tableSection').fadeIn(200); 
-    $('#btnTabTable').addClass('active'); 
-    loadTableData(); 
-    window.scrollTo(0,0); 
-  }
-
-  function showHandout() { 
-    hideAllSections(); 
-    $('#handoutSection').fadeIn(200); 
-    $('#btnTabHandout').addClass('active'); 
-    window.scrollTo(0,0); 
-  }
+  function showDashboard() { hideAllSections(); $('#dashboardSection').fadeIn(200); $('#btnTabDash').addClass('active'); updateDashboardCards(); renderChart(); window.scrollTo(0,0); }
+  function showForm() { hideAllSections(); $('#formSection').fadeIn(200, function() { resizeCanvas(); }); $('#btnTabForm').addClass('active'); initSelect2(); window.scrollTo(0,0); }
+  function showTable() { hideAllSections(); $('#tableSection').fadeIn(200); $('#btnTabTable').addClass('active'); loadTableData(); window.scrollTo(0,0); }
+  function showHandout() { hideAllSections(); $('#handoutSection').fadeIn(200); $('#btnTabHandout').addClass('active'); window.scrollTo(0,0); }
 
   function initSelect2() { $('.select2-input').select2({ theme: 'bootstrap-5', width: '100%', placeholder: 'เลือก...', allowClear: true, dropdownAutoWidth: true }); }
   function resetForm() { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); clearSignature(); }
 
-  // ---- Form Submission ----
+  // ---- Form Submission (NEW LOGIC: GitHub Pages -> API) ----
   async function handleFormSubmit(e) {
     e.preventDefault();
+    
+    // 1. Validation ตรวจสอบลายเซ็นก่อนส่ง
+    if (isCanvasBlank(canvas)) {
+        Swal.fire({ icon: 'warning', title: 'ลืมเซ็นชื่อหรือเปล่า?', text: 'กรุณาเซ็นชื่อผู้รายงานก่อนบันทึกข้อมูลครับ', confirmButtonColor: '#1e3c72' });
+        return;
+    }
+
+    // 2. ป้องกันกดรัวๆ (Disable Submit)
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> กำลังสร้างไฟล์...';
+    $('#loadingText').text("กำลังสร้าง PDF และรูปภาพ...");
     $('#loadingOverlay').css('display', 'flex');
+
     var form = document.getElementById('mainForm'); 
     var fd = {}; new FormData(form).forEach((v, k) => fd[k] = v); 
     const j = (arr) => arr.filter(v => v).join(', ');
 
+    // 3. จับข้อมูลยัดลง Capture Area เพื่อเตรียมถ่ายรูป
     $('#c_date').text(fd.ReportDate); $('#c_time').text(`${fd.StartTime} - ${fd.EndTime}`);
     $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
     $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
@@ -958,28 +541,54 @@
     $('#c_prob_det').text(fd.Problem_Detail || '-');
     $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
 
-    var signatureBase64 = null;
-    if (!isCanvasBlank(canvas)) { signatureBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', signatureBase64).show(); } else { $('#c_sig_img').hide(); }
+    var signatureBase64 = canvas.toDataURL("image/png");
+    $('#c_sig_img').attr('src', signatureBase64).show();
     fd.signatureBase64 = signatureBase64; 
 
+    // 4. การถ่ายภาพหน้าจอ สร้าง Image และ PDF
     var imageBase64 = null;
-    try { 
-      await new Promise(r => setTimeout(r, 100));
-      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.5 }); 
-      imageBase64 = capCanvas.toDataURL("image/png"); 
-    } catch(err) {}
+    var pdfBase64 = null;
 
+    try { 
+      var captureElement = document.getElementById('captureArea');
+      await new Promise(r => setTimeout(r, 500)); // หน่วงเวลาให้ภาพเรนเดอร์ลง DOM
+      
+      // -- สร้างภาพ PNG
+      var capCanvas = await html2canvas(captureElement, { scale: 1.5, useCORS: true, logging: false }); 
+      imageBase64 = capCanvas.toDataURL("image/png"); 
+
+      // -- สร้าง PDF
+      var opt = {
+        margin:       0.5,
+        filename:     'Report_' + fd.ReportDate + '.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 1.5, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      pdfBase64 = await html2pdf().set(opt).from(captureElement).outputPdf('datauristring');
+    } catch(err) {
+      console.error("Error creating files:", err);
+    }
+
+    // 5. ส่งข้อมูล + ไฟล์ไปยัง API (Google Apps Script)
+    $('#loadingText').text("กำลังอัปโหลดและบันทึกข้อมูล...");
     try {
-      let payload = { action: 'processForm', formObject: fd, imageBase64: imageBase64 };
+      let payload = { action: 'processForm', formObject: fd, imageBase64: imageBase64, pdfBase64: pdfBase64 };
       let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
       let result = await response.json();
-      $('#loadingOverlay').fadeOut();
       
       if(result.status === 'success') {
         Swal.fire({ icon: 'success', title: 'สำเร็จ!', text: result.message, timer: 2000, showConfirmButton: false });
-        resetForm(); showTable();
+        resetForm(); showTable(); // กลับไปหน้าประวัติ เพื่อเห็นปุ่มโหลด PDF ทันที
       } else { Swal.fire('Error', result.message, 'error'); }
-    } catch (e) { $('#loadingOverlay').fadeOut(); Swal.fire('Error', 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', 'error'); }
+    } catch (e) { 
+      Swal.fire('Error', 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', 'error'); 
+    } finally {
+      // คืนค่าปุ่มเมื่อจบงาน
+      $('#loadingOverlay').fadeOut();
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-save me-2"></i> บันทึกข้อมูลและสร้างรายงาน';
+    }
   }
 
   // ---- Table Data ----
@@ -1224,6 +833,7 @@
       html2canvas:  { scale: 2, useCORS: true },
       jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
     };
+    $('#loadingText').text("กำลังดาวน์โหลด PDF...");
     $('#loadingOverlay').css('display', 'flex');
     html2pdf().set(opt).from(element).save().then(() => { $('#loadingOverlay').fadeOut(); });
   }
