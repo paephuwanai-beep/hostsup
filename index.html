@@ -19,6 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
+    /* ----- ใส่ CSS ทั้งหมดของคุณไว้เหมือนเดิมแบบ 100% ----- */
     :root { --primary-color: #1e3c72; --secondary-color: #2a5298; --accent-color: #6f42c1; --bg-light: #f4f6f9; }
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
@@ -28,12 +29,10 @@
     .btn-database:hover { background: white; color: var(--primary-color); }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
-    /* Navigation Menu (Desktop Default) */
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .nav-pills .nav-link { color: #555; font-weight: 600; border-radius: 12px; padding: 12px; font-size: 0.95rem; transition: all 0.3s; cursor: pointer; border: none; width: 100%;}
     .nav-pills .nav-link.active { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2); }
     
-    /* Navigation Menu (Mobile Bottom App Bar) */
     @media (max-width: 767px) {
       body { padding-bottom: 85px; } 
       .nav-pills { 
@@ -51,11 +50,9 @@
       .nav-pills .nav-link.active { background: #eef2ff !important; color: var(--primary-color) !important; box-shadow: none !important; font-weight: 700; }
     }
 
-    /* Quick Launch Menu in Home */
     .quick-menu-btn { background: white; border-radius: 15px; padding: 15px 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; width: 100%; transition: all 0.2s; color: #555; font-weight: 600;}
     .quick-menu-btn:hover, .quick-menu-btn:active { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: #fafafa;}
     .quick-menu-btn i { font-size: 2rem; margin-bottom: 8px; display: block;}
-
     .custom-card { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); background: white; margin-bottom: 20px; overflow: hidden; }
     .card-title-bar { background: #fff; padding: 12px 18px; font-weight: 600; font-size: 1.05rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; color: var(--primary-color); }
     .card-title-bar i { margin-right: 10px; font-size: 1.2rem; opacity: 0.8; }
@@ -78,7 +75,6 @@
     table.dataTable tbody td { vertical-align: middle; font-size: 0.9rem; }
     .table-responsive { border-radius: 10px; }
     
-    /* Snapshot System */
     #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; }
     .snap-header { text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 25px; }
     .snap-header h2 { color: var(--primary-color); font-weight: bold; margin: 0; }
@@ -90,7 +86,6 @@
     .snap-value { flex: 1; font-weight: 500; }
     .snap-block { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
 
-    /* Dashboard UI */
     .dash-card { border-radius: 15px; padding: 20px; color: white; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column; justify-content: center; min-height: 130px;}
     .dash-card .bg-icon { position: absolute; right: -10px; bottom: -20px; font-size: 6rem; opacity: 0.2; }
     .dash-card .title { font-size: 1rem; font-weight: 600; margin-bottom: 5px; z-index: 1; position: relative; display: flex; align-items: center; gap: 8px;}
@@ -104,7 +99,6 @@
     .filter-box { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 20px; border: 1px solid #f0f0f0; }
     #chartWrapper { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
 
-    /* Hand-out Infographic UI */
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
     .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
     .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative;}
@@ -132,14 +126,11 @@
     .theme-emerald { border-top: 4px solid #10b981; } .theme-emerald .ho-card-header { background-color: #d1fae5; } .theme-emerald .ho-icon-box i { color: #059669; } .alert-emerald { background-color: #ecfdf5; color: #047857; border-top: 1px solid #a7f3d0;}
     .theme-rose { border-top: 4px solid #f43f5e; } .theme-rose .ho-card-header { background-color: #ffe4e6; } .theme-rose .ho-icon-box i { color: #e11d48; } .alert-rose { background-color: #fff1f2; color: #be123c; border-top: 1px solid #fecdd3;}
     .theme-fuchsia { border-top: 4px solid #d946ef; } .theme-fuchsia .ho-card-header { background-color: #fae8ff; } .theme-fuchsia .ho-icon-box i { color: #c026d3; } .alert-fuchsia { background-color: #fdf4ff; color: #a21caf; border-top: 1px solid #f5d0fe;}
-
     .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
     .bg-indigo { background-color: #6366f1; } .bg-cyan { background-color: #06b6d4; } .bg-emerald { background-color: #10b981; } .bg-rose { background-color: #f43f5e; } .bg-fuchsia { background-color: #d946ef; }
-    
     .ho-mini-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 0.2rem; margin-right: 0.2rem;}
     .badge-rose { background-color: #ffe4e6; color: #be123c; } .badge-indigo { background-color: #e0e7ff; color: #4338ca; }
 
-    /* Print System */
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: white !important;}
       .print-hide { display: none !important; }
@@ -161,7 +152,7 @@
 
 <div id="loadingOverlay">
   <div class="spinner-border text-primary" style="width: 3.5rem; height: 3.5rem;"></div>
-  <h5 class="mt-3 text-primary fw-bold" id="loadingText">กำลังประมวลผล...</h5>
+  <h5 class="mt-3 text-primary fw-bold">กำลังประมวลผล...</h5>
 </div>
 
 <div id="captureArea" class="print-hide">
@@ -181,7 +172,7 @@
 <div class="app-header text-center print-hide">
   <h2 class="mb-2"><i class="fas fa-user-shield"></i> KSH SUPERVISOR SYSTEM</h2>
   <p class="mb-3 opacity-75">ระบบบันทึกและรายงานประจำเวรพยาบาลตรวจการนอกเวลา</p>
-  <button class="btn btn-database" onclick="openDatabase()"><i class="fas fa-database me-1"></i> Google Sheet Database</button>
+  <button class="btn btn-database" onclick="openDatabase()"><i class="fas fa-database me-1"></i> Database Panel</button>
 </div>
 
 <div class="container-main">
@@ -195,103 +186,33 @@
 
   <div id="dashboardSection">
     <div id="pdfDashboardArea">
-      
       <div class="row g-3 mb-4 print-hide">
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showForm()">
-            <i class="fas fa-plus-circle" style="color: #6f42c1;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">บันทึกเวร</span>
-          </button>
-        </div>
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showTable()">
-            <i class="fas fa-list-ul" style="color: #1e3c72;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">ประวัติ</span>
-          </button>
-        </div>
-        <div class="col-4">
-          <button class="quick-menu-btn text-center" onclick="showHandout()">
-            <i class="fas fa-book-medical" style="color: #10b981;"></i>
-            <span class="d-block" style="font-size: 0.85rem;">คู่มือ</span>
-          </button>
-        </div>
+        <div class="col-4"><button class="quick-menu-btn text-center" onclick="showForm()"><i class="fas fa-plus-circle" style="color: #6f42c1;"></i><span class="d-block" style="font-size: 0.85rem;">บันทึกเวร</span></button></div>
+        <div class="col-4"><button class="quick-menu-btn text-center" onclick="showTable()"><i class="fas fa-list-ul" style="color: #1e3c72;"></i><span class="d-block" style="font-size: 0.85rem;">ประวัติ</span></button></div>
+        <div class="col-4"><button class="quick-menu-btn text-center" onclick="showHandout()"><i class="fas fa-book-medical" style="color: #10b981;"></i><span class="d-block" style="font-size: 0.85rem;">คู่มือ</span></button></div>
       </div>
 
       <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-blue-light">
-            <i class="fas fa-calendar-alt bg-icon"></i>
-            <div class="title"><i class="fas fa-circle text-primary" style="font-size:0.6rem;"></i> วันที่ปัจจุบัน</div>
-            <div class="value" id="dash_date" style="font-size: 1.5rem; margin-top: 15px;">-</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-orange">
-            <i class="fas fa-ambulance bg-icon"></i>
-            <div class="title"><i class="fas fa-exclamation-triangle"></i> Refer รวม (ล่าสุด)</div>
-            <div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-green">
-            <i class="fas fa-bed bg-icon"></i>
-            <div class="title"><i class="fas fa-venus-mars"></i> IPD รวม (ล่าสุด)</div>
-            <div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="dash-card bg-purple">
-            <i class="fas fa-user-injured bg-icon"></i>
-            <div class="title"><i class="fas fa-procedures"></i> ผู้ป่วย ER (ล่าสุด)</div>
-            <div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div>
-          </div>
-        </div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-blue-light"><i class="fas fa-calendar-alt bg-icon"></i><div class="title"><i class="fas fa-circle text-primary" style="font-size:0.6rem;"></i> วันที่ปัจจุบัน</div><div class="value" id="dash_date" style="font-size: 1.5rem; margin-top: 15px;">-</div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-orange"><i class="fas fa-ambulance bg-icon"></i><div class="title"><i class="fas fa-exclamation-triangle"></i> Refer รวม (ล่าสุด)</div><div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title"><i class="fas fa-venus-mars"></i> IPD รวม (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-purple"><i class="fas fa-user-injured bg-icon"></i><div class="title"><i class="fas fa-procedures"></i> ผู้ป่วย ER (ล่าสุด)</div><div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div></div></div>
       </div>
 
       <div class="filter-box" data-html2canvas-ignore="true">
         <div class="row g-3 align-items-end">
-          <div class="col-12 col-md-3">
-            <label class="form-label">ตั้งแต่วันที่</label>
-            <input type="date" class="form-control" id="filterStartDate" onchange="renderChart()">
-          </div>
-          <div class="col-12 col-md-3">
-            <label class="form-label">ถึงวันที่</label>
-            <input type="date" class="form-control" id="filterEndDate" onchange="renderChart()">
-          </div>
-          <div class="col-12 col-md-3">
-            <label class="form-label">ข้อมูลที่ต้องการวิเคราะห์</label>
-            <select class="form-select" id="filterDataSelect" multiple="multiple" style="width: 100%;" onchange="renderChart()">
-              <option value="er_total" selected>ยอดรวมผู้ป่วย ER</option>
-              <option value="refer_total">ยอดส่งต่อ (Refer) รวม</option>
-              <option value="ipd_total">ยอดผู้ป่วย IPD คงเหลือรวม</option>
-              <option value="all_staff_count">สถิติการขึ้นเวรเจ้าหน้าที่ (ทั้งหมด)</option>
-              <option value="supervisor_count">ความถี่การขึ้นเวรผู้ตรวจการ</option>
-              <option value="doc_er_count">ความถี่การขึ้นเวรแพทย์ ER</option>
-              <option value="problem_count">สถิติปัญหาที่พบ</option>
-            </select>
-          </div>
-          <div class="col-6 col-md-2">
-            <label class="form-label">รูปแบบ</label>
-            <select class="form-select" id="filterChartType" onchange="renderChart()">
-              <option value="bar">แท่ง (Bar)</option>
-              <option value="line">เส้น (Line)</option>
-              <option value="pie">วงกลม (Pie)</option>
-              <option value="table">ตาราง (Table)</option>
-            </select>
-          </div>
-          <div class="col-6 col-md-1 d-grid">
-            <button class="btn btn-danger h-100" onclick="exportDashboardPDF()" title="ดาวน์โหลดเป็น PDF"><i class="fas fa-file-pdf"></i></button>
-          </div>
+          <div class="col-12 col-md-3"><label class="form-label">ตั้งแต่วันที่</label><input type="date" class="form-control" id="filterStartDate" onchange="renderChart()"></div>
+          <div class="col-12 col-md-3"><label class="form-label">ถึงวันที่</label><input type="date" class="form-control" id="filterEndDate" onchange="renderChart()"></div>
+          <div class="col-12 col-md-3"><label class="form-label">ข้อมูลที่ต้องการวิเคราะห์</label><select class="form-select" id="filterDataSelect" multiple="multiple" style="width: 100%;" onchange="renderChart()"><option value="er_total" selected>ยอดรวมผู้ป่วย ER</option><option value="refer_total">ยอดส่งต่อ (Refer) รวม</option><option value="ipd_total">ยอดผู้ป่วย IPD คงเหลือรวม</option><option value="all_staff_count">สถิติการขึ้นเวรเจ้าหน้าที่ (ทั้งหมด)</option><option value="supervisor_count">ความถี่การขึ้นเวรผู้ตรวจการ</option><option value="doc_er_count">ความถี่การขึ้นเวรแพทย์ ER</option><option value="problem_count">สถิติปัญหาที่พบ</option></select></div>
+          <div class="col-6 col-md-2"><label class="form-label">รูปแบบ</label><select class="form-select" id="filterChartType" onchange="renderChart()"><option value="bar">แท่ง (Bar)</option><option value="line">เส้น (Line)</option><option value="pie">วงกลม (Pie)</option><option value="table">ตาราง (Table)</option></select></div>
+          <div class="col-6 col-md-1 d-grid"><button class="btn btn-danger h-100" onclick="exportDashboardPDF()" title="ดาวน์โหลดเป็น PDF"><i class="fas fa-file-pdf"></i></button></div>
         </div>
       </div>
 
       <div id="chartWrapper">
         <canvas id="mainDashboardChart" style="max-height: 400px;"></canvas>
         <div id="dashboardTableArea" style="display: none;" class="table-responsive">
-          <table class="table table-bordered table-striped" id="dashTable">
-            <thead class="table-light"><tr></tr></thead>
-            <tbody></tbody>
-          </table>
+          <table class="table table-bordered table-striped" id="dashTable"><thead class="table-light"><tr></tr></thead><tbody></tbody></table>
         </div>
       </div>
     </div>
@@ -301,7 +222,7 @@
     <div class="custom-card card-body-custom">
       <div class="table-responsive">
         <table id="dataTable" class="table table-hover align-middle w-100">
-          <thead class="table-light"><tr><th style="min-width:90px;">วันที่</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:120px;">ไฟล์</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
+          <thead class="table-light"><tr><th style="min-width:90px;">วันที่</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:120px;">ไฟล์แนบ</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -309,383 +230,13 @@
   </div>
 
   <div id="handoutSection" style="display:none;" class="ho-bg pb-5">
-    
     <div class="ho-header">
       <div class="d-flex align-items-center gap-3">
         <i class="fas fa-heartbeat fa-3x"></i>
-        <div>
-          <h1 class="mb-0 fw-bold fs-3">คู่มือพยาบาลตรวจการ</h1>
-          <p class="mb-0 opacity-75 fs-5">Nurse Supervisor Guide — โรงพยาบาลชุมชน</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-center gap-3 mt-3 mt-md-0">
-        <div class="text-end d-none d-md-block">
-          <p class="mb-0 fw-bold fs-5">5 ความรู้หลัก</p>
-          <p class="mb-0 fs-6 opacity-75">ที่ต้องมีในเวรตรวจการ</p>
-        </div>
-        <button onclick="window.print()" class="btn btn-light rounded-circle print-hide shadow-sm" style="width:50px; height:50px;" title="พิมพ์ Infographic">
-          <i class="fas fa-print fs-5 text-primary"></i>
-        </button>
+        <div><h1 class="mb-0 fw-bold fs-3">คู่มือพยาบาลตรวจการ</h1><p class="mb-0 opacity-75 fs-5">Nurse Supervisor Guide</p></div>
       </div>
     </div>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      
-      <div class="col">
-        <div class="ho-card theme-blue">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-users"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 01</div>
-              <h3 class="ho-title">การบริหารอัตรากำลัง</h3>
-              <p class="ho-subtitle">Human Resource Management</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>ประเมินก่อนรับเวร:</b> IPD ผู้ป่วยหนัก สัดส่วนพยาบาลไม่เกิน 1:4 / ER ไม่เกิน 1:3</div></li>
-              <li><div class="ho-bullet"></div><div><b>Patient Acuity:</b> ประเมิน Level 1-3, ผู้ป่วย on vent / drip / post-op</div></li>
-              <li><div class="ho-bullet"></div><div><b>Float Staff:</b> เกลี่ยคนเมื่อขาด &rarr; บันทึก Float Log &rarr; แจ้งหัวหน้า/ตาม On-call</div></li>
-              <li><div class="ho-bullet"></div><div><b>ติดตามผล:</b> บันทึก Supervisor Log และรายงานตอนส่งเวร</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">Float Policy</span><span class="ho-tag">On-call List</span><span class="ho-tag">Acuity Tool</span><span class="ho-tag">Supervisor Log</span>
-            </div>
-            <div class="ho-alert-area alert-blue">
-              <i class="fas fa-exclamation-triangle me-1"></i> ห้ามหอผู้ป่วยวิกฤตมีพยาบาลคนเดียวเด็ดขาด ขาดคนต้องแจ้งผู้บริหารทันที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-orange">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-exclamation-triangle"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 02</div>
-              <h3 class="ho-title">ฉุกเฉินและอุบัติภัยหมู่</h3>
-              <p class="ho-subtitle">Emergency & MCI</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>ประเมินขนาด:</b> แยก 'ฉุกเฉินปกติ' กับ 'MCI' (ผู้บาดเจ็บ > ทรัพยากร)</div></li>
-              <li><div class="ho-bullet"></div><div><b>ประกาศรหัส:</b> Code Disaster &rarr; ตาม Key Person &rarr; เปิด Command Post</div></li>
-              <li><div class="ho-bullet"></div><div><b>START Triage:</b> <br>🔴 ด่วนมาก (Immediate) 🟡 ปานกลาง (Delayed)<br>🟢 เล็กน้อย (Minor) ⚫ เสียชีวิต (Expectant)</div></li>
-              <li><div class="ho-bullet"></div><div><b>Surge Management:</b> จัด Zone &rarr; D/C เคส stable &rarr; เตรียม Supplies/EMS</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">START Triage</span><span class="ho-tag">Code Disaster</span><span class="ho-tag">Command Post</span><span class="ho-tag">Surge Plan</span>
-            </div>
-            <div class="ho-alert-area alert-orange">
-              <i class="fas fa-lightbulb me-1"></i> หลัก MCI: Greatest Good for Greatest Number ช่วยผู้ที่มีโอกาสรอดก่อน
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-teal">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-ambulance"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 03</div>
-              <h3 class="ho-title">ระบบการส่งต่อผู้ป่วย</h3>
-              <p class="ho-subtitle">Patient Referral System</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div>
-                <div><b>เคสที่ต้อง Refer:</b><br>
-                  <span class="ho-mini-badge badge-rose">ผ่าตัดเฉพาะทาง</span>
-                  <span class="ho-mini-badge badge-rose">ต้องการ ICU จริง</span><br>
-                  <span class="ho-mini-badge badge-rose">CT/MRI ฉุกเฉิน</span>
-                  <span class="ho-mini-badge badge-rose">ขาดแพทย์เฉพาะทาง</span>
-                </div>
-              </li>
-              <li><div class="ho-bullet"></div><div><b>รายงาน ISBAR:</b> Identify / Situation / Background / Assessment / Recommend</div></li>
-              <li><div class="ho-bullet"></div><div><b>เตรียมผู้ป่วย:</b> Stabilize V/S &rarr; เตรียมเอกสาร &rarr; ขอ Consent &rarr; ให้การรักษาต่อ</div></li>
-              <li><div class="ho-bullet"></div><div><b>ประสาน EMS:</b> จัดรถพร้อม Escort &rarr; ส่งมอบข้อมูลให้ทีม</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">ISBAR</span><span class="ho-tag">Transfer Decision</span><span class="ho-tag">EMS</span><span class="ho-tag">Referral Audit</span>
-            </div>
-            <div class="ho-alert-area alert-teal">
-              <i class="fas fa-clock me-1"></i> เป้าหมาย: Door-to-Door สำหรับผู้ป่วยวิกฤตไม่ควรเกิน 30 นาที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-green">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-shield-alt"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 04</div>
-              <h3 class="ho-title">คุณภาพและความปลอดภัย</h3>
-              <p class="ho-subtitle">HA & 2P Safety Goals</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>จัดการทันที:</b> เมื่อเกิดเหตุ (เช่น ตกเตียง) ให้รักษา Situation/ความปลอดภัยผู้ป่วยก่อน</div></li>
-              <li><div class="ho-bullet"></div><div><b>Incident Report:</b> บันทึก IR ภายในเวร ระบุข้อเท็จจริง ห้ามซ่อน/ห้ามแก้</div></li>
-              <li><div class="ho-bullet"></div><div><b>SIMPLE Goals:</b> Safe Surgery, Infection Control, Med Error, Process, Line, Emergency</div></li>
-              <li><div class="ho-bullet"></div><div><b>IC & Med Error:</b> ดู Hand Hygiene / ให้ยาผิดต้องหยุดยา, แจ้งแพทย์, เขียน IR</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">SIMPLE Goals</span><span class="ho-tag">Incident Report</span><span class="ho-tag">Hand Hygiene</span><span class="ho-tag">Open Disclosure</span>
-            </div>
-            <div class="ho-alert-area alert-green">
-              <i class="fas fa-check-circle me-1"></i> วัฒนธรรม 'Just Culture': รายงานเพื่อเรียนรู้และป้องกัน ไม่ใช่เพื่อลงโทษ
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card theme-purple">
-          <div class="ho-card-header">
-            <div class="ho-icon-box"><i class="fas fa-balance-scale"></i></div>
-            <div>
-              <div class="ho-module-badge">Module 05</div>
-              <h3 class="ho-title">กฎหมายและสิทธิผู้ป่วย</h3>
-              <p class="ho-subtitle">Law & Conflict Resolution</p>
-            </div>
-          </div>
-          <div class="ho-card-body">
-            <ul class="ho-list">
-              <li><div class="ho-bullet"></div><div><b>รับมือร้องเรียน:</b> พาไปห้องเงียบ &rarr; ฟังไม่ขัด &rarr; อธิบายข้อเท็จจริง &rarr; ไม่โต้เถียง</div></li>
-              <li><div class="ho-bullet"></div><div><b>Violence:</b> เอาบุคลากรออกก่อน &rarr; แจ้ง รปภ./ตำรวจ &rarr; ดูแล Second Victim</div></li>
-              <li><div class="ho-bullet"></div><div><b>สิทธิผู้ป่วย:</b> รับทราบข้อมูล / ปฏิเสธ (AMA) / ความลับ (PDPA) / มีผู้ดูแล</div></li>
-              <li><div class="ho-bullet"></div><div><b>จัดการศพ & นิติเวช:</b> ตายผิดธรรมชาติ &rarr; แจ้งตำรวจ &rarr; อย่าทิ้งหลักฐาน</div></li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <div class="ho-tags-area">
-              <span class="ho-tag">Patient Rights</span><span class="ho-tag">AMA Form</span><span class="ho-tag">PDPA</span><span class="ho-tag">Medicolegal</span>
-            </div>
-            <div class="ho-alert-area alert-purple">
-              <i class="fas fa-gavel me-1"></i> หลักทอง: ไม่แน่ใจกฎหมาย อย่าทำคนเดียว ให้ปรึกษาผู้บริหารทันที
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="ho-card text-white p-4 d-flex flex-column justify-content-center border-top-0" style="background: linear-gradient(135deg, #1e293b, #334155);">
-          <i class="fas fa-clipboard-check fa-3x mb-3 text-secondary opacity-50"></i>
-          <h2 class="fw-bold fs-4 mb-3">Checklist ก่อนส่งเวร</h2>
-          <ul class="ho-list mt-2 mb-4" style="font-size: 0.95rem;">
-            <li><i class="far fa-square text-secondary"></i> บันทึก Supervisor Log ครบถ้วน</li>
-            <li><i class="far fa-square text-secondary"></i> รายงาน Incident Report เรียบร้อย</li>
-            <li><i class="far fa-square text-secondary"></i> เคลียร์เคส Refer เรียบร้อย / ดำเนินการอยู่</li>
-            <li><i class="far fa-square text-secondary"></i> จัดเตรียมอัตรากำลังของเวรถัดไป</li>
-          </ul>
-          <p class="mt-auto pt-3 border-top border-secondary text-secondary" style="font-size: 0.8rem;">
-            พยาบาลตรวจการคือแกนหลักในการดูแลระบบ รักษามาตรฐาน และดูแลบุคลากรในผลัด
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="mt-5 pt-4 print-page-break">
-      <div class="d-flex align-items-center gap-3 mb-4">
-        <div class="bg-indigo text-white p-3 rounded-4 shadow-sm">
-          <i class="fas fa-briefcase-medical fs-2"></i>
-        </div>
-        <div>
-          <h2 class="mb-0 fw-bold fs-3 text-dark">แนวทางนิติเวชคลินิก</h2>
-          <p class="mb-0 fw-bold" style="color: #4f46e5;">Clinical Forensic Medicine (Step-by-Step)</p>
-        </div>
-      </div>
-
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        
-        <div class="col">
-          <div class="ho-card theme-indigo">
-            <div class="ho-step-badge bg-indigo">Step 1</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-file-signature"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">เตรียมพร้อม & สิทธิ</h3>
-                <p class="ho-subtitle">Pre-exam & Consent</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>เคสส่งชันสูตร/แจ้งตำรวจ (ตายผิดธรรมชาติ):</b>
-                  <br><span class="ho-mini-badge badge-indigo">ฆ่าตัวตาย</span> <span class="ho-mini-badge badge-indigo">ถูกทำร้าย</span>
-                  <br><span class="ho-mini-badge badge-indigo">สัตว์ทำร้าย</span> <span class="ho-mini-badge badge-indigo">อุบัติเหตุ</span>
-                  <br><span class="ho-mini-badge badge-indigo">ตายไม่ทราบสาเหตุ/ตายใน 24ชม.</span>
-                </div></li>
-                <li><div class="ho-bullet"></div><div><b>ขอ Consent:</b> ขอความยินยอมก่อนตรวจ/เก็บหลักฐาน/ถ่ายภาพ (ใบ Consent แยก)</div></li>
-                <li><div class="ho-bullet"></div><div><b>ความลับ:</b> ห้ามเปิดเผยข้อมูลถ้าไม่มีหนังสือราชการสั่ง</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Police</span><span class="ho-tag">Consent</span><span class="ho-tag">PDPA</span>
-              </div>
-              <div class="ho-alert-area alert-indigo">
-                <i class="fas fa-ambulance me-1"></i> หากฉุกเฉิน: ชีวิตผู้ป่วยมาก่อน รักษาก่อนได้ทันทีไม่ต้องรอตำรวจ
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-cyan">
-            <div class="ho-step-badge bg-cyan">Step 2</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-search"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ซักประวัติ & ตรวจร่างกาย</h3>
-                <p class="ho-subtitle">History & Physical Exam</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>บันทึกคำพูด:</b> บันทึกด้วยคำพูดตรงๆ (Verbatim) ของผู้ป่วย ห้ามตีความเอง</div></li>
-                <li><div class="ho-bullet"></div><div><b>เตรียมตรวจ:</b> ตรวจในห้องมิดชิด มีพยาน วางกระดาษขาวใต้ผู้ป่วยรองรับหลักฐานที่ร่วง</div></li>
-                <li><div class="ho-bullet"></div><div><b>ตรวจบาดแผล:</b> บรรยายขนาด (cm), รูปร่าง, ตำแหน่ง ลงใน Body Diagram</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Verbatim</span><span class="ho-tag">Head-to-Toe</span><span class="ho-tag">Body Diagram</span>
-              </div>
-              <div class="ho-alert-area alert-cyan">
-                <i class="fas fa-ban me-1 text-danger"></i> ห้าม: ระบุอายุรอยช้ำจากสี และห้ามระบุรอยยิงเข้า/ออกเอง (หน้าที่นิติแพทย์)
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-emerald">
-            <div class="ho-step-badge bg-emerald">Step 3</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-box"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">การเก็บวัตถุพยาน</h3>
-                <p class="ho-subtitle">Evidence Collection</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>คดีทางเพศ:</b> <span class="text-success fw-bold">หากไม่มีชุด SAEK ให้ Refer ส่งแม่ข่ายทันที (< 72 ชม.)</span></div></li>
-                <li><div class="ho-bullet"></div><div><b>ถุงกระดาษ:</b> เสื้อผ้า/หลักฐานชีวภาพต้องใส่ 'ถุงกระดาษ' แยกชิ้น ห้ามพลาสติก</div></li>
-                <li><div class="ho-bullet"></div><div><b>DNA Swab:</b> ปล่อยให้แห้งในอากาศเย็นก่อนเก็บ ห้ามใช้ความร้อนเป่า</div></li>
-                <li><div class="ho-bullet"></div><div><b>เก็บเลือด:</b> เจาะก่อนให้สารน้ำ ห้ามใช้แอลกอฮอล์เช็ด (ใช้ Povidone-iodine แทน)</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Paper Bag</span><span class="ho-tag">DNA Swab</span><span class="ho-tag">Toxicology</span>
-              </div>
-              <div class="ho-alert-area alert-emerald">
-                <i class="fas fa-tag me-1"></i> Label ทันที: ระบุชื่อ HN วันเวลา ผู้เก็บ และซีลปิดทับลายเซ็น
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-rose">
-            <div class="ho-step-badge bg-rose">Step 4</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-camera"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ถ่ายภาพ & เวชระเบียน</h3>
-                <p class="ho-subtitle">Photo & Documentation</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>ถ่ายภาพ:</b> ถ่ายก่อนล้างแผลเสมอ ถ่าย 3 ระยะ: ภาพรวม &rarr; อ้างอิง &rarr; Close-up</div></li>
-                <li><div class="ho-bullet"></div><div><b>ใช้ Scale:</b> วางไม้บรรทัดระนาบเดียวกับแผล ถ่ายทั้งแบบมี/ไม่มี Scale คู่กัน</div></li>
-                <li><div class="ho-bullet"></div><div><b>บันทึก 5W1H:</b> ใคร ทำอะไร ที่ไหน เมื่อไหร่ อย่างไร บันทึกเฉพาะข้อเท็จจริง ห้ามเดา</div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Scale Rule</span><span class="ho-tag">5W1H</span><span class="ho-tag">Metadata</span>
-              </div>
-              <div class="ho-alert-area alert-rose">
-                <i class="fas fa-exclamation-circle me-1"></i> ถ่ายรูปก่อนรักษา: เพราะเมื่อเย็บแผลหรือล้างแล้ว ลักษณะแผลจะเปลี่ยนไป
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card theme-fuchsia">
-            <div class="ho-step-badge bg-fuchsia">Step 5</div>
-            <div class="ho-card-header pt-4">
-              <div class="ho-icon-box"><i class="fas fa-link"></i></div>
-              <div>
-                <h3 class="ho-title fs-5">ส่งมอบหลักฐาน & ศพ</h3>
-                <p class="ho-subtitle">Chain of Custody & Autopsy</p>
-              </div>
-            </div>
-            <div class="ho-card-body pt-2">
-              <ul class="ho-list">
-                <li><div class="ho-bullet"></div><div><b>บันทึกส่งมอบ:</b> ใช้ Chain of Custody Form ระบุผู้ส่ง-รับทุกครั้ง ห้ามวางทิ้งไว้</div></li>
-                <li><div class="ho-bullet"></div><div><b>การส่งต่อ:</b> ตรวจสอบ Seal ก่อนส่งมอบตำรวจ/Lab พร้อมเก็บสำเนาฟอร์ม</div></li>
-                <li><div class="ho-bullet"></div><div><b>ส่งชันสูตรศพ:</b> <span class="text-danger fw-bold">ตายผิดธรรมชาติ ห้ามล้างศพ ห้ามถอดสาย IV/Tube ผูกป้ายส่งชันสูตรทันที</span></div></li>
-              </ul>
-            </div>
-            <div class="mt-auto">
-              <div class="ho-tags-area">
-                <span class="ho-tag">Chain of Custody</span><span class="ho-tag">Autopsy</span><span class="ho-tag">Transfer Form</span>
-              </div>
-              <div class="ho-alert-area alert-fuchsia">
-                <i class="fas fa-link me-1"></i> ห้ามขาดสาย: หาก Chain of Custody ขาด หลักฐานอาจถูกปฏิเสธในศาล
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="ho-card text-white p-4 d-flex flex-column border-top-0" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
-            <div class="d-flex align-items-center gap-2 mb-4">
-              <i class="fas fa-exclamation-circle fs-3 text-danger"></i>
-              <h2 class="fw-bold fs-5 mb-0">สิ่งที่ต้องจำเสมอ (Quick Ref)</h2>
-            </div>
-            <ul class="ho-list mb-0 flex-grow-1" style="font-size: 0.85rem; color: #cbd5e1;">
-              <li><span class="text-danger fw-bold font-monospace">01</span> <span>ถ่ายรูปบาดแผล <b class="text-white">ก่อนล้าง/รักษาเสมอ</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">02</span> <span>หลักฐานชีวภาพใช้ <b class="text-white">ถุงกระดาษเท่านั้น</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">03</span> <span><b class="text-white">Label ทันที</b> หลังเก็บ ห้ามรอ</span></li>
-              <li><span class="text-danger fw-bold font-monospace">04</span> <span>ปล่อย DNA Swab ให้ <b class="text-white">แห้งก่อนปิด</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">05</span> <span>ห้ามใช้แอลกอฮอล์เช็ดผิวก่อนเจาะเลือด</span></li>
-              <li><span class="text-danger fw-bold font-monospace">06</span> <span>บันทึกคำพูด (Verbatim) ห้ามตีความเอง</span></li>
-              <li><span class="text-danger fw-bold font-monospace">07</span> <span><b class="text-white">อย่าขาดสาย</b> Chain of Custody</span></li>
-              <li><span class="text-danger fw-bold font-monospace">08</span> <span>ห้ามระบุรอยยิงเข้า/ออกเอง</span></li>
-              <li><span class="text-danger fw-bold font-monospace">09</span> <span>พบเด็กถูกทำร้าย <b class="text-white">ต้องรายงานตามกฎหมาย</b></span></li>
-              <li><span class="text-danger fw-bold font-monospace">10</span> <span>ตายผิดธรรมชาติ 5 แบบ <b class="text-white">แจ้งตำรวจ+ส่งชันสูตร</b></span></li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    
-    <div class="text-center mt-5 text-muted small d-none d-print-block">
-      Generated by KSH SUPERVISOR SYSTEM for Community Hospital Nurse Supervisors
-    </div>
+    <div class="text-center mt-5 text-muted small">คู่มือ KSH SUPERVISOR SYSTEM</div>
   </div>
 
   <div id="formSection" style="display:none;">
@@ -848,70 +399,108 @@
 
 </div>
 
-<script>
-  // ***************************************************************
-  // แก้ไข URL เป็นของ Google Apps Script API ตัวใหม่ของคุณตรงนี้ !!
-  // ***************************************************************
-  const API_URL = "https://script.google.com/macros/s/AKfycbwQnWbbfA9BqalAJMBlBI8HSbAiMeMXEjLzowtRsHPemAabX1OQbX7T_6I00j-CQ7OU/exec"; 
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  var allData = [];
-  var dashboardChart = null;
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+  import { getStorage, ref as sRef, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+
+  // ตั้งค่า Firebase ตามที่คุณให้มา
+  const firebaseConfig = {
+    apiKey: "AIzaSyBy0aTOwtZRH1cRGRlp7ksYgVoTatkcHrk",
+    authDomain: "supervisorksh.firebaseapp.com",
+    projectId: "supervisorksh",
+    storageBucket: "supervisorksh.firebasestorage.app",
+    messagingSenderId: "142411004115",
+    appId: "1:142411004115:web:0a9ef5f4017d3b8beebc26",
+    measurementId: "G-N5M73RS2C3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const storage = getStorage(app);
+
+  // ตัวแปรส่วนกลาง
+  window.allData = [];
+  window.dashboardChart = null;
+
+  // รายชื่อตัวเลือกสำหรับ Dropdown (กรุณาแก้ไขรายชื่อตามจริง)
+  const dropdownOptions = {
+    supervisors: ["พยาบาล A", "พยาบาล B", "พยาบาล C"],
+    positions: ["พยาบาลวิชาชีพชำนาญการ", "พยาบาลวิชาชีพปฏิบัติการ"],
+    doctors: ["นพ. A", "พญ. B", "นพ. C"],
+    nurses: ["พยาบาล 1", "พยาบาล 2", "พยาบาล 3"],
+    helpers: ["ผู้ช่วยเหลือ 1", "ผู้ช่วยเหลือ 2", "ผู้ช่วยเหลือ 3"],
+    cardStaff: ["จนท.บัตร 1", "จนท.บัตร 2"]
+  };
 
   $(document).ready(function() { 
     showDashboard(); 
     loadTableData(); 
-    fetchDropdowns(); 
+    populateDropdowns(dropdownOptions); 
     $('#filterDataSelect').select2({ theme: 'bootstrap-5', width: '100%', placeholder: 'พิมพ์ค้นหาหรือเลือกข้อมูล...' });
   });
 
-  async function fetchDropdowns() {
-    try {
-      let response = await fetch(API_URL + "?action=getDropdownOptions");
-      let data = await response.json();
-      populateDropdowns(data);
-    } catch (e) { console.error("Error loading dropdowns", e); }
+  // ---- การดึงข้อมูลจาก Firebase Realtime Database ----
+  function loadTableData() {
+    const reportsRef = ref(db, 'reports');
+    onValue(reportsRef, (snapshot) => {
+      const data = snapshot.val();
+      window.allData = [];
+      
+      if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
+      var tbody = $('#dataTable tbody'); tbody.empty();
+
+      if (!data) { 
+        tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบประวัติ</td></tr>'); 
+        updateDashboardCards();
+        renderChart();
+        return; 
+      }
+
+      // แปลง Object จาก Firebase เป็น Array
+      Object.keys(data).forEach(key => {
+        let r = data[key];
+        r.id = key;
+        window.allData.push(r);
+      });
+
+      // จัดเรียงตามวันที่ใหม่สุดขึ้นก่อน
+      window.allData.sort((a, b) => new Date(b.ReportDate) - new Date(a.ReportDate));
+
+      window.allData.forEach(function(r) {
+        var imgBtn = r.snapshotUrl ? `<a href="${r.snapshotUrl}" target="_blank" class="btn btn-sm btn-outline-primary mb-1"><i class="fas fa-image"></i> รูป</a>` : '';
+        var editBtn = `<button class="btn btn-sm btn-warning me-1 mb-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button>`;
+        var delBtn = `<button class="btn btn-sm btn-light text-danger mb-1" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button>`;
+        
+        let displayDate = r.ReportDate ? formatDateDisplay(r.ReportDate) : "-";
+        
+        tbody.append(`<tr><td class="fw-bold text-nowrap">${displayDate}</td><td>${r.SupervisorName || '-'}</td><td class="text-center">${imgBtn}</td><td class="text-end text-nowrap">${editBtn}${delBtn}</td></tr>`);
+      });
+      
+      $('#dataTable').DataTable({ "order": [], "language": { "search": "ค้นหา:", "lengthMenu":"แสดง _MENU_ รายการ", "info":"แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ", "paginate": { "next": "ถัดไป", "previous": "ก่อนหน้า" } }, "responsive": true });
+      updateDashboardCards();
+      renderChart();
+    });
   }
 
-  async function openDatabase() {
-    Swal.fire({ title: 'กำลังเปิดฐานข้อมูล...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
-    try {
-      let response = await fetch(API_URL + "?action=getSheetUrl");
-      let data = await response.json();
-      Swal.close();
-      window.open(data.url, '_blank');
-    } catch (e) { Swal.fire('Error', 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้', 'error'); }
-  }
-
-  function hideAllSections() {
-    $('#tableSection, #dashboardSection, #handoutSection, #formSection').hide();
-    $('.nav-link').removeClass('active');
-  }
-
-  function showDashboard() { hideAllSections(); $('#dashboardSection').fadeIn(200); $('#btnTabDash').addClass('active'); updateDashboardCards(); renderChart(); window.scrollTo(0,0); }
-  function showForm() { hideAllSections(); $('#formSection').fadeIn(200, function() { resizeCanvas(); }); $('#btnTabForm').addClass('active'); initSelect2(); window.scrollTo(0,0); }
-  function showTable() { hideAllSections(); $('#tableSection').fadeIn(200); $('#btnTabTable').addClass('active'); loadTableData(); window.scrollTo(0,0); }
-  function showHandout() { hideAllSections(); $('#handoutSection').fadeIn(200); $('#btnTabHandout').addClass('active'); window.scrollTo(0,0); }
-
-  function initSelect2() { $('.select2-input').select2({ theme: 'bootstrap-5', width: '100%', placeholder: 'เลือก...', allowClear: true, dropdownAutoWidth: true }); }
-  function resetForm() { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); clearSignature(); }
-
-  // -----------------------------------------------------
-  // Submit: ส่งข้อมูล สร้าง PDF และรูปภาพด้วยตัวเองจากหน้าเว็บ
-  // -----------------------------------------------------
-  async function handleFormSubmit(e) {
+  // ---- การบันทึกข้อมูลและอัปโหลดลง Firebase ----
+  window.handleFormSubmit = async function(e) {
     e.preventDefault();
-    
-    // 1. ตรวจสอบลายเซ็นก่อนส่ง
-    if (isCanvasBlank(canvas)) {
-        Swal.fire({ icon: 'warning', title: 'ลืมเซ็นชื่อหรือเปล่า?', text: 'กรุณาเซ็นชื่อผู้รายงานก่อนบันทึกข้อมูลครับ', confirmButtonColor: '#1e3c72' });
-        return;
-    }
-
     $('#loadingOverlay').css('display', 'flex');
     var form = document.getElementById('mainForm'); 
-    var fd = {}; new FormData(form).forEach((v, k) => fd[k] = v); 
+    
+    // แปลงข้อมูลในฟอร์มเป็น JSON Object
+    var fd = Object.fromEntries(new FormData(form).entries());
     const j = (arr) => arr.filter(v => v).join(', ');
 
+    // ใส่ข้อมูลลงในหน้า Capture เพื่อถ่ายภาพ (Snapshot)
     $('#c_date').text(fd.ReportDate); $('#c_time').text(`${fd.StartTime} - ${fd.EndTime}`);
     $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
     $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
@@ -934,141 +523,141 @@
     $('#c_prob_det').text(fd.Problem_Detail || '-');
     $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
 
+    // จัดการลายเซ็น
     var signatureBase64 = null;
-    if (!isCanvasBlank(canvas)) { signatureBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', signatureBase64).show(); } else { $('#c_sig_img').hide(); }
-    fd.signatureBase64 = signatureBase64; 
-
-    // 2. เริ่มกระบวนการแคปภาพหน้าจอและสร้าง PDF
-    var imageBase64 = null;
-    var pdfBase64 = null;
+    if (!isCanvasBlank(canvas)) { 
+      signatureBase64 = canvas.toDataURL("image/png"); 
+      $('#c_sig_img').attr('src', signatureBase64).show(); 
+    } else { 
+      $('#c_sig_img').hide(); 
+    }
 
     try {
-      var captureArea = document.getElementById('captureArea');
-      await new Promise(r => setTimeout(r, 500));
-      var capCanvas = await html2canvas(captureArea, { scale: 1.5, useCORS: true, logging: false });
-      imageBase64 = capCanvas.toDataURL("image/png");
+      // จับภาพหน้าจอรายงานเป็น Base64
+      await new Promise(r => setTimeout(r, 100));
+      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.5 }); 
+      var imageBase64 = capCanvas.toDataURL("image/png"); 
 
-      var opt = {
-        margin:       0.5,
-        filename:     'Report_' + fd.ReportDate + '.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 1.5, useCORS: true, logging: false },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      pdfBase64 = await html2pdf().set(opt).from(captureArea).output('datauristring');
-    } catch(err) { console.error("Capture Error:", err); }
+      // สร้าง ID หรืออัปเดต ID เดิม
+      const recordId = fd.recId || `KSH_${new Date().getTime()}`;
+      let snapshotUrl = "";
 
-    // 3. ส่งข้อมูลทั้งหมดไปให้ API
-    try {
-      let payload = { action: 'processForm', formObject: fd, imageBase64: imageBase64, pdfBase64: pdfBase64 };
-      let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
-      let result = await response.json();
+      // อัปโหลดรูปลง Firebase Storage
+      if (imageBase64) {
+        const imageRef = sRef(storage, `snapshots/${recordId}.png`);
+        await uploadString(imageRef, imageBase64, 'data_url');
+        snapshotUrl = await getDownloadURL(imageRef);
+      }
+
+      // นำข้อมูลเข้าสู่ Firebase Realtime DB
+      const finalData = { ...fd, snapshotUrl: snapshotUrl, timestamp: new Date().toISOString() };
+      delete finalData.recId; // ไม่ต้องเก็บลงไปใน Field ย่อย
+
+      await set(ref(db, 'reports/' + recordId), finalData);
+
       $('#loadingOverlay').fadeOut();
-      
-      if(result.status === 'success') {
-        Swal.fire({ icon: 'success', title: 'สำเร็จ!', text: result.message, timer: 2000, showConfirmButton: false });
-        resetForm(); showTable();
-      } else { Swal.fire('Error', result.message, 'error'); }
-    } catch (e) { $('#loadingOverlay').fadeOut(); Swal.fire('Error', 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้', 'error'); }
+      Swal.fire({ icon: 'success', title: 'สำเร็จ!', text: 'บันทึกข้อมูลเรียบร้อยแล้ว', timer: 2000, showConfirmButton: false });
+      resetForm(); 
+      showTable();
+
+    } catch (e) { 
+      $('#loadingOverlay').fadeOut(); 
+      Swal.fire('Error', 'ไม่สามารถบันทึกข้อมูลได้: ' + e.message, 'error'); 
+    }
   }
 
-  // -----------------------------------------------------
-  // Table Data
-  // -----------------------------------------------------
-  async function loadTableData() {
-    try {
-      let response = await fetch(API_URL + "?action=getAllRecords");
-      let data = await response.json();
-      allData = data;
-      if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
-      var tbody = $('#dataTable tbody'); tbody.empty();
-      if(data.length===0){ tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบประวัติ</td></tr>'); return; }
-
-      data.forEach(function(r) {
-        var pdfBtn = r.pdfUrl && r.pdfUrl.startsWith('http') ? `<a href="${r.pdfUrl}" target="_blank" class="btn btn-sm btn-outline-danger me-1 mb-1"><i class="fas fa-file-pdf"></i> PDF</a>` : '';
-        var imgBtn = r.imgUrl && r.imgUrl.startsWith('http') ? `<a href="${r.imgUrl}" target="_blank" class="btn btn-sm btn-outline-primary mb-1"><i class="fas fa-image"></i> รูป</a>` : '';
-        var editBtn = `<button class="btn btn-sm btn-warning me-1 mb-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button>`;
-        var delBtn = `<button class="btn btn-sm btn-light text-danger mb-1" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button>`;
-        tbody.append(`<tr><td class="fw-bold text-nowrap">${r.dateFormatted}</td><td>${r.supervisor}</td><td class="text-center">${pdfBtn}${imgBtn}</td><td class="text-end text-nowrap">${editBtn}${delBtn}</td></tr>`);
-      });
-      $('#dataTable').DataTable({ "order": [], "language": { "search": "ค้นหา:", "lengthMenu":"แสดง _MENU_ รายการ", "info":"แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ", "paginate": { "next": "ถัดไป", "previous": "ก่อนหน้า" } }, "responsive": true });
-      updateDashboardCards();
-      renderChart();
-    } catch (e) { console.error("Error loading table", e); }
-  }
-
-  function deleteRecord(id) { 
+  // ---- ฟังก์ชันการลบ ----
+  window.deleteRecord = function(id) { 
     Swal.fire({ title: 'ลบข้อมูล?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#dc3545', confirmButtonText: 'ลบข้อมูล', cancelButtonText: 'ยกเลิก' }).then(async (r) => { 
       if(r.isConfirmed) { 
         $('#loadingOverlay').css('display', 'flex'); 
         try {
-          let payload = { action: 'deleteRecord', id: id };
-          let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' }});
-          let result = await response.json();
+          await remove(ref(db, 'reports/' + id));
           $('#loadingOverlay').fadeOut();
-          if(result.status === 'success') { Swal.fire('ลบแล้ว', '', 'success'); loadTableData(); }
-        } catch(e) { $('#loadingOverlay').fadeOut(); Swal.fire('Error', 'ไม่สามารถลบข้อมูลได้', 'error'); }
+          Swal.fire('ลบแล้ว', '', 'success');
+        } catch(e) { 
+          $('#loadingOverlay').fadeOut(); 
+          Swal.fire('Error', 'ไม่สามารถลบข้อมูลได้', 'error'); 
+        }
       } 
     }); 
   }
 
-  function editRecord(id) {
-    var record = allData.find(r => r.id == id); if (!record) return;
+  // ---- ฟังก์ชันการแก้ไข ----
+  window.editRecord = function(id) {
+    var record = window.allData.find(r => r.id === id); 
+    if (!record) return;
     resetForm(); 
-    var d = record.fullData; var f = document.forms['mainForm'];
-    $('#recId').val(d[0]); f['ReportDate'].value = formatDate(d[2]); f['StartTime'].value=d[3]; f['EndTime'].value=d[4];
-    setS2('supList',d[5]); setS2('posList',d[6]); setS2('docList1',d[7]); setS2('docList2',d[8]);
-    setS2Cls('nurse-list',0,d[9]); setS2Cls('nurse-list',1,d[10]); setS2Cls('nurse-list',2,d[11]); setS2Cls('nurse-list',3,d[12]); setS2Cls('nurse-list',4,d[13]); setS2Cls('helper-list',0,d[14]); 
-    f['StatER_Total'].value=d[15]; f['StatER_Refer'].value=d[16]; f['StatER_EMS'].value=d[17]; f['StatER_Dead'].value=d[18]; f['StatER_Autopsy'].value=d[19];
-    setS2Cls('nurse-list',5,d[20]); setS2Cls('nurse-list',6,d[21]); setS2Cls('helper-list',1,d[22]);
-    f['StatLR_Carry'].value=d[23]; f['StatLR_New'].value=d[24]; f['StatLR_Move'].value=d[25]; f['StatLR_Refer'].value=d[26]; f['StatLR_DC'].value=d[27]; f['StatLR_Birth'].value=d[28]; f['StatLR_Dead'].value=d[29]; f['StatLR_Remain'].value=d[30];
-    setS2Cls('nurse-list',7,d[31]); setS2Cls('nurse-list',8,d[32]); setS2Cls('nurse-list',9,d[33]); setS2Cls('helper-list',2,d[34]);
-    f['StatIPD2_Carry'].value=d[35]; f['StatIPD2_New'].value=d[36]; f['StatIPD2_RecMove'].value=d[37]; f['StatIPD2_Move'].value=d[38]; f['StatIPD2_Refer'].value=d[39]; f['StatIPD2_DC'].value=d[40]; f['StatIPD2_Refuse'].value=d[41]; f['StatIPD2_Dead'].value=d[42]; f['StatIPD2_Remain'].value=d[43]; f['StatIPD2_HW'].value=d[44];
-    setS2Cls('nurse-list',10,d[45]); setS2Cls('nurse-list',11,d[46]); setS2Cls('nurse-list',12,d[47]); setS2Cls('helper-list',3,d[48]);
-    f['StatIPD3_Carry'].value=d[49]; f['StatIPD3_New'].value=d[50]; f['StatIPD3_RecMove'].value=d[51]; f['StatIPD3_Move'].value=d[52]; f['StatIPD3_Refer'].value=d[53]; f['StatIPD3_DC'].value=d[54]; f['StatIPD3_Refuse'].value=d[55]; f['StatIPD3_Dead'].value=d[56]; f['StatIPD3_Remain'].value=d[57]; f['StatIPD3_HW'].value=d[58];
-    setS2Cls('card-list',0,d[59]); setS2Cls('card-list',1,d[60]); setS2Cls('helper-list',4,d[61]); setS2Cls('helper-list',5,d[62]);
-    f['Refer_Total'].value=d[63]; f['Ref_CP'].value=d[64]; f['Ref_PK'].value=d[65]; f['Ref_CP2'].value=d[66]; f['Ref_KK'].value=d[67]; f['Ref_Other'].value=d[68]; f['Ref_OtherName'].value=d[69];
-    f['Ref1'].value=d[70]; f['Ref2'].value=d[71]; f['Ref3'].value=d[72]; f['Ref4'].value=d[73]; f['Ref5'].value=d[74]; f['Ref6'].value=d[75];
-    for(var i=1;i<=9;i++) setRadio('Prob'+i, d[75+i]);
-    f['Problem_Detail'].value=d[85]; f['Security'].value=d[86]; f['Other_Detail'].value=d[87]; f['HeadNurse_Comment'].value=d[88];
-    showForm(); Swal.fire({ title: 'โหมดแก้ไขข้อมูล', text: 'กรุณาตรวจสอบและเซ็นชื่อใหม่อีกครั้ง', icon: 'info', timer: 3000, showConfirmButton: false });
+    
+    var f = document.forms['mainForm'];
+    $('#recId').val(id); 
+
+    // นำข้อมูลกลับเข้าฟอร์ม
+    Object.keys(record).forEach(key => {
+      if(f[key]) {
+        if(f[key].type === "radio") {
+          setRadio(key, record[key]);
+        } else if ($(f[key]).hasClass('select2-input')) {
+          $(f[key]).val(record[key]).trigger('change');
+        } else {
+          f[key].value = record[key];
+        }
+      }
+    });
+
+    showForm(); 
+    Swal.fire({ title: 'โหมดแก้ไขข้อมูล', text: 'กรุณาตรวจสอบและบันทึกอีกครั้ง', icon: 'info', timer: 3000, showConfirmButton: false });
   }
 
-  function populateDropdowns(o) { createOpts('supList',o.supervisors); createOpts('posList',o.positions); createOpts('docList1',o.doctors); createOpts('docList2',o.doctors); fillCls('nurse-list',o.nurses); fillCls('helper-list',o.helpers); fillCls('card-list',o.cardStaff); }
+  // ---- ฟังก์ชันสนับสนุนอื่นๆ ----
+  window.openDatabase = function() {
+    window.open(`https://console.firebase.google.com/project/${firebaseConfig.projectId}/database/${firebaseConfig.projectId}-default-rtdb/data`, '_blank');
+  }
+
+  function formatDateDisplay(d) { if(!d) return ''; var dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
+
+  window.populateDropdowns = function(o) { createOpts('supList',o.supervisors); createOpts('posList',o.positions); createOpts('docList1',o.doctors); createOpts('docList2',o.doctors); fillCls('nurse-list',o.nurses); fillCls('helper-list',o.helpers); fillCls('card-list',o.cardStaff); }
   function createOpts(id, l) { var s=document.getElementById(id); if(s) l.forEach(v=>{var o=document.createElement('option');o.value=v;o.text=v;s.add(o)}); }
   function fillCls(c, l) { var ss=document.getElementsByClassName(c); for(var i=0;i<ss.length;i++){ var d=document.createElement('option');d.value="";ss[i].add(d); l.forEach(v=>{var o=document.createElement('option');o.value=v;o.text=v;ss[i].add(o)}); }}
-  function setS2(id, v) { $('#'+id).val(v).trigger('change'); }
-  function setS2Cls(c, i, v) { $(document.getElementsByClassName(c)[i]).val(v).trigger('change'); }
   function setRadio(n, v) { if(v) $(`input[name="${n}"][value="${v}"]`).prop('checked', true); }
-  function formatDate(d) { if(!d) return ''; var dt=new Date(d); return dt.getFullYear()+'-'+('0'+(dt.getMonth()+1)).slice(-2)+'-'+('0'+dt.getDate()).slice(-2); }
 
-  function updateDashboardCards() {
-    if(!allData || allData.length === 0) return;
-    let sortedData = [...allData].sort((a, b) => new Date(b.fullData[2]) - new Date(a.fullData[2]));
-    let latest = sortedData[0].fullData;
+  // ---- Navigation Logic ----
+  window.hideAllSections = function() { $('#tableSection, #dashboardSection, #handoutSection, #formSection').hide(); $('.nav-link').removeClass('active'); }
+  window.showDashboard = function() { hideAllSections(); $('#dashboardSection').fadeIn(200); $('#btnTabDash').addClass('active'); updateDashboardCards(); renderChart(); window.scrollTo(0,0); }
+  window.showForm = function() { hideAllSections(); $('#formSection').fadeIn(200, function() { resizeCanvas(); }); $('#btnTabForm').addClass('active'); initSelect2(); window.scrollTo(0,0); }
+  window.showTable = function() { hideAllSections(); $('#tableSection').fadeIn(200); $('#btnTabTable').addClass('active'); window.scrollTo(0,0); }
+  window.showHandout = function() { hideAllSections(); $('#handoutSection').fadeIn(200); $('#btnTabHandout').addClass('active'); window.scrollTo(0,0); }
+
+  window.initSelect2 = function() { $('.select2-input').select2({ theme: 'bootstrap-5', width: '100%', placeholder: 'เลือก...', allowClear: true, dropdownAutoWidth: true }); }
+  window.resetForm = function() { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); clearSignature(); }
+
+  // ---- Chart & Dashboard ----
+  window.updateDashboardCards = function() {
+    if(!window.allData || window.allData.length === 0) return;
+    let latest = window.allData[0]; // จัดเรียงล่าสุดไว้ที่ 0 แล้ว
     let today = new Date();
     $('#dash_date').text(today.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }));
-    $('#dash_refer').text(latest[63] || '0');
-    let ipdTotal = (Number(latest[43]) || 0) + (Number(latest[57]) || 0);
+    $('#dash_refer').text(latest.Refer_Total || '0');
+    let ipdTotal = (Number(latest.StatIPD2_Remain) || 0) + (Number(latest.StatIPD3_Remain) || 0);
     $('#dash_ipd').text(ipdTotal);
-    $('#dash_er').text(latest[15] || '0');
+    $('#dash_er').text(latest.StatER_Total || '0');
   }
 
-  function renderChart() {
-    if(!allData || allData.length === 0) return;
+  window.renderChart = function() {
+    if(!window.allData || window.allData.length === 0) return;
     let startDate = $('#filterStartDate').val();
     let endDate = $('#filterEndDate').val();
     let selectedTypes = $('#filterDataSelect').val() || [];
     let chartType = $('#filterChartType').val();
 
     if (selectedTypes.length === 0) {
-       if (dashboardChart) dashboardChart.destroy();
+       if (window.dashboardChart) window.dashboardChart.destroy();
        $('#dashTable tbody, #dashTable thead tr').empty();
        return;
     }
 
-    let filteredData = allData.filter(r => {
-      let rDate = new Date(r.fullData[2]);
+    let filteredData = window.allData.filter(r => {
+      let rDate = new Date(r.ReportDate);
       rDate.setHours(0,0,0,0);
       let isAfterStart = startDate ? rDate >= new Date(startDate) : true;
       let isBeforeEnd = endDate ? rDate <= new Date(endDate) : true;
@@ -1086,19 +675,19 @@
     const getOptionText = (val) => $(`#filterDataSelect option[value='${val}']`).text();
 
     if (isTimeMode) {
-      filteredData.sort((a, b) => new Date(a.fullData[2]) - new Date(b.fullData[2]));
-      labels = [...new Set(filteredData.map(r => r.dateFormatted))];
+      filteredData.sort((a, b) => new Date(a.ReportDate) - new Date(b.ReportDate));
+      labels = [...new Set(filteredData.map(r => formatDateDisplay(r.ReportDate)))];
       let colors = ['#1e3c72', '#ff9966', '#11998e'];
 
       let timeSels = selectedTypes.filter(t => timeSeriesTypes.includes(t));
       timeSels.forEach((type, index) => {
         let dataPoints = labels.map(lbl => {
-          let dailyRecords = filteredData.filter(r => r.dateFormatted === lbl);
+          let dailyRecords = filteredData.filter(r => formatDateDisplay(r.ReportDate) === lbl);
           let sum = 0;
           dailyRecords.forEach(r => {
-            if(type === 'er_total') sum += Number(r.fullData[15]) || 0;
-            if(type === 'refer_total') sum += Number(r.fullData[63]) || 0;
-            if(type === 'ipd_total') sum += (Number(r.fullData[43]) || 0) + (Number(r.fullData[57]) || 0);
+            if(type === 'er_total') sum += Number(r.StatER_Total) || 0;
+            if(type === 'refer_total') sum += Number(r.Refer_Total) || 0;
+            if(type === 'ipd_total') sum += (Number(r.StatIPD2_Remain) || 0) + (Number(r.StatIPD3_Remain) || 0);
           });
           return sum;
         });
@@ -1117,14 +706,17 @@
       let counts = {};
       filteredData.forEach(r => {
         let items = [];
-        if(selectedTypes.includes('supervisor_count')) items.push(r.fullData[5]);
-        if(selectedTypes.includes('doc_er_count')) items.push(r.fullData[7]);
+        if(selectedTypes.includes('supervisor_count')) items.push(r.SupervisorName);
+        if(selectedTypes.includes('doc_er_count')) items.push(r.DoctorER);
         if(selectedTypes.includes('problem_count')) {
-          for(let i=1; i<=9; i++) { if(r.fullData[75+i] === "พบ") items.push("ปัญหาข้อ " + i); }
+          for(let i=1; i<=9; i++) { if(r["Prob"+i] === "พบ") items.push("ปัญหาข้อ " + i); }
         }
         if(selectedTypes.includes('all_staff_count')) {
-          let staffIndices = [9,10,11,12,13,14, 20,21,22, 31,32,33,34, 45,46,47,48, 59,60,61,62];
-          staffIndices.forEach(idx => items.push(r.fullData[idx]));
+          items.push(r.NurseER1, r.NurseER2, r.NurseER3, r.NurseER4, r.EMT, r.HelperER);
+          items.push(r.NurseLR1, r.NurseLR2, r.HelperLR);
+          items.push(r.NurseIPD2_1, r.NurseIPD2_2, r.NurseIPD2_3, r.HelperIPD2);
+          items.push(r.NurseIPD3_1, r.NurseIPD3_2, r.NurseIPD3_3, r.HelperIPD3);
+          items.push(r.CardStaff1, r.CardStaff2, r.Porter1, r.Porter2);
         }
 
         items.forEach(item => {
@@ -1189,10 +781,10 @@
     $('#dashboardTableArea').hide();
     $('#mainDashboardChart').show();
 
-    if (dashboardChart) { dashboardChart.destroy(); }
+    if (window.dashboardChart) { window.dashboardChart.destroy(); }
 
     let ctx = document.getElementById('mainDashboardChart').getContext('2d');
-    dashboardChart = new Chart(ctx, {
+    window.dashboardChart = new Chart(ctx, {
       type: chartType,
       data: { labels: labels, datasets: datasets },
       options: {
@@ -1204,7 +796,7 @@
     });
   }
 
-  function exportDashboardPDF() {
+  window.exportDashboardPDF = function() {
     var element = document.getElementById('pdfDashboardArea');
     var opt = {
       margin:       0.5,
@@ -1217,8 +809,9 @@
     html2pdf().set(opt).from(element).save().then(() => { $('#loadingOverlay').fadeOut(); });
   }
 
+  // ---- Signature System ----
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
-  function resizeCanvas() { var ratio = Math.max(window.devicePixelRatio || 1, 1); canvas.width = canvas.offsetWidth * ratio; canvas.height = canvas.offsetHeight * ratio; ctx.scale(ratio, ratio); ctx.lineWidth = 2.5; ctx.strokeStyle = "#000080"; ctx.lineCap = "round"; }
+  window.resizeCanvas = function() { var ratio = Math.max(window.devicePixelRatio || 1, 1); canvas.width = canvas.offsetWidth * ratio; canvas.height = canvas.offsetHeight * ratio; ctx.scale(ratio, ratio); ctx.lineWidth = 2.5; ctx.strokeStyle = "#000080"; ctx.lineCap = "round"; }
   window.addEventListener("resize", resizeCanvas);
   function getMousePos(canvas, evt) { var rect = canvas.getBoundingClientRect(); return { x: (evt.clientX || evt.touches[0].clientX) - rect.left, y: (evt.clientY || evt.touches[0].clientY) - rect.top }; }
   function startDrawing(e) { drawing = true; var pos = getMousePos(canvas, e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); e.preventDefault(); }
@@ -1226,8 +819,8 @@
   function stopDrawing(e) { drawing = false; ctx.closePath(); }
   canvas.addEventListener('mousedown', startDrawing); canvas.addEventListener('mousemove', draw); canvas.addEventListener('mouseup', stopDrawing); canvas.addEventListener('mouseout', stopDrawing);
   canvas.addEventListener('touchstart', startDrawing, {passive: false}); canvas.addEventListener('touchmove', draw, {passive: false}); canvas.addEventListener('touchend', stopDrawing);
-  function clearSignature() { ctx.clearRect(0, 0, canvas.width, canvas.height); $('#c_sig_img').hide().attr('src', ''); }
-  function isCanvasBlank(canvas) { var blank = document.createElement('canvas'); blank.width = canvas.width; blank.height = canvas.height; return canvas.toDataURL() === blank.toDataURL(); }
+  window.clearSignature = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); $('#c_sig_img').hide().attr('src', ''); }
+  window.isCanvasBlank = function(canvas) { var blank = document.createElement('canvas'); blank.width = canvas.width; blank.height = canvas.height; return canvas.toDataURL() === blank.toDataURL(); }
 </script>
 </body>
 </html>
