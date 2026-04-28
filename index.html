@@ -98,32 +98,26 @@
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
     .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
     .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative;}
-    .ho-card:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
     .ho-card-header { padding: 1rem; display: flex; align-items: center; gap: 0.75rem; }
     .ho-icon-box { background: white; padding: 0.5rem; border-radius: 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; width: 3rem; height: 3rem; font-size: 1.5rem;}
     .ho-module-badge { font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
     .ho-title { font-size: 1.125rem; font-weight: 700; color: #1f2937; line-height: 1.25; margin-bottom: 0; }
-    .ho-subtitle { font-size: 0.75rem; color: #4b5563; margin-bottom: 0; }
     .ho-card-body { padding: 1.25rem; flex-grow: 1; }
     .ho-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
     .ho-list li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; }
     .ho-bullet { margin-top: 0.35rem; min-width: 6px; width: 6px; height: 6px; border-radius: 50%; background-color: #9ca3af; }
-    .ho-tags-area { padding: 0 1.25rem 0.75rem 1.25rem; display: flex; flex-wrap: wrap; gap: 0.375rem; }
-    .ho-tag { display: inline-flex; align-items: center; padding: 0.125rem 0.5rem; border-radius: 0.25rem; font-size: 0.65rem; font-weight: 500; background-color: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
-    .ho-alert-area { padding: 1rem; font-size: 0.875rem; font-weight: 500; }
-    
-    .theme-blue { border-top: 4px solid #3b82f6; } .theme-blue .ho-card-header { background-color: #dbeafe; } .theme-blue .ho-icon-box i { color: #2563eb; } .alert-blue { background-color: #eff6ff; color: #1d4ed8; }
-    .theme-orange { border-top: 4px solid #f97316; } .theme-orange .ho-card-header { background-color: #ffedd5; } .theme-orange .ho-icon-box i { color: #ea580c; } .alert-orange { background-color: #fff7ed; color: #c2410c; }
-    .theme-teal { border-top: 4px solid #14b8a6; } .theme-teal .ho-card-header { background-color: #ccfbf1; } .theme-teal .ho-icon-box i { color: #0d9488; } .alert-teal { background-color: #f0fdfa; color: #0f766e; }
-    .theme-green { border-top: 4px solid #22c55e; } .theme-green .ho-card-header { background-color: #dcfce7; } .theme-green .ho-icon-box i { color: #16a34a; } .alert-green { background-color: #f0fdf4; color: #15803d; }
-    .theme-purple { border-top: 4px solid #a855f7; } .theme-purple .ho-card-header { background-color: #f3e8ff; } .theme-purple .ho-icon-box i { color: #9333ea; } .alert-purple { background-color: #faf5ff; color: #7e22ce; }
-    .theme-indigo { border-top: 4px solid #6366f1; } .theme-indigo .ho-card-header { background-color: #e0e7ff; } .theme-indigo .ho-icon-box i { color: #4f46e5; } .alert-indigo { background-color: #eef2ff; color: #4338ca; border-top: 1px solid #c7d2fe;}
-    .theme-cyan { border-top: 4px solid #06b6d4; } .theme-cyan .ho-card-header { background-color: #cffafe; } .theme-cyan .ho-icon-box i { color: #0891b2; } .alert-cyan { background-color: #ecfeff; color: #0e7490; border-top: 1px solid #a5f3fc;}
-    .theme-emerald { border-top: 4px solid #10b981; } .theme-emerald .ho-card-header { background-color: #d1fae5; } .theme-emerald .ho-icon-box i { color: #059669; } .alert-emerald { background-color: #ecfdf5; color: #047857; border-top: 1px solid #a7f3d0;}
-    .theme-rose { border-top: 4px solid #f43f5e; } .theme-rose .ho-card-header { background-color: #ffe4e6; } .theme-rose .ho-icon-box i { color: #e11d48; } .alert-rose { background-color: #fff1f2; color: #be123c; border-top: 1px solid #fecdd3;}
-    .theme-fuchsia { border-top: 4px solid #d946ef; } .theme-fuchsia .ho-card-header { background-color: #fae8ff; } .theme-fuchsia .ho-icon-box i { color: #c026d3; } .alert-fuchsia { background-color: #fdf4ff; color: #a21caf; border-top: 1px solid #f5d0fe;}
+    .theme-blue { border-top: 4px solid #3b82f6; } .theme-blue .ho-card-header { background-color: #dbeafe; } .theme-blue .ho-icon-box i { color: #2563eb; } 
+    .theme-orange { border-top: 4px solid #f97316; } .theme-orange .ho-card-header { background-color: #ffedd5; } .theme-orange .ho-icon-box i { color: #ea580c; } 
+    .theme-teal { border-top: 4px solid #14b8a6; } .theme-teal .ho-card-header { background-color: #ccfbf1; } .theme-teal .ho-icon-box i { color: #0d9488; } 
+    .theme-green { border-top: 4px solid #22c55e; } .theme-green .ho-card-header { background-color: #dcfce7; } .theme-green .ho-icon-box i { color: #16a34a; } 
+    .theme-purple { border-top: 4px solid #a855f7; } .theme-purple .ho-card-header { background-color: #f3e8ff; } .theme-purple .ho-icon-box i { color: #9333ea; } 
+    .theme-indigo { border-top: 4px solid #6366f1; } .theme-indigo .ho-card-header { background-color: #e0e7ff; } .theme-indigo .ho-icon-box i { color: #4f46e5; } 
+    .theme-cyan { border-top: 4px solid #06b6d4; } .theme-cyan .ho-card-header { background-color: #cffafe; } .theme-cyan .ho-icon-box i { color: #0891b2; } 
+    .theme-emerald { border-top: 4px solid #10b981; } .theme-emerald .ho-card-header { background-color: #d1fae5; } .theme-emerald .ho-icon-box i { color: #059669; } 
+    .theme-rose { border-top: 4px solid #f43f5e; } .theme-rose .ho-card-header { background-color: #ffe4e6; } .theme-rose .ho-icon-box i { color: #e11d48; } 
+    .theme-fuchsia { border-top: 4px solid #d946ef; } .theme-fuchsia .ho-card-header { background-color: #fae8ff; } .theme-fuchsia .ho-icon-box i { color: #c026d3; } 
 
-    .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; }
     .bg-indigo { background-color: #6366f1; } .bg-cyan { background-color: #06b6d4; } .bg-emerald { background-color: #10b981; } .bg-rose { background-color: #f43f5e; } .bg-fuchsia { background-color: #d946ef; }
     .ho-mini-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 0.2rem; margin-right: 0.2rem;}
     .badge-rose { background-color: #ffe4e6; color: #be123c; } .badge-indigo { background-color: #e0e7ff; color: #4338ca; }
@@ -135,14 +129,10 @@
       #handoutSection { display: block !important; width: 100%; margin: 0; padding: 0; }
       .container-main { max-width: 100%; margin: 0; padding: 0;}
       .ho-header { box-shadow: none; border-radius: 0; padding: 1rem; color: black; background: white !important; border-bottom: 2px solid #1e40af;}
-      .ho-header h1 { color: #1e40af; }
-      .ho-header p { color: #4b5563; }
-      .ho-header i { color: #1e40af; }
+      .ho-header h1 { color: #1e40af; } .ho-header p { color: #4b5563; }
       .print-page-break { page-break-before: always; }
       .ho-card { break-inside: avoid; margin-bottom: 15px;}
     }
-
-    @media (min-width: 768px) { .card-body-custom { padding: 25px; } .app-header { padding: 40px 0 60px 0; border-radius: 0; } }
   </style>
 </head>
 <body>
@@ -170,7 +160,7 @@
           <p style="margin-bottom: 5px;">ลงชื่อ............................................</p>
           <img id="c_sig_img" src="" style="max-height: 50px; display: none; margin-bottom: 5px;">
           <p style="margin-bottom: 0;">(<span id="c_sup_name2"></span>)</p>
-          <p>ผู้รายงาน</p>
+          <p>ผู้รายงาน (พยาบาลตรวจการ)</p>
       </div>
       <div style="width: 30%;">
           <p style="margin-bottom: 30px;">ลงชื่อ............................................</p>
@@ -252,7 +242,7 @@
 
   <div id="settingsSection" class="section-content" style="display:none;">
     <div class="alert alert-info border-0 shadow-sm rounded-4 mb-4">
-      <i class="fas fa-info-circle me-2"></i> จัดการรายชื่อ Dropdown (แก้ไขแล้วจะมีผลในฟอร์มทันที)
+      <i class="fas fa-info-circle me-2"></i> เพิ่มหรือลบรายชื่อต่างๆ ได้ที่นี่ ระบบจะอัปเดตไปที่ช่องให้เลือกตอนบันทึกเวรโดยอัตโนมัติ
     </div>
     <div class="row g-3">
       <div class="col-md-6"><div class="setting-card"><div class="setting-header">ผู้ตรวจการ</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_supervisors" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('supervisors')">เพิ่ม</button></div><div id="list_supervisors" class="bg-light rounded"></div></div></div></div>
@@ -408,13 +398,11 @@
       </div></div>
 
       <div class="custom-card border-primary">
-        <div class="card-title-bar text-bg-primary text-white"><i class="fas fa-file-signature"></i> 11. ผู้รับรายงานและลายมือชื่อ</div>
+        <div class="card-title-bar text-bg-primary text-white"><i class="fas fa-file-signature"></i> 11. ลายมือชื่อผู้รายงาน</div>
         <div class="card-body-custom">
-           <div class="row g-3 mb-3">
-               <div class="col-12 col-md-6"><label class="form-label">หัวหน้ากลุ่มงาน (ผู้รับรายงาน)</label><select class="form-select select2-input list-head" name="HeadNurseName"></select></div>
-               <div class="col-12 col-md-6"><label class="form-label">ผู้อำนวยการ รพ. (ผู้รับรายงาน)</label><select class="form-select select2-input list-director" name="DirectorName"></select></div>
+           <div class="alert alert-secondary small mb-3">
+             <i class="fas fa-info-circle"></i> รายชื่อผู้อำนวยการ และ หัวหน้ากลุ่มงาน จะถูกประทับลงในเอกสาร PDF ให้โดยอัตโนมัติตามที่ตั้งค่าไว้
            </div>
-           <hr>
            <label class="form-label text-primary"><i class="fas fa-pen-nib me-1"></i> กรุณาเซ็นชื่อในกรอบด้านล่าง (ผู้ตรวจการเวร)</label>
            <div class="signature-wrapper mb-2">
              <button type="button" class="btn btn-sm btn-light border btn-clear-sig" onclick="clearSignature()"><i class="fas fa-eraser"></i> ลบ/เขียนใหม่</button>
@@ -857,7 +845,7 @@
   window.dashboardChart = null;
 
   $(document).ready(function() { 
-    // อัปเดตวันที่ทันทีเพื่อไม่ให้หน้าจอว่าง
+    // อัปเดตวันที่ทันที
     $('#dash_date').text(new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }));
 
     signInAnonymously(auth).then(() => {
@@ -871,12 +859,24 @@
   });
 
   // -------------------------------------------------------------
-  // ระบบตั้งค่า (Settings & Dropdown Manager)
+  // ระบบตั้งค่า (Settings & Dropdown Manager) ใช้งานได้ 100%
   // -------------------------------------------------------------
   function loadSettings() {
     onValue(ref(db, 'settings/dropdowns'), (snap) => {
-      window.dropdownData = snap.val() || {};
       
+      // ถ้าฐานข้อมูลว่าง ให้เพิ่มข้อมูลเริ่มต้นทันที (เพื่อให้คุณเห็นตัวอย่างและทำงานต่อได้)
+      if (!snap.exists()) {
+          const defaultSettings = {
+              supervisors: { 1: "คุณปิยณัฐ", 2: "คุณภูวนัย", 3: "คุณสุวนันท์", 4: "คุณสุรีย์พร", 5: "คุณพรพิมล", 6: "คุณปราณี" },
+              positions: { 1: "พยาบาลวิชาชีพชำนาญการพิเศษ", 2: "พยาบาลวิชาชีพชำนาญการ", 3: "พยาบาลวิชาชีพปฏิบัติการ" },
+              head: { 1: "หัวหน้ากลุ่มงานการพยาบาล" },
+              director: { 1: "ผู้อำนวยการโรงพยาบาล" }
+          };
+          set(ref(db, 'settings/dropdowns'), defaultSettings);
+          return; // ให้ onValue ทำงานใหม่อีกครั้ง
+      }
+
+      window.dropdownData = snap.val() || {};
       const categories = ['supervisors', 'positions', 'doctors', 'nurses', 'emt', 'helpers', 'porters', 'cardStaff', 'head', 'director'];
       
       categories.forEach(cat => {
@@ -885,18 +885,19 @@
         const items = window.dropdownData[cat] || {};
         
         if(Object.keys(items).length === 0) {
-           listDiv.append('<div class="p-2 text-muted small text-center">ไม่มีข้อมูล</div>');
+           listDiv.append('<div class="p-2 text-muted small text-center">ยังไม่มีข้อมูล</div>');
         } else {
            Object.keys(items).forEach(key => {
              listDiv.append(`
                <div class="setting-list-item">
                  <span>${items[key]}</span>
-                 <button class="btn btn-sm text-danger" onclick="deleteDropdownItem('${cat}', '${key}')"><i class="fas fa-times"></i></button>
+                 <button class="btn btn-sm text-danger" onclick="deleteDropdownItem('${cat}', '${key}')" title="ลบข้อมูล"><i class="fas fa-times"></i></button>
                </div>
              `);
            });
         }
 
+        // โหลดเข้าแบบฟอร์ม Select ให้อัตโนมัติ
         const selects = $(`.list-${cat}`);
         selects.empty().append('<option value=""></option>');
         Object.values(items).forEach(val => selects.append(new Option(val, val)));
@@ -906,19 +907,32 @@
     });
   }
 
+  // กด Enter เพื่อเพิ่มข้อมูลในช่อง Settings
+  $(document).on('keypress', '.setting-card input', function(e) {
+      if(e.which == 13) { $(this).next('button').click(); }
+  });
+
   window.addDropdownItem = function(category) {
       const input = $(`#add_${category}`);
       const val = input.val().trim();
       if(!val) return;
-      push(ref(db, `settings/dropdowns/${category}`), val).then(() => { input.val(''); });
+      
+      push(ref(db, `settings/dropdowns/${category}`), val).then(() => { 
+          input.val(''); 
+          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลเรียบร้อย', showConfirmButton: false, timer: 1500 });
+      }).catch(err => {
+          Swal.fire('Error', 'ไม่สามารถเพิ่มข้อมูลได้', 'error');
+      });
   }
 
   window.deleteDropdownItem = function(category, key) {
-      remove(ref(db, `settings/dropdowns/${category}/${key}`));
+      remove(ref(db, `settings/dropdowns/${category}/${key}`)).then(() => {
+          Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ลบข้อมูลแล้ว', showConfirmButton: false, timer: 1500 });
+      });
   }
 
   // -------------------------------------------------------------
-  // Data Table & Dashboard
+  // Data Table
   // -------------------------------------------------------------
   function loadTableData() {
     onValue(ref(db, 'reports'), (snapshot) => {
@@ -956,6 +970,15 @@
     var fd = Object.fromEntries(new FormData(form).entries());
     const j = (arr) => arr.filter(v => v).join(', ');
 
+    // ดึงชื่อ ผอ. และ หัวหน้าจากตั้งค่า (ดึงรายการแรกที่เจอ) มาใส่ PDF อัตโนมัติ
+    let defaultHead = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '......................................';
+    let defaultDirector = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '......................................';
+    
+    // บันทึกเป็นหลักฐานลงในข้อมูลการเซฟด้วย
+    fd.HeadNurseName = defaultHead;
+    fd.DirectorName = defaultDirector;
+
+    // ยัดข้อมูลลง Snapshot
     $('#c_date').text(fd.ReportDate); $('#c_time').text(`${fd.StartTime} - ${fd.EndTime}`);
     $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
     $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
@@ -979,8 +1002,8 @@
     $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
 
     $('#c_sup_name2').text(fd.SupervisorName || '......................................');
-    $('#c_head_name').text(fd.HeadNurseName || '......................................');
-    $('#c_dir_name').text(fd.DirectorName || '......................................');
+    $('#c_head_name').text(defaultHead);
+    $('#c_dir_name').text(defaultDirector);
 
     var signatureBase64 = null;
     if (!isCanvasBlank(canvas)) { 
@@ -1011,7 +1034,7 @@
     } catch (e) { $('#loadingOverlay').fadeOut(); Swal.fire('Error', 'ไม่สามารถบันทึกข้อมูลได้: ' + e.message, 'error'); }
   }
 
-  // ---- ฟังก์ชันพื้นฐาน ----
+  // ---- ฟังก์ชันลบ / แก้ไข ----
   window.deleteRecord = function(id) { Swal.fire({ title: 'ลบข้อมูล?', icon: 'warning', showCancelButton: true }).then(async (r) => { if(r.isConfirmed) { await remove(ref(db, 'reports/' + id)); Swal.fire('ลบแล้ว', '', 'success'); } }); }
   window.editRecord = function(id) {
     var r = window.allData.find(x => x.id === id); if (!r) return;
@@ -1026,13 +1049,14 @@
     showSection('form'); Swal.fire('โหมดแก้ไข', 'กรุณาเซ็นชื่อใหม่ก่อนบันทึก', 'info');
   }
 
+  // ---- Export PSV ----
   window.exportDataPSV = function() {
     const start = $('#exportStart').val(); const end = $('#exportEnd').val();
     if (!start || !end) { Swal.fire('แจ้งเตือน', 'กรุณาระบุตั้งแต่วันที่ และ ถึงวันที่', 'warning'); return; }
     const filtered = window.allData.filter(r => { const d = new Date(r.ReportDate); return d >= new Date(start) && d <= new Date(end); });
     if (filtered.length === 0) { Swal.fire('ไม่พบข้อมูล', 'ไม่มีรายงานในช่วงวันที่เลือก', 'info'); return; }
 
-    const allKeys = ["ReportDate", "StartTime", "EndTime", "SupervisorName", "Position", "DoctorER", "DoctorWard", "NurseER1", "NurseER2", "NurseER3", "NurseER4", "EMT", "HelperER", "StatER_Total", "StatER_Refer", "StatER_EMS", "StatER_Dead", "StatER_Autopsy", "NurseLR1", "NurseLR2", "HelperLR", "StatLR_Carry", "StatLR_New", "StatLR_Move", "StatLR_Refer", "StatLR_DC", "StatLR_Birth", "StatLR_Dead", "StatLR_Remain", "NurseIPD2_1", "NurseIPD2_2", "NurseIPD2_3", "HelperIPD2", "StatIPD2_Carry", "StatIPD2_New", "StatIPD2_RecMove", "StatIPD2_Move", "StatIPD2_Refer", "StatIPD2_DC", "StatIPD2_Refuse", "StatIPD2_Dead", "StatIPD2_Remain", "StatIPD2_HW", "NurseIPD3_1", "NurseIPD3_2", "NurseIPD3_3", "HelperIPD3", "StatIPD3_Carry", "StatIPD3_New", "StatIPD3_RecMove", "StatIPD3_Move", "StatIPD3_Refer", "StatIPD3_DC", "StatIPD3_Refuse", "StatIPD3_Dead", "StatIPD3_Remain", "StatIPD3_HW", "CardStaff1", "CardStaff2", "Porter1", "Porter2", "Refer_Total", "Ref_CP", "Ref_CP2", "Ref_PK", "Ref_KK", "Ref_Other", "Ref_OtherName", "Ref1", "Ref2", "Ref3", "Ref4", "Ref5", "Ref6", "Prob1", "Prob2", "Prob3", "Prob4", "Prob5", "Prob6", "Prob7", "Prob8", "Prob9", "Problem_Detail", "Security", "Other_Detail", "HeadNurse_Comment"];
+    const allKeys = ["ReportDate", "StartTime", "EndTime", "SupervisorName", "Position", "DoctorER", "DoctorWard", "NurseER1", "NurseER2", "NurseER3", "NurseER4", "EMT", "HelperER", "StatER_Total", "StatER_Refer", "StatER_EMS", "StatER_Dead", "StatER_Autopsy", "NurseLR1", "NurseLR2", "HelperLR", "StatLR_Carry", "StatLR_New", "StatLR_Move", "StatLR_Refer", "StatLR_DC", "StatLR_Birth", "StatLR_Dead", "StatLR_Remain", "NurseIPD2_1", "NurseIPD2_2", "NurseIPD2_3", "HelperIPD2", "StatIPD2_Carry", "StatIPD2_New", "StatIPD2_RecMove", "StatIPD2_Move", "StatIPD2_Refer", "StatIPD2_DC", "StatIPD2_Refuse", "StatIPD2_Dead", "StatIPD2_Remain", "StatIPD2_HW", "NurseIPD3_1", "NurseIPD3_2", "NurseIPD3_3", "HelperIPD3", "StatIPD3_Carry", "StatIPD3_New", "StatIPD3_RecMove", "StatIPD3_Move", "StatIPD3_Refer", "StatIPD3_DC", "StatIPD3_Refuse", "StatIPD3_Dead", "StatIPD3_Remain", "StatIPD3_HW", "CardStaff1", "CardStaff2", "Porter1", "Porter2", "Refer_Total", "Ref_CP", "Ref_CP2", "Ref_PK", "Ref_KK", "Ref_Other", "Ref_OtherName", "Ref1", "Ref2", "Ref3", "Ref4", "Ref5", "Ref6", "Prob1", "Prob2", "Prob3", "Prob4", "Prob5", "Prob6", "Prob7", "Prob8", "Prob9", "Problem_Detail", "Security", "Other_Detail", "HeadNurse_Comment", "HeadNurseName", "DirectorName"];
     let content = allKeys.join("|") + "\n"; 
     filtered.forEach(r => {
         const row = allKeys.map(k => (r[k] ? String(r[k]) : "").replace(/(\r\n|\n|\r)/gm, " ").replace(/\|/g, "/"));
@@ -1095,7 +1119,7 @@
     window.dashboardChart = new Chart(document.getElementById('mainDashboardChart'), { type: cType, data: {labels, datasets}, options: {responsive: true, maintainAspectRatio: false} });
   }
 
-  // Navigation & Utils
+  // ---- Navigation ----
   window.showSection = function(id) { 
       $('.section-content').hide(); 
       $('.nav-link').removeClass('active'); 
@@ -1108,7 +1132,7 @@
   function formatDateDisplay(d) { if(!d) return ''; var dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = function() { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); clearSignature(); }
 
-  // Signature
+  // ---- Signature Pad ----
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   window.addEventListener("resize", resizeCanvas);
