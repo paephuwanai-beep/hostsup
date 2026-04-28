@@ -212,7 +212,7 @@
               <div class="row g-3 align-items-end">
                   <div class="col-12 col-md-4"><label class="form-label">ตั้งแต่วันที่</label><input type="date" class="form-control" id="exportStart"></div>
                   <div class="col-12 col-md-4"><label class="form-label">ถึงวันที่</label><input type="date" class="form-control" id="exportEnd"></div>
-                  <div class="col-12 col-md-4"><button class="btn btn-primary w-100 py-2 fw-bold" onclick="exportDataPSV()"><i class="fas fa-download me-2"></i>โหลดไฟล์ .PSV</button></div>
+                  <div class="col-12 col-md-4"><button class="btn btn-primary w-100 py-2 fw-bold" onclick="exportDataPSV()"><i class="fas fa-download me-2"></i>ดาวน์โหลด .PSV</button></div>
               </div>
           </div>
       </div>
@@ -253,8 +253,8 @@
       <div class="col-md-6"><div class="setting-card"><div class="setting-header">ผู้ช่วยเหลือ (NA)</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_helpers" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('helpers')">เพิ่ม</button></div><div id="list_helpers" class="bg-light rounded"></div></div></div></div>
       <div class="col-md-6"><div class="setting-card"><div class="setting-header">พนักงานเปล</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_porters" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('porters')">เพิ่ม</button></div><div id="list_porters" class="bg-light rounded"></div></div></div></div>
       <div class="col-md-6"><div class="setting-card"><div class="setting-header">ห้องบัตร</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_cardStaff" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('cardStaff')">เพิ่ม</button></div><div id="list_cardStaff" class="bg-light rounded"></div></div></div></div>
-      <div class="col-md-6"><div class="setting-card border-primary"><div class="setting-header text-bg-primary">หัวหน้ากลุ่มงาน (ใช้ใน PDF)</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_head" class="form-control" placeholder="ชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('head')">เพิ่ม</button></div><div id="list_head" class="bg-light rounded"></div></div></div></div>
-      <div class="col-md-6"><div class="setting-card border-primary"><div class="setting-header text-bg-primary">ผู้อำนวยการ รพ. (ใช้ใน PDF)</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_director" class="form-control" placeholder="ชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('director')">เพิ่ม</button></div><div id="list_director" class="bg-light rounded"></div></div></div></div>
+      <div class="col-md-6"><div class="setting-card border-primary"><div class="setting-header text-bg-primary">หัวหน้ากลุ่มงาน (ใช้ใน PDF)</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_head" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('head')">เพิ่ม</button></div><div id="list_head" class="bg-light rounded"></div></div></div></div>
+      <div class="col-md-6"><div class="setting-card border-primary"><div class="setting-header text-bg-primary">ผู้อำนวยการ รพ. (ใช้ใน PDF)</div><div class="card-body-custom"><div class="input-group mb-2"><input type="text" id="add_director" class="form-control" placeholder="ระบุชื่อ..."><button class="btn btn-primary" onclick="addDropdownItem('director')">เพิ่ม</button></div><div id="list_director" class="bg-light rounded"></div></div></div></div>
     </div>
   </div>
 
@@ -400,8 +400,8 @@
       <div class="custom-card border-primary">
         <div class="card-title-bar text-bg-primary text-white"><i class="fas fa-file-signature"></i> 11. ลายมือชื่อผู้รายงาน</div>
         <div class="card-body-custom">
-           <div class="alert alert-secondary small mb-3">
-             <i class="fas fa-info-circle"></i> รายชื่อผู้อำนวยการ และ หัวหน้ากลุ่มงาน จะถูกประทับลงในเอกสาร PDF ให้โดยอัตโนมัติตามที่ตั้งค่าไว้
+           <div class="alert alert-secondary small mb-3 border-0">
+             <i class="fas fa-info-circle"></i> รายชื่อผู้อำนวยการ และ หัวหน้ากลุ่มงาน จะถูกประทับลงในเอกสาร PDF ให้โดยอัตโนมัติตามที่ได้ระบุไว้ในเมนู 'ตั้งค่า'
            </div>
            <label class="form-label text-primary"><i class="fas fa-pen-nib me-1"></i> กรุณาเซ็นชื่อในกรอบด้านล่าง (ผู้ตรวจการเวร)</label>
            <div class="signature-wrapper mb-2">
@@ -845,7 +845,6 @@
   window.dashboardChart = null;
 
   $(document).ready(function() { 
-    // อัปเดตวันที่ทันที
     $('#dash_date').text(new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }));
 
     signInAnonymously(auth).then(() => {
@@ -859,12 +858,11 @@
   });
 
   // -------------------------------------------------------------
-  // ระบบตั้งค่า (Settings & Dropdown Manager) ใช้งานได้ 100%
+  // ระบบตั้งค่า (Settings & Dropdown Manager) แก้บั๊กกดเพิ่มไม่ได้
   // -------------------------------------------------------------
   function loadSettings() {
     onValue(ref(db, 'settings/dropdowns'), (snap) => {
       
-      // ถ้าฐานข้อมูลว่าง ให้เพิ่มข้อมูลเริ่มต้นทันที (เพื่อให้คุณเห็นตัวอย่างและทำงานต่อได้)
       if (!snap.exists()) {
           const defaultSettings = {
               supervisors: { 1: "คุณปิยณัฐ", 2: "คุณภูวนัย", 3: "คุณสุวนันท์", 4: "คุณสุรีย์พร", 5: "คุณพรพิมล", 6: "คุณปราณี" },
@@ -872,8 +870,8 @@
               head: { 1: "หัวหน้ากลุ่มงานการพยาบาล" },
               director: { 1: "ผู้อำนวยการโรงพยาบาล" }
           };
-          set(ref(db, 'settings/dropdowns'), defaultSettings);
-          return; // ให้ onValue ทำงานใหม่อีกครั้ง
+          set(ref(db, 'settings/dropdowns'), defaultSettings).catch(err => console.error(err));
+          return; 
       }
 
       window.dropdownData = snap.val() || {};
@@ -897,7 +895,6 @@
            });
         }
 
-        // โหลดเข้าแบบฟอร์ม Select ให้อัตโนมัติ
         const selects = $(`.list-${cat}`);
         selects.empty().append('<option value=""></option>');
         Object.values(items).forEach(val => selects.append(new Option(val, val)));
@@ -907,28 +904,39 @@
     });
   }
 
-  // กด Enter เพื่อเพิ่มข้อมูลในช่อง Settings
+  // กด Enter เพื่อเพิ่ม
   $(document).on('keypress', '.setting-card input', function(e) {
       if(e.which == 13) { $(this).next('button').click(); }
   });
 
-  window.addDropdownItem = function(category) {
+  window.addDropdownItem = async function(category) {
       const input = $(`#add_${category}`);
       const val = input.val().trim();
-      if(!val) return;
+      if(!val) {
+          Swal.fire('แจ้งเตือน', 'กรุณาระบุชื่อที่ต้องการเพิ่ม', 'warning');
+          return;
+      }
       
-      push(ref(db, `settings/dropdowns/${category}`), val).then(() => { 
+      try {
+          const listRef = ref(db, `settings/dropdowns/${category}`);
+          const newRef = push(listRef);
+          await set(newRef, val);
           input.val(''); 
           Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลเรียบร้อย', showConfirmButton: false, timer: 1500 });
-      }).catch(err => {
-          Swal.fire('Error', 'ไม่สามารถเพิ่มข้อมูลได้', 'error');
-      });
+      } catch (err) {
+          console.error("Add Error:", err);
+          Swal.fire('ข้อผิดพลาด', 'ไม่สามารถเพิ่มข้อมูลได้ (โปรดเช็ค Rule ฐานข้อมูล): ' + err.message, 'error');
+      }
   }
 
-  window.deleteDropdownItem = function(category, key) {
-      remove(ref(db, `settings/dropdowns/${category}/${key}`)).then(() => {
+  window.deleteDropdownItem = async function(category, key) {
+      try {
+          await remove(ref(db, `settings/dropdowns/${category}/${key}`));
           Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ลบข้อมูลแล้ว', showConfirmButton: false, timer: 1500 });
-      });
+      } catch (err) {
+          console.error("Delete Error:", err);
+          Swal.fire('ข้อผิดพลาด', 'ไม่สามารถลบข้อมูลได้: ' + err.message, 'error');
+      }
   }
 
   // -------------------------------------------------------------
@@ -970,15 +978,15 @@
     var fd = Object.fromEntries(new FormData(form).entries());
     const j = (arr) => arr.filter(v => v).join(', ');
 
-    // ดึงชื่อ ผอ. และ หัวหน้าจากตั้งค่า (ดึงรายการแรกที่เจอ) มาใส่ PDF อัตโนมัติ
+    // ดึงชื่อ ผอ. และ หัวหน้าจากหน้า Settings มาใส่ PDF โดยอัตโนมัติ
     let defaultHead = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '......................................';
     let defaultDirector = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '......................................';
     
-    // บันทึกเป็นหลักฐานลงในข้อมูลการเซฟด้วย
+    // บันทึกไว้เป็นหลักฐานในฐานข้อมูลด้วย
     fd.HeadNurseName = defaultHead;
     fd.DirectorName = defaultDirector;
 
-    // ยัดข้อมูลลง Snapshot
+    // ยัดข้อมูลลง Snapshot Area
     $('#c_date').text(fd.ReportDate); $('#c_time').text(`${fd.StartTime} - ${fd.EndTime}`);
     $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
     $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
@@ -1070,7 +1078,7 @@
   window.updateDashboardCards = function() {
     $('#dash_date').text(new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }));
     if(!window.allData || window.allData.length === 0) {
-        $('#dash_refer, #dash_ipd, #dash_er').text('0'); return;
+        $('#dash_refer').text('0'); $('#dash_ipd').text('0'); $('#dash_er').text('0'); return;
     }
     let l = window.allData[0];
     $('#dash_refer').text(l.Refer_Total || '0');
@@ -1119,7 +1127,7 @@
     window.dashboardChart = new Chart(document.getElementById('mainDashboardChart'), { type: cType, data: {labels, datasets}, options: {responsive: true, maintainAspectRatio: false} });
   }
 
-  // ---- Navigation ----
+  // Navigation & Utils
   window.showSection = function(id) { 
       $('.section-content').hide(); 
       $('.nav-link').removeClass('active'); 
@@ -1132,7 +1140,7 @@
   function formatDateDisplay(d) { if(!d) return ''; var dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = function() { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); clearSignature(); }
 
-  // ---- Signature Pad ----
+  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   window.addEventListener("resize", resizeCanvas);
