@@ -23,9 +23,9 @@
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .app-header p { font-size: 0.9rem; }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
-    /* Navigation Menu */
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .nav-pills .nav-link { color: #555; font-weight: 600; border-radius: 12px; padding: 12px; font-size: 0.95rem; transition: all 0.3s; cursor: pointer; border: none; width: 100%;}
     .nav-pills .nav-link.active { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2); }
@@ -93,9 +93,9 @@
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
-    /* Handout Design */
+    /* Handout Infographic UI */
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
-    .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
+    .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
     .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative; border-top: 4px solid var(--primary-color);}
     .ho-card-header { padding: 1rem; display: flex; align-items: center; gap: 0.75rem; background-color: #f8fafc;}
     .ho-icon-box { background: white; padding: 0.5rem; border-radius: 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; width: 3rem; height: 3rem; font-size: 1.5rem; color: var(--primary-color);}
@@ -166,7 +166,7 @@
 
 <div class="app-header text-center print-hide">
   <h2 class="mb-2"><i class="fas fa-user-shield"></i> KSH SUPERVISOR SYSTEM</h2>
-  <p class="mb-0 opacity-75">ระบบบันทึกและรายงานประจำเวรพยาบาลตรวจการนอกเวลา</p>
+  <p class="mb-0 opacity-75">ระบบดิจิทัลรายงานเวรพยาบาลตรวจการนอกเวลา</p>
 </div>
 
 <div class="container-main">
@@ -189,10 +189,10 @@
       </div>
 
       <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3"><div class="dash-card bg-blue-light"><i class="fas fa-calendar-alt bg-icon"></i><div class="title"><i class="fas fa-circle text-primary" style="font-size:0.6rem;"></i> วันที่ปัจจุบัน</div><div class="value" id="dash_date" style="font-size: 1.5rem; margin-top: 15px;">-</div></div></div>
-        <div class="col-6 col-md-3"><div class="dash-card bg-orange"><i class="fas fa-ambulance bg-icon"></i><div class="title"><i class="fas fa-exclamation-triangle"></i> Refer (ล่าสุด)</div><div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div></div></div>
-        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title"><i class="fas fa-venus-mars"></i> IPD รวม (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
-        <div class="col-6 col-md-3"><div class="dash-card bg-purple"><i class="fas fa-user-injured bg-icon"></i><div class="title"><i class="fas fa-procedures"></i> ER (ล่าสุด)</div><div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-blue-light"><i class="fas fa-calendar-alt bg-icon"></i><div class="title small">วันที่ปัจจุบัน</div><div class="value" id="dash_date" style="font-size: 1.4rem;">-</div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-orange"><i class="fas fa-ambulance bg-icon"></i><div class="title small">Refer (ล่าสุด)</div><div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title small">IPD (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-purple"><i class="fas fa-user-injured bg-icon"></i><div class="title small">ER (ล่าสุด)</div><div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div></div></div>
       </div>
 
       <div class="custom-card border-primary print-hide" style="border: 1px solid #d1d5db;">
@@ -258,7 +258,7 @@
             <label class="form-label">เวรปฏิบัติงาน</label>
             <select class="form-select" name="Shift" id="shiftSelect" required onchange="updateShiftTime()">
                 <option value="">เลือกเวร...</option>
-                <option value="ดึก">ดึก (00.30 - 08.30)</option>
+                <option value="ดึก">ดึก (00.00 - 08.00)</option>
                 <option value="เช้า">เช้า (08.30 - 16.30)</option>
                 <option value="บ่าย">บ่าย (16.30 - 24.00)</option>
             </select>
@@ -494,7 +494,6 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
   import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-  import { getStorage, ref as sRef, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -509,7 +508,6 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-  const storage = getStorage(app);
   const auth = getAuth(app);
 
   window.allData = [];
@@ -524,13 +522,10 @@
     }).catch(err => Swal.fire('Error', 'เชื่อมต่อฐานข้อมูลไม่ได้: ' + err.message, 'error'));
   });
 
-  // -------------------------------------------------------------
-  // อัปเดตเวลาอัตโนมัติตามเวรที่เลือก
-  // -------------------------------------------------------------
   window.updateShiftTime = function() {
       const shift = $('#shiftSelect').val();
       let start = "", end = "", display = "";
-      if (shift === 'ดึก') { start = "00:30"; end = "08:30"; display = "00.30 - 08.30 น."; }
+      if (shift === 'ดึก') { start = "00:00"; end = "08:00"; display = "00.00 - 08.00 น."; }
       else if (shift === 'เช้า') { start = "08:30"; end = "16:30"; display = "08.30 - 16.30 น."; }
       else if (shift === 'บ่าย') { start = "16:30"; end = "24:00"; display = "16.30 - 24.00 น."; }
       
@@ -539,9 +534,6 @@
       $('#shiftTimeDisplay').val(display);
   }
 
-  // -------------------------------------------------------------
-  // Settings Management 
-  // -------------------------------------------------------------
   function loadSettings() {
     onValue(ref(db, 'settings/dropdowns'), (snap) => {
       
@@ -616,9 +608,6 @@
   window.deleteDropdownItem = (cat, key) => remove(ref(db, `settings/dropdowns/${cat}/${key}`));
   $(document).on('keypress', '.setting-card input', function(e) { if(e.which == 13) { $(this).siblings('button').click(); } });
 
-  // -------------------------------------------------------------
-  // Data Table & Submit
-  // -------------------------------------------------------------
   function loadTableData() {
     onValue(ref(db, 'reports'), (snapshot) => {
       const data = snapshot.val(); window.allData = [];
@@ -627,7 +616,6 @@
       if (!data) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
       Object.keys(data).forEach(key => { let r = data[key]; r.id = key; window.allData.push(r); });
       
-      // เรียงลำดับ: วันที่มากสุดไปน้อยสุด -> วันเดียวกันเรียง บ่าย > เช้า > ดึก
       window.allData.sort((a, b) => {
           const dateA = new Date(a.ReportDate).getTime();
           const dateB = new Date(b.ReportDate).getTime();
@@ -640,7 +628,7 @@
       });
 
       window.allData.forEach(function(r) {
-        var imgBtn = r.snapshotUrl ? `<a href="${r.snapshotUrl}" target="_blank" class="btn btn-sm btn-outline-primary mb-1"><i class="fas fa-file-pdf"></i></a>` : '';
+        var imgBtn = r.snapshotUrl ? `<button class="btn btn-sm btn-outline-primary mb-1" onclick="viewImage('${r.id}')" title="ดูเอกสาร"><i class="fas fa-file-pdf"></i></button>` : '';
         var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
         
         tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-center">${imgBtn}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
@@ -650,76 +638,84 @@
     });
   }
 
+  // ฟังก์ชันดูรูปรายงาน
+  window.viewImage = function(id) {
+     let r = window.allData.find(x => x.id === id);
+     if(r && r.snapshotUrl) {
+         let w = window.open("");
+         w.document.write(`<div style="text-align:center;"><img src="${r.snapshotUrl}" style="max-width:100%; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1);"></div>`);
+     }
+  }
+
   window.handleFormSubmit = async function(e) {
-    e.preventDefault(); $('#loadingOverlay').show();
-    var fd = Object.fromEntries(new FormData(e.target).entries());
-    const j = (arr) => arr.filter(v => v).join(', ');
+    e.preventDefault();
+    $('#loadingOverlay').css('display', 'flex'); 
     
-    // ดึงชื่อ ผอ./หัวหน้า จาก Settings
-    let headStr = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '|';
-    let dirStr = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '|';
-    let [headName, headPos] = headStr.split('|');
-    let [dirName, dirPos] = dirStr.split('|');
-
-    fd.HeadNurseName = headName;
-    fd.DirectorName = dirName;
-
-    // เตรียม PDF Snapshot
-    let dateText = formatDateDisplay(fd.ReportDate);
-    if(fd.Shift) dateText += ` (เวร${fd.Shift})`;
-    $('#c_date').text(dateText); 
-    $('#c_time').text(fd.ShiftTimeDisplay || `${fd.StartTime} - ${fd.EndTime}`);
-    
-    $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
-    $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
-    $('#c_nurse_er').text(j([fd.NurseER1,fd.NurseER2,fd.NurseER3,fd.NurseER4])||'-');
-    $('#c_emt').text(fd.EMT||'-'); $('#c_helper_er').text(fd.HelperER||'-');
-    $('#c_nurse_lr').text(j([fd.NurseLR1,fd.NurseLR2])||'-'); $('#c_helper_lr').text(fd.HelperLR||'-');
-    $('#c_nurse_ipd2').text(j([fd.NurseIPD2_1,fd.NurseIPD2_2,fd.NurseIPD2_3])||'-'); $('#c_helper_ipd2').text(fd.HelperIPD2||'-');
-    $('#c_nurse_ipd3').text(j([fd.NurseIPD3_1,fd.NurseIPD3_2,fd.NurseIPD3_3])||'-'); $('#c_helper_ipd3').text(fd.HelperIPD3||'-');
-    $('#c_card').text(j([fd.CardStaff1,fd.CardStaff2])||'-'); $('#c_porter').text(j([fd.Porter1,fd.Porter2])||'-');
-    $('#c_stat_er').text(`รวม ${fd.StatER_Total||0} | Refer ${fd.StatER_Refer||0} | EMS ${fd.StatER_EMS||0} | Dead ${fd.StatER_Dead||0} | ชันสูตร ${fd.StatER_Autopsy||0}`);
-    $('#c_stat_lr').text(`ยกมา ${fd.StatLR_Carry||0} | รับ ${fd.StatLR_New||0} | ย้าย ${fd.StatLR_Move||0} | Ref ${fd.StatLR_Refer||0} | D/C ${fd.StatLR_DC||0} | คลอด ${fd.StatLR_Birth||0} | Dead ${fd.StatLR_Dead||0} | คงเหลือ ${fd.StatLR_Remain||0}`);
-    $('#c_stat_ipd2').text(`ยกมา ${fd.StatIPD2_Carry||0} | รับ ${fd.StatIPD2_New||0} | รับย้าย ${fd.StatIPD2_RecMove||0} | ย้าย ${fd.StatIPD2_Move||0} | Ref ${fd.StatIPD2_Refer||0} | D/C ${fd.StatIPD2_DC||0} | ปฏิเสธ ${fd.StatIPD2_Refuse||0} | Dead ${fd.StatIPD2_Dead||0} | คงเหลือ ${fd.StatIPD2_Remain||0} | HW ${fd.StatIPD2_HW||0}`);
-    $('#c_stat_ipd3').text(`ยกมา ${fd.StatIPD3_Carry||0} | รับ ${fd.StatIPD3_New||0} | รับย้าย ${fd.StatIPD3_RecMove||0} | ย้าย ${fd.StatIPD3_Move||0} | Ref ${fd.StatIPD3_Refer||0} | D/C ${fd.StatIPD3_DC||0} | ปฏิเสธ ${fd.StatIPD3_Refuse||0} | Dead ${fd.StatIPD3_Dead||0} | คงเหลือ ${fd.StatIPD3_Remain||0} | HW ${fd.StatIPD3_HW||0}`);
-    
-    var refDet = ""; [fd.Ref1, fd.Ref2, fd.Ref3, fd.Ref4, fd.Ref5, fd.Ref6].forEach((r, i) => { if(r) refDet += `รอบ ${i+1}: ${r}\n`; });
-    $('#c_ref_sum').text(`${fd.Refer_Total||0} (ชย:${fd.Ref_CP||0}, ภข:${fd.Ref_PK||0}, ชพ:${fd.Ref_CP2||0}, ขก:${fd.Ref_KK||0}, อื่นๆ:${fd.Ref_Other||0} ${fd.Ref_OtherName||''})`);
-    $('#c_ref_det').text(refDet||'-');
-    var probs = []; for(var i=1; i<=9; i++) { if(fd["Prob"+i] === "พบ") probs.push("ข้อ " + i); }
-    $('#c_prob_list').text(probs.length > 0 ? probs.join(", ") : "ไม่พบ");
-    $('#c_prob_det').text(fd.Problem_Detail || '-');
-    $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
-
-    $('#c_sup_name2').text(fd.SupervisorName || '......................................');
-    $('#c_head_name').text(headName || '......................................');
-    $('#c_head_pos').text(headPos || 'หัวหน้ากลุ่มงาน');
-    $('#c_dir_name').text(dirName || '......................................');
-    $('#c_dir_pos').text(dirPos || 'ผู้อำนวยการโรงพยาบาล');
-    
-    var sigBase64 = null; if (!isCanvasBlank(canvas)) { sigBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', sigBase64).show(); } else { $('#c_sig_img').hide(); }
-
     try {
+      var fd = Object.fromEntries(new FormData(e.target).entries());
+      const j = (arr) => arr.filter(v => v).join(', ');
+      
+      let headStr = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '|';
+      let dirStr = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '|';
+      let [headName, headPos] = headStr.split('|');
+      let [dirName, dirPos] = dirStr.split('|');
+
+      fd.HeadNurseName = headName;
+      fd.DirectorName = dirName;
+
+      let dateText = formatDateDisplay(fd.ReportDate);
+      if(fd.Shift) dateText += ` (เวร${fd.Shift})`;
+      $('#c_date').text(dateText); 
+      $('#c_time').text(fd.ShiftTimeDisplay || `${fd.StartTime} - ${fd.EndTime}`);
+      
+      $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
+      $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
+      $('#c_nurse_er').text(j([fd.NurseER1,fd.NurseER2,fd.NurseER3,fd.NurseER4])||'-');
+      $('#c_emt').text(fd.EMT||'-'); $('#c_helper_er').text(fd.HelperER||'-');
+      $('#c_nurse_lr').text(j([fd.NurseLR1,fd.NurseLR2])||'-'); $('#c_helper_lr').text(fd.HelperLR||'-');
+      $('#c_nurse_ipd2').text(j([fd.NurseIPD2_1,fd.NurseIPD2_2,fd.NurseIPD2_3])||'-'); $('#c_helper_ipd2').text(fd.HelperIPD2||'-');
+      $('#c_nurse_ipd3').text(j([fd.NurseIPD3_1,fd.NurseIPD3_2,fd.NurseIPD3_3])||'-'); $('#c_helper_ipd3').text(fd.HelperIPD3||'-');
+      $('#c_card').text(j([fd.CardStaff1,fd.CardStaff2])||'-'); $('#c_porter').text(j([fd.Porter1,fd.Porter2])||'-');
+      $('#c_stat_er').text(`รวม ${fd.StatER_Total||0} | Refer ${fd.StatER_Refer||0} | EMS ${fd.StatER_EMS||0} | Dead ${fd.StatER_Dead||0} | ชันสูตร ${fd.StatER_Autopsy||0}`);
+      $('#c_stat_lr').text(`ยกมา ${fd.StatLR_Carry||0} | รับ ${fd.StatLR_New||0} | ย้าย ${fd.StatLR_Move||0} | Ref ${fd.StatLR_Refer||0} | D/C ${fd.StatLR_DC||0} | คลอด ${fd.StatLR_Birth||0} | Dead ${fd.StatLR_Dead||0} | คงเหลือ ${fd.StatLR_Remain||0}`);
+      $('#c_stat_ipd2').text(`ยกมา ${fd.StatIPD2_Carry||0} | รับ ${fd.StatIPD2_New||0} | รับย้าย ${fd.StatIPD2_RecMove||0} | ย้าย ${fd.StatIPD2_Move||0} | Ref ${fd.StatIPD2_Refer||0} | D/C ${fd.StatIPD2_DC||0} | ปฏิเสธ ${fd.StatIPD2_Refuse||0} | Dead ${fd.StatIPD2_Dead||0} | คงเหลือ ${fd.StatIPD2_Remain||0} | HW ${fd.StatIPD2_HW||0}`);
+      $('#c_stat_ipd3').text(`ยกมา ${fd.StatIPD3_Carry||0} | รับ ${fd.StatIPD3_New||0} | รับย้าย ${fd.StatIPD3_RecMove||0} | ย้าย ${fd.StatIPD3_Move||0} | Ref ${fd.StatIPD3_Refer||0} | D/C ${fd.StatIPD3_DC||0} | ปฏิเสธ ${fd.StatIPD3_Refuse||0} | Dead ${fd.StatIPD3_Dead||0} | คงเหลือ ${fd.StatIPD3_Remain||0} | HW ${fd.StatIPD3_HW||0}`);
+      
+      var refDet = ""; [fd.Ref1, fd.Ref2, fd.Ref3, fd.Ref4, fd.Ref5, fd.Ref6].forEach((r, i) => { if(r) refDet += `รอบ ${i+1}: ${r}\n`; });
+      $('#c_ref_sum').text(`${fd.Refer_Total||0} (ชย:${fd.Ref_CP||0}, ภข:${fd.Ref_PK||0}, ชพ:${fd.Ref_CP2||0}, ขก:${fd.Ref_KK||0}, อื่นๆ:${fd.Ref_Other||0} ${fd.Ref_OtherName||''})`);
+      $('#c_ref_det').text(refDet||'-');
+      var probs = []; for(var i=1; i<=9; i++) { if(fd["Prob"+i] === "พบ") probs.push("ข้อ " + i); }
+      $('#c_prob_list').text(probs.length > 0 ? probs.join(", ") : "ไม่พบ");
+      $('#c_prob_det').text(fd.Problem_Detail || '-');
+      $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
+
+      $('#c_sup_name2').text(fd.SupervisorName || '......................................');
+      $('#c_head_name').text(headName || '......................................');
+      $('#c_head_pos').text(headPos || 'หัวหน้ากลุ่มงาน');
+      $('#c_dir_name').text(dirName || '......................................');
+      $('#c_dir_pos').text(dirPos || 'ผู้อำนวยการโรงพยาบาล');
+      
+      var sigBase64 = null; if (!isCanvasBlank(canvas)) { sigBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', sigBase64).show(); } else { $('#c_sig_img').hide(); }
+
       await new Promise(r => setTimeout(r, 200));
-      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.5 });
-      var snapBase64 = capCanvas.toDataURL("image/png");
+      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.2 });
+      var snapBase64 = capCanvas.toDataURL("image/jpeg", 0.6); // บีบอัดเป็น JPEG ขนาดเล็กเพื่อลง DB โดยตรง
       const recordId = fd.recId || `KSH_${Date.now()}`;
       
-      const imageRef = sRef(storage, `reports/${recordId}.png`);
-      await uploadString(imageRef, snapBase64, 'data_url');
-      const snapUrl = await getDownloadURL(imageRef);
-
-      const finalData = { ...fd, snapshotUrl: snapUrl, timestamp: new Date().toISOString() };
+      const finalData = { ...fd, snapshotUrl: snapBase64, timestamp: new Date().toISOString() };
       delete finalData.recId;
       await set(ref(db, 'reports/' + recordId), finalData);
 
       $('#loadingOverlay').hide();
       Swal.fire('สำเร็จ', 'บันทึกรายงานแล้ว', 'success');
       resetForm(); showSection('table');
-    } catch (err) { $('#loadingOverlay').hide(); Swal.fire('Error', err.message, 'error'); }
+    } catch (err) { 
+      $('#loadingOverlay').hide(); 
+      console.error(err);
+      Swal.fire('ข้อผิดพลาดในการบันทึก', err.message, 'error'); 
+    }
   }
 
-  // ---- Functions ----
   window.deleteRecord = (id) => { Swal.fire({ title: 'ลบ?', icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
@@ -743,7 +739,6 @@
     const filtered = window.allData.filter(r => { let d = new Date(r.ReportDate); return d >= new Date(start) && d <= new Date(end); });
     if(!filtered.length) return Swal.fire('ไม่พบข้อมูล','','info');
     
-    // คอลัมน์ครบถ้วน
     const allKeys = ["ReportDate", "Shift", "StartTime", "EndTime", "SupervisorName", "Position", "DoctorER", "DoctorWard", "NurseER1", "NurseER2", "NurseER3", "NurseER4", "EMT", "HelperER", "StatER_Total", "StatER_Refer", "StatER_EMS", "StatER_Dead", "StatER_Autopsy", "NurseLR1", "NurseLR2", "HelperLR", "StatLR_Carry", "StatLR_New", "StatLR_Move", "StatLR_Refer", "StatLR_DC", "StatLR_Birth", "StatLR_Dead", "StatLR_Remain", "NurseIPD2_1", "NurseIPD2_2", "NurseIPD2_3", "HelperIPD2", "StatIPD2_Carry", "StatIPD2_New", "StatIPD2_RecMove", "StatIPD2_Move", "StatIPD2_Refer", "StatIPD2_DC", "StatIPD2_Refuse", "StatIPD2_Dead", "StatIPD2_Remain", "StatIPD2_HW", "NurseIPD3_1", "NurseIPD3_2", "NurseIPD3_3", "HelperIPD3", "StatIPD3_Carry", "StatIPD3_New", "StatIPD3_RecMove", "StatIPD3_Move", "StatIPD3_Refer", "StatIPD3_DC", "StatIPD3_Refuse", "StatIPD3_Dead", "StatIPD3_Remain", "StatIPD3_HW", "CardStaff1", "CardStaff2", "Porter1", "Porter2", "Refer_Total", "Ref_CP", "Ref_CP2", "Ref_PK", "Ref_KK", "Ref_Other", "Ref_OtherName", "Ref1", "Ref2", "Ref3", "Ref4", "Ref5", "Ref6", "Prob1", "Prob2", "Prob3", "Prob4", "Prob5", "Prob6", "Prob7", "Prob8", "Prob9", "Problem_Detail", "Security", "Other_Detail", "HeadNurse_Comment", "HeadNurseName", "DirectorName"];
     let content = allKeys.join("|") + "\n"; 
     filtered.forEach(r => {
@@ -803,12 +798,10 @@
     window.dashboardChart = new Chart(document.getElementById('mainDashboardChart'), { type: cType, data: {labels, datasets}, options: {responsive: true, maintainAspectRatio: false} });
   }
 
-  // Navigation & Utils
   window.showSection = (id) => { $('.section-content').hide(); $('.nav-link').removeClass('active'); $(`#${id}Section`).fadeIn(); let btnId = id.charAt(0).toUpperCase()+id.slice(1); $(`#btnTab${btnId}`).addClass('active'); if(id==='form') resizeCanvas(); window.scrollTo(0,0); }
   function formatDateDisplay(d) { if(!d) return ''; let dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = () => { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); $('#shiftTimeDisplay').val(''); clearSignature(); }
 
-  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   canvas.addEventListener('mousedown', (e) => { drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
