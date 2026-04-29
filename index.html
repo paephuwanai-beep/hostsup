@@ -23,7 +23,6 @@
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
-    .app-header p { font-size: 0.9rem; }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -63,7 +62,7 @@
     .btn-gradient { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; border: none; padding: 14px; font-weight: 600; font-size: 1.1rem; border-radius: 12px; box-shadow: 0 6px 15px rgba(111, 66, 193, 0.25); transition: transform 0.2s; width: 100%;}
     #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; flex-direction:column; justify-content:center; align-items:center; backdrop-filter: blur(4px); }
     
-    /* Snapshot System - Updated to prevent blank image */
+    /* Snapshot System - แก้ไขให้แสดงผลสมบูรณ์ทุกหน้า */
     #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; }
     .snap-header { text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 25px; }
     .snap-header h2 { color: var(--primary-color); font-weight: bold; margin: 0; }
@@ -93,7 +92,7 @@
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
-    /* Handout Infographic UI */
+    /* Handout UI */
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
     .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
     .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative; border-top: 4px solid var(--primary-color);}
@@ -108,7 +107,9 @@
     .theme-blue { border-top: 4px solid #3b82f6; } .theme-orange { border-top: 4px solid #f97316; } .theme-teal { border-top: 4px solid #14b8a6; } .theme-green { border-top: 4px solid #22c55e; } .theme-purple { border-top: 4px solid #a855f7; } .theme-indigo { border-top: 4px solid #6366f1; } .theme-cyan { border-top: 4px solid #06b6d4; } .theme-emerald { border-top: 4px solid #10b981; } .theme-rose { border-top: 4px solid #f43f5e; } .theme-fuchsia { border-top: 4px solid #d946ef; } 
     .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; }
     .bg-indigo { background-color: #6366f1; } .bg-cyan { background-color: #06b6d4; } .bg-emerald { background-color: #10b981; } .bg-rose { background-color: #f43f5e; } .bg-fuchsia { background-color: #d946ef; }
-    
+    .ho-mini-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 0.2rem; margin-right: 0.2rem;}
+    .badge-rose { background-color: #ffe4e6; color: #be123c; } .badge-indigo { background-color: #e0e7ff; color: #4338ca; }
+
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: white !important;}
       .print-hide { display: none !important; }
@@ -413,7 +414,7 @@
       </div>
 
       <div class="d-grid gap-2 mb-5">
-        <button type="submit" class="btn btn-gradient text-white">
+        <button type="submit" class="btn btn-gradient text-white py-3 fw-bold shadow">
           <i class="fas fa-save me-2"></i> บันทึกข้อมูลและสร้างรายงาน
         </button>
       </div>
@@ -424,7 +425,7 @@
     <div class="custom-card card-body-custom">
       <div class="table-responsive">
         <table id="dataTable" class="table table-hover align-middle w-100">
-          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:140px;">ดาวน์โหลด</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
+          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:160px;">ดาวน์โหลด</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -598,41 +599,7 @@
   window.deleteDropdownItem = (cat, key) => remove(ref(db, `settings/dropdowns/${cat}/${key}`));
   $(document).on('keypress', '.setting-card input', function(e) { if(e.which == 13) { $(this).siblings('button').click(); } });
 
-  // -------------------------------------------------------------
-  // Data Table & Generate Reports
-  // -------------------------------------------------------------
-  function loadTableData() {
-    onValue(ref(db, 'reports'), (snapshot) => {
-      const data = snapshot.val(); window.allData = [];
-      if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
-      var tbody = $('#dataTable tbody').empty();
-      if (!data) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
-      
-      Object.keys(data).forEach(key => { let r = data[key]; r.id = key; window.allData.push(r); });
-      
-      window.allData.sort((a, b) => {
-          const dateA = new Date(a.ReportDate).getTime(); const dateB = new Date(b.ReportDate).getTime();
-          if (dateA !== dateB) return dateB - dateA;
-          const shiftWeight = { 'ดึก': 1, 'เช้า': 2, 'บ่าย': 3 };
-          return (shiftWeight[b.Shift] || 0) - (shiftWeight[a.Shift] || 0); 
-      });
-
-      window.allData.forEach(function(r) {
-        var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
-        // ปุ่ม PDF และ JPG ดึงข้อมูลสร้างใหม่สดๆ ทันที ไม่โหลดหนักฐานข้อมูล
-        var imgBtn = `
-            <button class="btn btn-sm btn-outline-danger mb-1" onclick="downloadFromTable('${r.id}', 'pdf')" title="โหลด PDF"><i class="fas fa-file-pdf"></i> PDF</button>
-            <button class="btn btn-sm btn-outline-success mb-1" onclick="downloadFromTable('${r.id}', 'jpg')" title="โหลดรูป JPG"><i class="fas fa-image"></i> JPG</button>
-        `;
-        
-        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-center">${imgBtn}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
-      });
-      $('#dataTable').DataTable({ "order": [], "responsive": true, "language": { "search": "ค้นหา:" } });
-      updateDashboardCards(); renderChart();
-    });
-  }
-
-  // ฟังก์ชันยัดข้อมูลลง Template 
+  // ฟังก์ชันยัดข้อมูลลงแบบฟอร์มจำลอง (Template) สำหรับสร้างภาพและ PDF
   function populateCaptureArea(r) {
         const j = (arr) => arr.filter(v => v).join(', ');
         
@@ -663,12 +630,43 @@
 
         $('#c_sup_name2').text(r.SupervisorName || '......................................');
         $('#c_head_name').text(r.HeadNurseName || '......................................');
-        $('#c_head_pos').text(r.HeadNursePos || 'หัวหน้ากลุ่มงาน');
+        $('#c_head_pos').text(r.HeadNursePos || 'หัวหน้ากลุ่มงานการพยาบาลฯ');
         $('#c_dir_name').text(r.DirectorName || '......................................');
         $('#c_dir_pos').text(r.DirectorPos || 'ผู้อำนวยการโรงพยาบาล');
         
         if (r.signatureBase64) { $('#c_sig_img').attr('src', r.signatureBase64).show(); } 
         else { $('#c_sig_img').hide(); }
+  }
+
+  function loadTableData() {
+    onValue(ref(db, 'reports'), (snapshot) => {
+      const data = snapshot.val(); window.allData = [];
+      if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
+      var tbody = $('#dataTable tbody').empty();
+      if (!data) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
+      
+      Object.keys(data).forEach(key => { let r = data[key]; r.id = key; window.allData.push(r); });
+      
+      window.allData.sort((a, b) => {
+          const dateA = new Date(a.ReportDate).getTime(); const dateB = new Date(b.ReportDate).getTime();
+          if (dateA !== dateB) return dateB - dateA;
+          const shiftWeight = { 'ดึก': 1, 'เช้า': 2, 'บ่าย': 3 };
+          return (shiftWeight[b.Shift] || 0) - (shiftWeight[a.Shift] || 0); 
+      });
+
+      window.allData.forEach(function(r) {
+        var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
+        // ปุ่ม PDF และ JPG ดึงข้อมูลสร้างใหม่สดๆ ทันที ไม่ต้องพึ่ง Storage
+        var imgBtn = `
+            <button class="btn btn-sm btn-outline-danger mb-1 me-1" onclick="downloadFromTable('${r.id}', 'pdf')" title="โหลด PDF"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="btn btn-sm btn-outline-success mb-1" onclick="downloadFromTable('${r.id}', 'jpg')" title="โหลดรูป JPG"><i class="fas fa-image"></i> JPG</button>
+        `;
+        
+        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-center text-nowrap">${imgBtn}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1 mb-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger mb-1" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
+      });
+      $('#dataTable').DataTable({ "order": [], "responsive": true, "language": { "search": "ค้นหา:" } });
+      updateDashboardCards(); renderChart();
+    });
   }
 
   // ระบบดาวน์โหลดจากตารางประวัติ (ดึงสดใหม่ คมชัด)
@@ -682,9 +680,9 @@
       
       const capArea = document.getElementById('captureArea');
       capArea.style.left = '0px';
-      capArea.style.zIndex = '-100';
       
       try {
+          await new Promise(res => setTimeout(res, 500)); // รอหน้าเว็บเรนเดอร์ CSS
           if (format === 'jpg') {
               var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, logging: false });
               var dlLink = document.createElement("a");
@@ -692,8 +690,10 @@
               dlLink.download = `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.jpg`;
               document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
           } else if (format === 'pdf') {
-              var opt = { margin: 0.3, filename: `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, logging: false }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
-              await html2pdf().set(opt).from(capArea).save();
+              // ใช้รูปภาพ Canvas จาก html2canvas ใส่ลงใน jsPDF เพื่อป้องกันปัญหาหน้าขาวโพลน 100%
+              var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, logging: false });
+              var opt = { margin: 0.3, filename: `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.pdf`, image: { type: 'jpeg', quality: 0.98 }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
+              await html2pdf().set(opt).from(capCanvas).save();
           }
       } catch(e) {
           console.error("Export Error", e);
@@ -725,12 +725,10 @@
       // เอาข้อมูลใส่ Template เพื่อเตรียมแคป
       populateCaptureArea(fd);
 
-      // ดึงตัวแปร Template มาแคป
       const capArea = document.getElementById('captureArea');
       capArea.style.left = '0px';
-      capArea.style.zIndex = '-100';
 
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 500)); // รอ CSS เรนเดอร์
 
       // 1. แคปและโหลด JPG 
       var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, logging: false });
@@ -740,15 +738,14 @@
       dlLink.download = `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.jpg`;
       document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
 
-      // 2. แคปและโหลด PDF
+      // 2. แคปและโหลด PDF (โยน Canvas เข้า PDF โดยตรง กันหน้าขาว)
       var opt = {
         margin:       0.3,
         filename:     `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
-      await html2pdf().set(opt).from(capArea).save();
+      await html2pdf().set(opt).from(capCanvas).save();
 
       // ซ่อน Template กลับไป
       capArea.style.left = '-9999px';
@@ -767,32 +764,34 @@
       $('#loadingOverlay').hide(); 
       console.error(err);
       Swal.fire('ข้อผิดพลาดในการบันทึก', err.message, 'error'); 
+      $('#loadingText').text('กำลังประมวลผล...');
     }
   }
 
   // ---- Functions ----
   window.deleteRecord = (id) => { Swal.fire({ title: 'ลบข้อมูล?', text: "ไม่สามารถกู้คืนได้", icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
   
-  // แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100%
+  // แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100% (แก้บั๊กเก่าแล้ว)
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
     resetForm(); $('#recId').val(id); 
     
     Object.keys(r).forEach(k => { 
-        let field = document.forms['mainForm'][k];
-        if(field) {
-            if(field.length && field[0] && field[0].type === "radio") {
-                $(`input[name="${k}"][value="${r[k]}"]`).prop('checked', true);
-            } else if ($(field).hasClass('select2-input') || field.tagName === 'SELECT') {
-                $(field).val(r[k]).trigger('change');
+        let $el = $(`[name="${k}"]`, '#mainForm');
+        if($el.length > 0) {
+            if($el.attr('type') === 'radio') {
+                $el.filter(`[value="${r[k]}"]`).prop('checked', true);
+            } else if ($el.hasClass('select2-input') || $el.is('select')) {
+                $el.val(r[k]).trigger('change');
             } else {
-                field.value = r[k];
+                $el.val(r[k]);
             }
         }
     });
     
     if(r.Shift) updateShiftTime();
-    showSection('form'); Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ดึงข้อมูลเรียบร้อย', text: 'กรุณาเซ็นชื่อใหม่ก่อนกดบันทึก', showConfirmButton: false, timer: 3000 });
+    showSection('form'); 
+    Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ดึงข้อมูลเรียบร้อย', text: 'กรุณาเซ็นชื่อใหม่ก่อนกดบันทึก', showConfirmButton: false, timer: 3000 });
   }
 
   window.exportDataPSV = () => {
