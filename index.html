@@ -129,7 +129,7 @@
 
 <div id="loadingOverlay">
   <div class="spinner-border text-primary" style="width: 3.5rem; height: 3.5rem;"></div>
-  <h5 class="mt-3 text-primary fw-bold">กำลังประมวลผล...</h5>
+  <h5 class="mt-3 text-primary fw-bold">กำลังประมวลผล และดาวน์โหลดไฟล์...</h5>
 </div>
 
 <div id="captureArea" class="print-hide">
@@ -192,7 +192,7 @@
       <div class="row g-3 mb-4">
         <div class="col-6 col-md-3"><div class="dash-card bg-blue-light"><i class="fas fa-calendar-alt bg-icon"></i><div class="title small">วันที่ปัจจุบัน</div><div class="value" id="dash_date" style="font-size: 1.4rem;">-</div></div></div>
         <div class="col-6 col-md-3"><div class="dash-card bg-orange"><i class="fas fa-ambulance bg-icon"></i><div class="title small">Refer (ล่าสุด)</div><div class="value"><span id="dash_refer">0</span> <span class="unit">ราย</span></div></div></div>
-        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title small">IPD (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
+        <div class="col-6 col-md-3"><div class="dash-card bg-green"><i class="fas fa-bed bg-icon"></i><div class="title small">IPD รวม (ล่าสุด)</div><div class="value"><span id="dash_ipd">0</span> <span class="unit">ราย</span></div></div></div>
         <div class="col-6 col-md-3"><div class="dash-card bg-purple"><i class="fas fa-user-injured bg-icon"></i><div class="title small">ER (ล่าสุด)</div><div class="value"><span id="dash_er">0</span> <span class="unit">ราย</span></div></div></div>
       </div>
 
@@ -259,7 +259,7 @@
             <label class="form-label">เวรปฏิบัติงาน</label>
             <select class="form-select" name="Shift" id="shiftSelect" required onchange="updateShiftTime()">
                 <option value="">เลือกเวร...</option>
-                <option value="ดึก">ดึก (00.30 - 08.30)</option>
+                <option value="ดึก">ดึก (00.00 - 08.00)</option>
                 <option value="เช้า">เช้า (08.30 - 16.30)</option>
                 <option value="บ่าย">บ่าย (16.30 - 24.00)</option>
             </select>
@@ -537,7 +537,6 @@
 
   function loadSettings() {
     onValue(ref(db, 'settings/dropdowns'), (snap) => {
-      
       if (!snap.exists()) {
           const defaultSettings = {
               supervisors: { 1: "คุณปิยณัฐ", 2: "คุณภูวนัย", 3: "คุณสุวนันท์", 4: "คุณสุรีย์พร", 5: "คุณพรพิมล", 6: "คุณปราณี" },
@@ -548,28 +547,24 @@
           set(ref(db, 'settings/dropdowns'), defaultSettings);
           return; 
       }
-
       window.dropdownData = snap.val() || {};
       const categories = ['supervisors', 'positions', 'doctors', 'nurses', 'emt', 'helpers', 'porters', 'cardStaff', 'head', 'director'];
       
       categories.forEach(cat => {
         const listDiv = $(`#list_${cat}`); listDiv.empty();
         const items = window.dropdownData[cat] || {};
-        
         if(Object.keys(items).length === 0) listDiv.append('<div class="p-2 text-muted small text-center">ว่าง</div>');
         else {
            Object.keys(items).forEach(key => {
              if (cat === 'head' || cat === 'director') {
                 const parts = items[key].split('|');
-                const name = parts[0] || '';
-                const pos = parts[1] || '';
+                const name = parts[0] || ''; const pos = parts[1] || '';
                 listDiv.append(`<div class="setting-list-item"><div><strong>${name}</strong><br><small class="text-muted">${pos}</small></div><button class="btn btn-sm text-danger" onclick="deleteDropdownItem('${cat}', '${key}')"><i class="fas fa-times"></i></button></div>`);
              } else {
                 listDiv.append(`<div class="setting-list-item"><span>${items[key]}</span><button class="btn btn-sm text-danger" onclick="deleteDropdownItem('${cat}', '${key}')"><i class="fas fa-times"></i></button></div>`);
              }
            });
         }
-        
         if (cat !== 'head' && cat !== 'director') {
             const selects = $(`.list-${cat}`); selects.empty().append('<option value=""></option>');
             Object.values(items).forEach(val => selects.append(new Option(val, val)));
@@ -590,14 +585,9 @@
   }
 
   window.addDropdownItemComplex = async function(category) {
-      const nameInput = $(`#add_${category}_name`);
-      const posInput = $(`#add_${category}_pos`);
-      const nameVal = nameInput.val().trim();
-      const posVal = posInput.val().trim();
-      
-      if(!nameVal || !posVal) {
-          Swal.fire('แจ้งเตือน', 'กรุณาระบุทั้งชื่อและตำแหน่ง', 'warning'); return;
-      }
+      const nameInput = $(`#add_${category}_name`); const posInput = $(`#add_${category}_pos`);
+      const nameVal = nameInput.val().trim(); const posVal = posInput.val().trim();
+      if(!nameVal || !posVal) { Swal.fire('แจ้งเตือน', 'กรุณาระบุทั้งชื่อและตำแหน่ง', 'warning'); return; }
       const val = nameVal + "|" + posVal;
       try {
           await push(ref(db, `settings/dropdowns/${category}`), val);
@@ -621,11 +611,8 @@
           const dateA = new Date(a.ReportDate).getTime();
           const dateB = new Date(b.ReportDate).getTime();
           if (dateA !== dateB) return dateB - dateA;
-          
           const shiftWeight = { 'ดึก': 1, 'เช้า': 2, 'บ่าย': 3 };
-          const wA = shiftWeight[a.Shift] || 0;
-          const wB = shiftWeight[b.Shift] || 0;
-          return wB - wA; 
+          return (shiftWeight[b.Shift] || 0) - (shiftWeight[a.Shift] || 0); 
       });
 
       window.allData.forEach(function(r) {
@@ -645,16 +632,11 @@
       var fd = Object.fromEntries(new FormData(e.target).entries());
       const j = (arr) => arr.filter(v => v).join(', ');
       
-      // ดึงชื่อ ผอ./หัวหน้า จาก Settings แบบแยกส่วน
       let headStr = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '|';
       let dirStr = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '|';
-      let [headName, headPos] = headStr.split('|');
-      let [dirName, dirPos] = dirStr.split('|');
+      let [headName, headPos] = headStr.split('|'); let [dirName, dirPos] = dirStr.split('|');
+      fd.HeadNurseName = headName; fd.DirectorName = dirName;
 
-      fd.HeadNurseName = headName;
-      fd.DirectorName = dirName;
-
-      // เตรียม PDF Snapshot
       let dateText = formatDateDisplay(fd.ReportDate);
       if(fd.Shift) dateText += ` (เวร${fd.Shift})`;
       $('#c_date').text(dateText); 
@@ -681,7 +663,6 @@
       $('#c_prob_det').text(fd.Problem_Detail || '-');
       $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
 
-      // นำชื่อไปใส่ในตำแหน่งต่างๆ ของ PDF
       $('#c_sup_name2').text(fd.SupervisorName || '......................................');
       $('#c_head_name').text(headName || '......................................');
       $('#c_head_pos').text(headPos || 'หัวหน้ากลุ่มงาน');
@@ -691,35 +672,36 @@
       var sigBase64 = null; if (!isCanvasBlank(canvas)) { sigBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', sigBase64).show(); } else { $('#c_sig_img').hide(); }
 
       await new Promise(r => setTimeout(r, 200));
-
-      const recordId = fd.recId || `KSH_${Date.now()}`;
       
-      // บันทึกข้อมูลลง Database
+      // 1. แคปภาพความละเอียดสูง
+      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 2 });
+      var dbSnapBase64 = capCanvas.toDataURL("image/jpeg", 0.5); 
+      
+      // 2. ดาวน์โหลด JPEG ลงเครื่องอัตโนมัติ
+      var dlSnapBase64 = capCanvas.toDataURL("image/jpeg", 0.95);
+      var dlLink = document.createElement("a");
+      dlLink.href = dlSnapBase64;
+      dlLink.download = `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.jpg`;
+      document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
+
+      // 3. ดาวน์โหลด PDF ลงเครื่องอัตโนมัติ
+      var opt = {
+        margin:       0.3,
+        filename:     `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      await html2pdf().set(opt).from(document.getElementById('captureArea')).save();
+
+      // 4. บันทึกลง Firebase (ไม่ต้องพึ่ง Storage)
+      const recordId = fd.recId || `KSH_${Date.now()}`;
       const finalData = { ...fd, timestamp: new Date().toISOString() };
       delete finalData.recId;
       await set(ref(db, 'reports/' + recordId), finalData);
 
-      // --- ดาวน์โหลด JPEG อัตโนมัติ ---
-      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.5 });
-      var snapBase64 = capCanvas.toDataURL("image/jpeg", 0.9);
-      let jpegLink = document.createElement("a");
-      jpegLink.download = `Report_${fd.ReportDate}_${fd.Shift}.jpg`;
-      jpegLink.href = snapBase64;
-      jpegLink.click();
-
-      // --- ดาวน์โหลด PDF อัตโนมัติ ---
-      var element = document.getElementById('captureArea');
-      var opt = {
-          margin: 0.5,
-          filename: `Report_${fd.ReportDate}_${fd.Shift}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true },
-          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
-
       $('#loadingOverlay').hide();
-      Swal.fire('สำเร็จ', 'บันทึกรายงานและดาวน์โหลดไฟล์เรียบร้อยแล้ว', 'success');
+      Swal.fire('สำเร็จ', 'บันทึกข้อมูลและดาวน์โหลดไฟล์ลงเครื่องแล้ว', 'success');
       resetForm(); showSection('table');
     } catch (err) { 
       $('#loadingOverlay').hide(); 
@@ -729,28 +711,23 @@
   }
 
   window.deleteRecord = (id) => { Swal.fire({ title: 'ลบ?', icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
-  
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
     resetForm(); $('#recId').val(id); 
-    
-    // โหลดข้อมูลเก่าลงฟอร์ม
-    Object.keys(r).forEach(k => {
-        let $el = $(`[name="${k}"]`);
-        if($el.length) {
-            if($el.attr('type') === 'radio') {
-                $el.filter(`[value="${r[k]}"]`).prop('checked', true);
-            } else if($el.hasClass('select2-input') || $el.is('select')) {
-                $el.val(r[k]).trigger('change');
+    Object.keys(r).forEach(k => { 
+        let field = document.forms['mainForm'][k];
+        if(field) {
+            if(field.length && field[0] && field[0].type === "radio") {
+                $(`input[name="${k}"][value="${r[k]}"]`).prop('checked', true);
+            } else if ($(field).hasClass('select2-input') || field.tagName === 'SELECT') {
+                $(field).val(r[k]).trigger('change');
             } else {
-                $el.val(r[k]);
+                field.value = r[k];
             }
         }
     });
-
-    if(r.Shift) updateShiftTime(); // อัปเดตเวลาให้ตรงกับเวร
-    showSection('form'); 
-    Swal.fire('โหมดแก้ไข', 'ระบบดึงข้อมูลมาให้แล้ว กรุณาตรวจสอบและเซ็นชื่อใหม่ก่อนบันทึก', 'info');
+    if(r.Shift) updateShiftTime();
+    showSection('form'); Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'เข้าสู่โหมดแก้ไข', text: 'กรุณาเซ็นชื่อใหม่ก่อนบันทึก', showConfirmButton: false, timer: 3000 });
   }
 
   window.exportDataPSV = () => {
@@ -759,7 +736,6 @@
     const filtered = window.allData.filter(r => { let d = new Date(r.ReportDate); return d >= new Date(start) && d <= new Date(end); });
     if(!filtered.length) return Swal.fire('ไม่พบข้อมูล','','info');
     
-    // คอลัมน์ครบถ้วน
     const allKeys = ["ReportDate", "Shift", "StartTime", "EndTime", "SupervisorName", "Position", "DoctorER", "DoctorWard", "NurseER1", "NurseER2", "NurseER3", "NurseER4", "EMT", "HelperER", "StatER_Total", "StatER_Refer", "StatER_EMS", "StatER_Dead", "StatER_Autopsy", "NurseLR1", "NurseLR2", "HelperLR", "StatLR_Carry", "StatLR_New", "StatLR_Move", "StatLR_Refer", "StatLR_DC", "StatLR_Birth", "StatLR_Dead", "StatLR_Remain", "NurseIPD2_1", "NurseIPD2_2", "NurseIPD2_3", "HelperIPD2", "StatIPD2_Carry", "StatIPD2_New", "StatIPD2_RecMove", "StatIPD2_Move", "StatIPD2_Refer", "StatIPD2_DC", "StatIPD2_Refuse", "StatIPD2_Dead", "StatIPD2_Remain", "StatIPD2_HW", "NurseIPD3_1", "NurseIPD3_2", "NurseIPD3_3", "HelperIPD3", "StatIPD3_Carry", "StatIPD3_New", "StatIPD3_RecMove", "StatIPD3_Move", "StatIPD3_Refer", "StatIPD3_DC", "StatIPD3_Refuse", "StatIPD3_Dead", "StatIPD3_Remain", "StatIPD3_HW", "CardStaff1", "CardStaff2", "Porter1", "Porter2", "Refer_Total", "Ref_CP", "Ref_CP2", "Ref_PK", "Ref_KK", "Ref_Other", "Ref_OtherName", "Ref1", "Ref2", "Ref3", "Ref4", "Ref5", "Ref6", "Prob1", "Prob2", "Prob3", "Prob4", "Prob5", "Prob6", "Prob7", "Prob8", "Prob9", "Problem_Detail", "Security", "Other_Detail", "HeadNurse_Comment", "HeadNurseName", "DirectorName"];
     let content = allKeys.join("|") + "\n"; 
     filtered.forEach(r => {
@@ -819,12 +795,10 @@
     window.dashboardChart = new Chart(document.getElementById('mainDashboardChart'), { type: cType, data: {labels, datasets}, options: {responsive: true, maintainAspectRatio: false} });
   }
 
-  // Navigation & Utils
   window.showSection = (id) => { $('.section-content').hide(); $('.nav-link').removeClass('active'); $(`#${id}Section`).fadeIn(); let btnId = id.charAt(0).toUpperCase()+id.slice(1); $(`#btnTab${btnId}`).addClass('active'); if(id==='form') resizeCanvas(); window.scrollTo(0,0); }
   function formatDateDisplay(d) { if(!d) return ''; let dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = () => { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); $('#shiftTimeDisplay').val(''); clearSignature(); }
 
-  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   canvas.addEventListener('mousedown', (e) => { drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
