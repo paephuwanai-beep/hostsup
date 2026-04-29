@@ -23,9 +23,9 @@
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
-    .app-header p { font-size: 0.9rem; }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
+    /* Navigation Menu */
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .nav-pills .nav-link { color: #555; font-weight: 600; border-radius: 12px; padding: 12px; font-size: 0.95rem; transition: all 0.3s; cursor: pointer; border: none; width: 100%;}
     .nav-pills .nav-link.active { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2); }
@@ -90,6 +90,7 @@
 
     /* Settings UI */
     .setting-list-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 0.9rem;}
+    .setting-list-item:last-child { border-bottom: none; }
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
@@ -258,7 +259,7 @@
             <label class="form-label">เวรปฏิบัติงาน</label>
             <select class="form-select" name="Shift" id="shiftSelect" required onchange="updateShiftTime()">
                 <option value="">เลือกเวร...</option>
-                <option value="ดึก">ดึก (00.00 - 08.00)</option>
+                <option value="ดึก">ดึก (00.30 - 08.30)</option>
                 <option value="เช้า">เช้า (08.30 - 16.30)</option>
                 <option value="บ่าย">บ่าย (16.30 - 24.00)</option>
             </select>
@@ -426,7 +427,7 @@
     <div class="custom-card card-body-custom">
       <div class="table-responsive">
         <table id="dataTable" class="table table-hover align-middle w-100">
-          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:100px;">ไฟล์</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
+          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -525,7 +526,7 @@
   window.updateShiftTime = function() {
       const shift = $('#shiftSelect').val();
       let start = "", end = "", display = "";
-      if (shift === 'ดึก') { start = "00:00"; end = "08:00"; display = "00.00 - 08.00 น."; }
+      if (shift === 'ดึก') { start = "00:30"; end = "08:30"; display = "00.30 - 08.30 น."; }
       else if (shift === 'เช้า') { start = "08:30"; end = "16:30"; display = "08.30 - 16.30 น."; }
       else if (shift === 'บ่าย') { start = "16:30"; end = "24:00"; display = "16.30 - 24.00 น."; }
       
@@ -628,23 +629,12 @@
       });
 
       window.allData.forEach(function(r) {
-        var imgBtn = r.snapshotUrl ? `<button class="btn btn-sm btn-outline-primary mb-1" onclick="viewImage('${r.id}')" title="ดูเอกสาร"><i class="fas fa-file-pdf"></i></button>` : '';
         var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
-        
-        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-center">${imgBtn}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
+        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
       });
       $('#dataTable').DataTable({ "order": [], "responsive": true, "language": { "search": "ค้นหา:" } });
       updateDashboardCards(); renderChart();
     });
-  }
-
-  // ฟังก์ชันดูรูปรายงาน
-  window.viewImage = function(id) {
-     let r = window.allData.find(x => x.id === id);
-     if(r && r.snapshotUrl) {
-         let w = window.open("");
-         w.document.write(`<div style="text-align:center;"><img src="${r.snapshotUrl}" style="max-width:100%; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1);"></div>`);
-     }
   }
 
   window.handleFormSubmit = async function(e) {
@@ -655,6 +645,7 @@
       var fd = Object.fromEntries(new FormData(e.target).entries());
       const j = (arr) => arr.filter(v => v).join(', ');
       
+      // ดึงชื่อ ผอ./หัวหน้า จาก Settings แบบแยกส่วน
       let headStr = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '|';
       let dirStr = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '|';
       let [headName, headPos] = headStr.split('|');
@@ -663,6 +654,7 @@
       fd.HeadNurseName = headName;
       fd.DirectorName = dirName;
 
+      // เตรียม PDF Snapshot
       let dateText = formatDateDisplay(fd.ReportDate);
       if(fd.Shift) dateText += ` (เวร${fd.Shift})`;
       $('#c_date').text(dateText); 
@@ -689,6 +681,7 @@
       $('#c_prob_det').text(fd.Problem_Detail || '-');
       $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
 
+      // นำชื่อไปใส่ในตำแหน่งต่างๆ ของ PDF
       $('#c_sup_name2').text(fd.SupervisorName || '......................................');
       $('#c_head_name').text(headName || '......................................');
       $('#c_head_pos').text(headPos || 'หัวหน้ากลุ่มงาน');
@@ -698,16 +691,35 @@
       var sigBase64 = null; if (!isCanvasBlank(canvas)) { sigBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', sigBase64).show(); } else { $('#c_sig_img').hide(); }
 
       await new Promise(r => setTimeout(r, 200));
-      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.2 });
-      var snapBase64 = capCanvas.toDataURL("image/jpeg", 0.6); // บีบอัดเป็น JPEG ขนาดเล็กเพื่อลง DB โดยตรง
+
       const recordId = fd.recId || `KSH_${Date.now()}`;
       
-      const finalData = { ...fd, snapshotUrl: snapBase64, timestamp: new Date().toISOString() };
+      // บันทึกข้อมูลลง Database
+      const finalData = { ...fd, timestamp: new Date().toISOString() };
       delete finalData.recId;
       await set(ref(db, 'reports/' + recordId), finalData);
 
+      // --- ดาวน์โหลด JPEG อัตโนมัติ ---
+      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 1.5 });
+      var snapBase64 = capCanvas.toDataURL("image/jpeg", 0.9);
+      let jpegLink = document.createElement("a");
+      jpegLink.download = `Report_${fd.ReportDate}_${fd.Shift}.jpg`;
+      jpegLink.href = snapBase64;
+      jpegLink.click();
+
+      // --- ดาวน์โหลด PDF อัตโนมัติ ---
+      var element = document.getElementById('captureArea');
+      var opt = {
+          margin: 0.5,
+          filename: `Report_${fd.ReportDate}_${fd.Shift}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+
       $('#loadingOverlay').hide();
-      Swal.fire('สำเร็จ', 'บันทึกรายงานแล้ว', 'success');
+      Swal.fire('สำเร็จ', 'บันทึกรายงานและดาวน์โหลดไฟล์เรียบร้อยแล้ว', 'success');
       resetForm(); showSection('table');
     } catch (err) { 
       $('#loadingOverlay').hide(); 
@@ -717,20 +729,28 @@
   }
 
   window.deleteRecord = (id) => { Swal.fire({ title: 'ลบ?', icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
+  
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
     resetForm(); $('#recId').val(id); 
-    Object.keys(r).forEach(k => { 
-        if(document.forms['mainForm'][k]) {
-            if(document.forms['mainForm'][k].length && document.forms['mainForm'][k][0].type === "radio") $(`input[name="${k}"][value="${r[k]}"]`).prop('checked', true);
-            else if ($(document.forms['mainForm'][k]).hasClass('select2-input') || document.forms['mainForm'][k].tagName === 'SELECT') {
-                $(document.forms['mainForm'][k]).val(r[k]).trigger('change');
+    
+    // โหลดข้อมูลเก่าลงฟอร์ม
+    Object.keys(r).forEach(k => {
+        let $el = $(`[name="${k}"]`);
+        if($el.length) {
+            if($el.attr('type') === 'radio') {
+                $el.filter(`[value="${r[k]}"]`).prop('checked', true);
+            } else if($el.hasClass('select2-input') || $el.is('select')) {
+                $el.val(r[k]).trigger('change');
+            } else {
+                $el.val(r[k]);
             }
-            else document.forms['mainForm'][k].value = r[k];
         }
     });
-    if(r.Shift) updateShiftTime();
-    showSection('form'); Swal.fire('โหมดแก้ไข', 'กรุณาเซ็นชื่อใหม่ก่อนบันทึก', 'info');
+
+    if(r.Shift) updateShiftTime(); // อัปเดตเวลาให้ตรงกับเวร
+    showSection('form'); 
+    Swal.fire('โหมดแก้ไข', 'ระบบดึงข้อมูลมาให้แล้ว กรุณาตรวจสอบและเซ็นชื่อใหม่ก่อนบันทึก', 'info');
   }
 
   window.exportDataPSV = () => {
@@ -739,6 +759,7 @@
     const filtered = window.allData.filter(r => { let d = new Date(r.ReportDate); return d >= new Date(start) && d <= new Date(end); });
     if(!filtered.length) return Swal.fire('ไม่พบข้อมูล','','info');
     
+    // คอลัมน์ครบถ้วน
     const allKeys = ["ReportDate", "Shift", "StartTime", "EndTime", "SupervisorName", "Position", "DoctorER", "DoctorWard", "NurseER1", "NurseER2", "NurseER3", "NurseER4", "EMT", "HelperER", "StatER_Total", "StatER_Refer", "StatER_EMS", "StatER_Dead", "StatER_Autopsy", "NurseLR1", "NurseLR2", "HelperLR", "StatLR_Carry", "StatLR_New", "StatLR_Move", "StatLR_Refer", "StatLR_DC", "StatLR_Birth", "StatLR_Dead", "StatLR_Remain", "NurseIPD2_1", "NurseIPD2_2", "NurseIPD2_3", "HelperIPD2", "StatIPD2_Carry", "StatIPD2_New", "StatIPD2_RecMove", "StatIPD2_Move", "StatIPD2_Refer", "StatIPD2_DC", "StatIPD2_Refuse", "StatIPD2_Dead", "StatIPD2_Remain", "StatIPD2_HW", "NurseIPD3_1", "NurseIPD3_2", "NurseIPD3_3", "HelperIPD3", "StatIPD3_Carry", "StatIPD3_New", "StatIPD3_RecMove", "StatIPD3_Move", "StatIPD3_Refer", "StatIPD3_DC", "StatIPD3_Refuse", "StatIPD3_Dead", "StatIPD3_Remain", "StatIPD3_HW", "CardStaff1", "CardStaff2", "Porter1", "Porter2", "Refer_Total", "Ref_CP", "Ref_CP2", "Ref_PK", "Ref_KK", "Ref_Other", "Ref_OtherName", "Ref1", "Ref2", "Ref3", "Ref4", "Ref5", "Ref6", "Prob1", "Prob2", "Prob3", "Prob4", "Prob5", "Prob6", "Prob7", "Prob8", "Prob9", "Problem_Detail", "Security", "Other_Detail", "HeadNurse_Comment", "HeadNurseName", "DirectorName"];
     let content = allKeys.join("|") + "\n"; 
     filtered.forEach(r => {
@@ -798,10 +819,12 @@
     window.dashboardChart = new Chart(document.getElementById('mainDashboardChart'), { type: cType, data: {labels, datasets}, options: {responsive: true, maintainAspectRatio: false} });
   }
 
+  // Navigation & Utils
   window.showSection = (id) => { $('.section-content').hide(); $('.nav-link').removeClass('active'); $(`#${id}Section`).fadeIn(); let btnId = id.charAt(0).toUpperCase()+id.slice(1); $(`#btnTab${btnId}`).addClass('active'); if(id==='form') resizeCanvas(); window.scrollTo(0,0); }
   function formatDateDisplay(d) { if(!d) return ''; let dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = () => { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); $('#shiftTimeDisplay').val(''); clearSignature(); }
 
+  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   canvas.addEventListener('mousedown', (e) => { drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
