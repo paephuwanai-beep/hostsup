@@ -23,7 +23,6 @@
     body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
-    .app-header p { font-size: 0.9rem; }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -41,7 +40,7 @@
     }
 
     .quick-menu-btn { background: white; border-radius: 15px; padding: 15px 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; width: 100%; transition: all 0.2s; color: #555; font-weight: 600;}
-    .quick-menu-btn:hover, .quick-menu-btn:active { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: #fafafa;}
+    .quick-menu-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: #fafafa;}
     .quick-menu-btn i { font-size: 1.8rem; margin-bottom: 8px; display: block;}
 
     .custom-card { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); background: white; margin-bottom: 20px; overflow: hidden; }
@@ -61,10 +60,14 @@
     .stats-container { background: #f8f9fa; border: 1px solid #ececec; border-radius: 12px; padding: 12px; margin-top: 15px; }
     .stat-title { font-size: 0.85rem; font-weight: bold; color: #666; margin-bottom: 8px; display: block; }
     .btn-gradient { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; border: none; padding: 14px; font-weight: 600; font-size: 1.1rem; border-radius: 12px; box-shadow: 0 6px 15px rgba(111, 66, 193, 0.25); transition: transform 0.2s; width: 100%;}
-    #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; flex-direction:column; justify-content:center; align-items:center; backdrop-filter: blur(4px); }
     
-    /* Snapshot System - แก้ไขให้แสดงผลสมบูรณ์ ไม่ขาวโพลน */
-    #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; z-index: -1; }
+    /* โหลดติ้ง Overlay ให้ลอยอยู่ชั้นบนสุด */
+    #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.95); z-index:99999; flex-direction:column; justify-content:center; align-items:center; backdrop-filter: blur(4px); }
+    
+    /* -------------------------------------------------------------
+       Snapshot System (ตั้งค่าความกว้าง 800px จำลองกระดาษ A4 เสมอ)
+       ------------------------------------------------------------- */
+    #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; z-index: 1000; }
     .snap-header { text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 25px; }
     .snap-header h2 { color: var(--primary-color); font-weight: bold; margin: 0; }
     .snap-header p { margin: 5px 0 0; color: #666; }
@@ -93,13 +96,13 @@
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
-    /* Handout Infographic UI */
+    /* Handout UI (ย่อทิ้งไว้ให้โค้ดสะอาด แต่ระบบทำงานได้ปกติ) */
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
-    .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
-    .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: box-shadow 0.3s; position: relative; border-top: 4px solid var(--primary-color);}
+    .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
+    .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; position: relative; border-top: 4px solid var(--primary-color);}
     .ho-card-header { padding: 1rem; display: flex; align-items: center; gap: 0.75rem; background-color: #f8fafc;}
     .ho-icon-box { background: white; padding: 0.5rem; border-radius: 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center; width: 3rem; height: 3rem; font-size: 1.5rem; color: var(--primary-color);}
-    .ho-module-badge { font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ho-module-badge { font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; }
     .ho-title { font-size: 1.1rem; font-weight: 700; color: #1f2937; line-height: 1.25; margin-bottom: 0; }
     .ho-card-body { padding: 1.25rem; flex-grow: 1; }
     .ho-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;}
@@ -258,7 +261,7 @@
             <label class="form-label">เวรปฏิบัติงาน</label>
             <select class="form-select" name="Shift" id="shiftSelect" required onchange="updateShiftTime()">
                 <option value="">เลือกเวร...</option>
-                <option value="ดึก">ดึก (00.00 - 08.00)</option>
+                <option value="ดึก">ดึก (00.30 - 08.30)</option>
                 <option value="เช้า">เช้า (08.30 - 16.30)</option>
                 <option value="บ่าย">บ่าย (16.30 - 24.00)</option>
             </select>
@@ -404,7 +407,7 @@
         <div class="card-title-bar text-bg-primary text-white"><i class="fas fa-file-signature"></i> 11. ลายมือชื่อผู้รายงาน</div>
         <div class="card-body-custom">
            <div class="alert alert-secondary small mb-3 border-0">
-             <i class="fas fa-info-circle"></i> รายชื่อผู้อำนวยการ และ หัวหน้ากลุ่มงาน จะถูกประทับลงในเอกสาร PDF และ JPG อัตโนมัติ (และจะถูกดาวน์โหลดลงเครื่องทันทีเมื่อกดบันทึก)
+             <i class="fas fa-info-circle"></i> รายชื่อผู้อำนวยการ และ หัวหน้ากลุ่มงาน จะถูกประทับลงในเอกสาร PDF และ JPG อัตโนมัติ ตามที่ได้ระบุไว้ในเมนู 'ตั้งค่า'
            </div>
            <label class="form-label text-primary"><i class="fas fa-pen-nib me-1"></i> กรุณาเซ็นชื่อในกรอบด้านล่าง (ผู้ตรวจการเวร)</label>
            <div class="signature-wrapper mb-2">
@@ -415,7 +418,9 @@
       </div>
 
       <div class="d-grid gap-2 mb-5">
-        <button type="submit" class="btn btn-gradient text-white py-3 fw-bold shadow"><i class="fas fa-save me-2"></i> บันทึกข้อมูลและสร้างรายงาน</button>
+        <button type="submit" class="btn btn-gradient text-white">
+          <i class="fas fa-save me-2"></i> บันทึกข้อมูลและสร้างไฟล์รายงานอัตโนมัติ
+        </button>
       </div>
     </form>
   </div>
@@ -523,7 +528,7 @@
   window.updateShiftTime = function() {
       const shift = $('#shiftSelect').val();
       let start = "", end = "", display = "";
-      if (shift === 'ดึก') { start = "00:00"; end = "08:00"; display = "00.00 - 08.00 น."; } // อิงตามที่ตั้งค่าไว้
+      if (shift === 'ดึก') { start = "00:30"; end = "08:30"; display = "00.30 - 08.30 น."; }
       else if (shift === 'เช้า') { start = "08:30"; end = "16:30"; display = "08.30 - 16.30 น."; }
       else if (shift === 'บ่าย') { start = "16:30"; end = "24:00"; display = "16.30 - 24.00 น."; }
       
@@ -598,7 +603,6 @@
   window.deleteDropdownItem = (cat, key) => remove(ref(db, `settings/dropdowns/${cat}/${key}`));
   $(document).on('keypress', '.setting-card input', function(e) { if(e.which == 13) { $(this).siblings('button').click(); } });
 
-  // ฟังก์ชันยัดข้อมูลลง Template 
   function populateCaptureArea(r) {
         const j = (arr) => arr.filter(v => v).join(', ');
         
@@ -629,7 +633,7 @@
 
         $('#c_sup_name2').text(r.SupervisorName || '......................................');
         $('#c_head_name').text(r.HeadNurseName || '......................................');
-        $('#c_head_pos').text(r.HeadNursePos || 'หัวหน้ากลุ่มงาน');
+        $('#c_head_pos').text(r.HeadNursePos || 'หัวหน้ากลุ่มงานการพยาบาลฯ');
         $('#c_dir_name').text(r.DirectorName || '......................................');
         $('#c_dir_pos').text(r.DirectorPos || 'ผู้อำนวยการโรงพยาบาล');
         
@@ -637,6 +641,9 @@
         else { $('#c_sig_img').hide(); }
   }
 
+  // -------------------------------------------------------------
+  // Data Table (ประวัติ)
+  // -------------------------------------------------------------
   function loadTableData() {
     onValue(ref(db, 'reports'), (snapshot) => {
       const data = snapshot.val(); window.allData = [];
@@ -655,7 +662,7 @@
 
       window.allData.forEach(function(r) {
         var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
-        // ปุ่ม PDF และ JPG สำหรับดาวน์โหลด
+        // ปุ่ม PDF และ JPG ในตาราง
         var imgBtn = `
             <button class="btn btn-sm btn-outline-danger mb-1 me-1" onclick="downloadFromTable('${r.id}', 'pdf')" title="โหลด PDF"><i class="fas fa-file-pdf"></i> PDF</button>
             <button class="btn btn-sm btn-outline-success mb-1" onclick="downloadFromTable('${r.id}', 'jpg')" title="โหลดรูป JPG"><i class="fas fa-image"></i> JPG</button>
@@ -668,58 +675,68 @@
     });
   }
 
-  // ดาวน์โหลดจากตาราง (เลื่อนหน้าจอขึ้นสุดก่อนแก้ปัญหาหน้าว่าง)
+  // ฟังก์ชันดาวน์โหลดและแคปภาพ (ใช้ร่วมกันทั้งหน้าบันทึก และหน้าตาราง)
+  async function captureAndDownload(format, filename) {
+      const capArea = document.getElementById('captureArea');
+      
+      // ดึงขึ้นมาไว้บนสุดเพื่อให้เรนเดอร์ติด 100% แต่ให้มันอยู่หลังตัวโหลดติ้ง (z-index 9000)
+      capArea.style.left = '0px';
+      capArea.style.top = '0px';
+      capArea.style.zIndex = '9000'; 
+      window.scrollTo(0, 0); // เลื่อนหน้าจอกลับขึ้นบนสุดป้องกัน Safari ตัดแหว่ง
+      
+      await new Promise(res => setTimeout(res, 800)); // รอ CSS และ Font โหลดให้เสร็จสมบูรณ์
+      
+      if (format === 'jpg' || format === 'both') {
+          let capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, scrollY: 0, windowWidth: 800 });
+          let imgData = capCanvas.toDataURL("image/jpeg", 0.95);
+          let dlLink = document.createElement("a");
+          dlLink.href = imgData;
+          dlLink.download = filename + '.jpg';
+          document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
+      }
+      
+      if (format === 'pdf' || format === 'both') {
+          // ใช้โหมดแปลง HTML ลง PDF ตรงๆ เพื่อให้มันตัดหน้าอัตโนมัติ (Page Break)
+          let opt = { 
+              margin: 0.3, 
+              filename: filename + '.pdf', 
+              image: { type: 'jpeg', quality: 0.98 }, 
+              html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowWidth: 800 }, 
+              jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+              pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+          };
+          await html2pdf().set(opt).from(capArea).save();
+      }
+
+      // ซ่อนกลับที่เดิม
+      capArea.style.left = '-9999px';
+  }
+
+  // กดปุ่มดาวน์โหลดจากตาราง
   window.downloadFromTable = async function(id, format) {
       var r = window.allData.find(x => x.id === id);
       if(!r) return;
       
-      window.scrollTo(0, 0); // 🔹 สำคัญ: ดึงหน้าจอกลับขึ้นสุดป้องกัน Safari แหว่ง
-      populateCaptureArea(r);
-      
       $('#loadingText').text(`กำลังสร้างไฟล์ ${format.toUpperCase()}...`);
       $('#loadingOverlay').css('display', 'flex');
-      
-      const capArea = document.getElementById('captureArea');
-      capArea.style.left = '0px';
-      capArea.style.zIndex = '9998'; // ซ่อนไว้ใต้ตัวโหลด แต่ให้เบราว์เซอร์มองเห็น
+
+      populateCaptureArea(r);
       
       try {
-          await new Promise(res => setTimeout(res, 500)); 
-          
-          if (format === 'jpg') {
-              var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, scrollY: 0, windowY: 0 });
-              var dlLink = document.createElement("a");
-              dlLink.href = capCanvas.toDataURL("image/jpeg", 0.95);
-              dlLink.download = `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.jpg`;
-              document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
-          } else if (format === 'pdf') {
-              // 🔹 ใช้ Native HTML to PDF เพื่อให้ระบบตัดแบ่งหน้าได้อัตโนมัติ 
-              var opt = { 
-                  margin: 0.4, 
-                  filename: `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.pdf`, 
-                  image: { type: 'jpeg', quality: 0.98 }, 
-                  html2canvas: { scale: 2, useCORS: true, scrollY: 0, windowY: 0 }, 
-                  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-                  pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-              };
-              await html2pdf().set(opt).from(capArea).save();
-          }
+          await captureAndDownload(format, `รายงานเวร_${r.ReportDate}_เวร${r.Shift}`);
       } catch(e) {
           console.error("Export Error", e);
           Swal.fire('ข้อผิดพลาด', 'ดาวน์โหลดไฟล์ไม่สำเร็จ', 'error');
       }
       
-      capArea.style.left = '-9999px';
-      capArea.style.zIndex = '-1';
       $('#loadingOverlay').hide();
       $('#loadingText').text('กำลังประมวลผล...');
   }
 
-  // บันทึกฟอร์มใหม่ และ โหลดลงเครื่องทันที
+  // บันทึกฟอร์มใหม่
   window.handleFormSubmit = async function(e) {
     e.preventDefault();
-    window.scrollTo(0, 0); // 🔹 สำคัญ: ดึงหน้าจอกลับขึ้นสุดป้องกัน Safari แหว่ง
-
     $('#loadingText').text('กำลังบันทึกและดาวน์โหลดไฟล์...');
     $('#loadingOverlay').css('display', 'flex'); 
     
@@ -736,42 +753,17 @@
 
       populateCaptureArea(fd);
 
-      const capArea = document.getElementById('captureArea');
-      capArea.style.left = '0px';
-      capArea.style.zIndex = '9998';
+      // โหลดทั้งคู่ PDF และ JPG ลงเครื่อง
+      await captureAndDownload('both', `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}`);
 
-      await new Promise(r => setTimeout(r, 500)); 
-
-      // 1. แคปและโหลด JPG 
-      var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, scrollY: 0, windowY: 0 });
-      var imgData = capCanvas.toDataURL("image/jpeg", 0.95);
-      var dlLink = document.createElement("a");
-      dlLink.href = imgData;
-      dlLink.download = `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.jpg`;
-      document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
-
-      // 2. แคปและโหลด PDF (โยน HTML ลง PDF โดยตรง เพื่อให้แบ่งหน้าได้สวยงาม)
-      var opt = {
-        margin:       0.4,
-        filename:     `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, scrollY: 0, windowY: 0 },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-      await html2pdf().set(opt).from(capArea).save();
-
-      capArea.style.left = '-9999px';
-      capArea.style.zIndex = '-1';
-
-      // 3. บันทึกข้อมูลลง Firebase
+      // บันทึกข้อมูลลงฐานข้อมูล
       const recordId = fd.recId || `KSH_${Date.now()}`;
       const finalData = { ...fd, timestamp: new Date().toISOString() };
       delete finalData.recId;
       await set(ref(db, 'reports/' + recordId), finalData);
 
       $('#loadingOverlay').hide();
-      Swal.fire('สำเร็จ', 'บันทึกข้อมูลและดาวน์โหลดไฟล์เรียบร้อยแล้ว', 'success');
+      Swal.fire('สำเร็จ', 'บันทึกและดาวน์โหลดไฟล์สำเร็จ', 'success');
       resetForm(); showSection('table');
       $('#loadingText').text('กำลังประมวลผล...');
     } catch (err) { 
@@ -782,20 +774,24 @@
     }
   }
 
+  // -------------------------------------------------------------
+  // แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100%
+  // -------------------------------------------------------------
   window.deleteRecord = (id) => { Swal.fire({ title: 'ลบข้อมูล?', text: "ไม่สามารถกู้คืนได้", icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
   
-  // 🔹 แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100% (ซ่อมบั๊กแล้ว)
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
-    resetForm(); $('#recId').val(id); 
+    resetForm(); 
+    $('#recId').val(id); 
     
+    // ดึงข้อมูลกรอกกลับให้แม่นยำ
     Object.keys(r).forEach(k => { 
         let $el = $(`[name="${k}"]`, '#mainForm');
         if($el.length > 0) {
             if($el.attr('type') === 'radio') {
-                $el.filter(`[value="${r[k]}"]`).prop('checked', true);
+                $el.filter(`[value="${r[k]}"]`).prop('checked', true); // ซ่อมบั๊ก Radio button
             } else if ($el.hasClass('select2-input') || $el.is('select')) {
-                $el.val(r[k]).trigger('change');
+                $el.val(r[k]).trigger('change'); // ซ่อมบั๊ก Select2
             } else {
                 $el.val(r[k]);
             }
@@ -804,9 +800,10 @@
     
     if(r.Shift) updateShiftTime();
     showSection('form'); 
-    Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ดึงข้อมูลเรียบร้อย', text: 'กรุณาเซ็นชื่อใหม่ก่อนกดบันทึก', showConfirmButton: false, timer: 3000 });
+    Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ดึงข้อมูลเรียบร้อย', text: 'กรุณาตรวจสอบและเซ็นชื่อใหม่ก่อนกดบันทึก', showConfirmButton: false, timer: 3000 });
   }
 
+  // Export PSV
   window.exportDataPSV = () => {
     const start = $('#exportStart').val(), end = $('#exportEnd').val();
     if(!start || !end) return Swal.fire('ระบุวันที่','','warning');
@@ -824,6 +821,7 @@
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `KSH_Export.psv`; link.click();
   }
 
+  // Dashboard Cards & Charts
   window.updateDashboardCards = () => {
     $('#dash_date').text(new Date().toLocaleDateString('th-TH', { year:'numeric', month:'short', day:'numeric' }));
     if(window.allData.length){
@@ -876,6 +874,7 @@
   function formatDateDisplay(d) { if(!d) return ''; let dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = () => { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); $('#shiftTimeDisplay').val(''); clearSignature(); }
 
+  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   canvas.addEventListener('mousedown', (e) => { drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
