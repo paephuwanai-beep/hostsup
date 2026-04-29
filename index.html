@@ -20,12 +20,12 @@
 
   <style>
     :root { --primary-color: #1e3c72; --secondary-color: #2a5298; --accent-color: #6f42c1; --bg-light: #f4f6f9; }
-    body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-light); color: #333; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
     .app-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 30px 15px 50px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
     .app-header h2 { font-size: 1.5rem; font-weight: 700; }
+    .app-header p { font-size: 0.9rem; }
     .container-main { max-width: 1100px; margin: -25px auto 20px auto; padding: 0 10px; position: relative; z-index: 10; }
     
-    /* Navigation Menu */
     .nav-pills { background: white; border-radius: 15px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .nav-pills .nav-link { color: #555; font-weight: 600; border-radius: 12px; padding: 12px; font-size: 0.95rem; transition: all 0.3s; cursor: pointer; border: none; width: 100%;}
     .nav-pills .nav-link.active { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2); }
@@ -63,7 +63,7 @@
     .btn-gradient { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; border: none; padding: 14px; font-weight: 600; font-size: 1.1rem; border-radius: 12px; box-shadow: 0 6px 15px rgba(111, 66, 193, 0.25); transition: transform 0.2s; width: 100%;}
     #loadingOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; flex-direction:column; justify-content:center; align-items:center; backdrop-filter: blur(4px); }
     
-    /* Snapshot System */
+    /* Snapshot System - Updated to prevent blank image */
     #captureArea { position: absolute; left: -9999px; top: 0; width: 800px; background: white; padding: 40px; font-family: 'Sarabun'; color: #333; line-height: 1.6; }
     .snap-header { text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 15px; margin-bottom: 25px; }
     .snap-header h2 { color: var(--primary-color); font-weight: bold; margin: 0; }
@@ -90,7 +90,6 @@
 
     /* Settings UI */
     .setting-list-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 0.9rem;}
-    .setting-list-item:last-child { border-bottom: none; }
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
@@ -109,9 +108,7 @@
     .theme-blue { border-top: 4px solid #3b82f6; } .theme-orange { border-top: 4px solid #f97316; } .theme-teal { border-top: 4px solid #14b8a6; } .theme-green { border-top: 4px solid #22c55e; } .theme-purple { border-top: 4px solid #a855f7; } .theme-indigo { border-top: 4px solid #6366f1; } .theme-cyan { border-top: 4px solid #06b6d4; } .theme-emerald { border-top: 4px solid #10b981; } .theme-rose { border-top: 4px solid #f43f5e; } .theme-fuchsia { border-top: 4px solid #d946ef; } 
     .ho-step-badge { position: absolute; top: 0; right: 0; color: white; padding: 0.25rem 0.75rem; border-bottom-left-radius: 0.75rem; font-size: 0.7rem; font-weight: 700; }
     .bg-indigo { background-color: #6366f1; } .bg-cyan { background-color: #06b6d4; } .bg-emerald { background-color: #10b981; } .bg-rose { background-color: #f43f5e; } .bg-fuchsia { background-color: #d946ef; }
-    .ho-mini-badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 0.375rem; font-size: 0.7rem; font-weight: 700; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 0.2rem; margin-right: 0.2rem;}
-    .badge-rose { background-color: #ffe4e6; color: #be123c; } .badge-indigo { background-color: #e0e7ff; color: #4338ca; }
-
+    
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: white !important;}
       .print-hide { display: none !important; }
@@ -129,7 +126,7 @@
 
 <div id="loadingOverlay">
   <div class="spinner-border text-primary" style="width: 3.5rem; height: 3.5rem;"></div>
-  <h5 class="mt-3 text-primary fw-bold">กำลังประมวลผล และดาวน์โหลดไฟล์...</h5>
+  <h5 class="mt-3 text-primary fw-bold" id="loadingText">กำลังประมวลผล...</h5>
 </div>
 
 <div id="captureArea" class="print-hide">
@@ -259,7 +256,7 @@
             <label class="form-label">เวรปฏิบัติงาน</label>
             <select class="form-select" name="Shift" id="shiftSelect" required onchange="updateShiftTime()">
                 <option value="">เลือกเวร...</option>
-                <option value="ดึก">ดึก (00.00 - 08.00)</option>
+                <option value="ดึก">ดึก (00.30 - 08.30)</option>
                 <option value="เช้า">เช้า (08.30 - 16.30)</option>
                 <option value="บ่าย">บ่าย (16.30 - 24.00)</option>
             </select>
@@ -427,7 +424,7 @@
     <div class="custom-card card-body-custom">
       <div class="table-responsive">
         <table id="dataTable" class="table table-hover align-middle w-100">
-          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
+          <thead class="table-light"><tr><th style="min-width:120px;">วันที่/เวร</th><th>ผู้ตรวจการ</th><th class="text-center" style="min-width:140px;">ดาวน์โหลด</th><th class="text-end" style="min-width:90px;">จัดการ</th></tr></thead>
           <tbody></tbody>
         </table>
       </div>
@@ -547,12 +544,14 @@
           set(ref(db, 'settings/dropdowns'), defaultSettings);
           return; 
       }
+
       window.dropdownData = snap.val() || {};
       const categories = ['supervisors', 'positions', 'doctors', 'nurses', 'emt', 'helpers', 'porters', 'cardStaff', 'head', 'director'];
       
       categories.forEach(cat => {
         const listDiv = $(`#list_${cat}`); listDiv.empty();
         const items = window.dropdownData[cat] || {};
+        
         if(Object.keys(items).length === 0) listDiv.append('<div class="p-2 text-muted small text-center">ว่าง</div>');
         else {
            Object.keys(items).forEach(key => {
@@ -565,6 +564,7 @@
              }
            });
         }
+        
         if (cat !== 'head' && cat !== 'director') {
             const selects = $(`.list-${cat}`); selects.empty().append('<option value=""></option>');
             Object.values(items).forEach(val => selects.append(new Option(val, val)));
@@ -579,8 +579,7 @@
       if(!val) return;
       try {
           await push(ref(db, `settings/dropdowns/${category}`), val);
-          input.val('');
-          Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลแล้ว', showConfirmButton: false, timer: 1000 });
+          input.val(''); Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลแล้ว', showConfirmButton: false, timer: 1000 });
       } catch(e) { Swal.fire('Error', e.message, 'error'); }
   }
 
@@ -599,17 +598,20 @@
   window.deleteDropdownItem = (cat, key) => remove(ref(db, `settings/dropdowns/${cat}/${key}`));
   $(document).on('keypress', '.setting-card input', function(e) { if(e.which == 13) { $(this).siblings('button').click(); } });
 
+  // -------------------------------------------------------------
+  // Data Table & Generate Reports
+  // -------------------------------------------------------------
   function loadTableData() {
     onValue(ref(db, 'reports'), (snapshot) => {
       const data = snapshot.val(); window.allData = [];
       if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
       var tbody = $('#dataTable tbody').empty();
       if (!data) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
+      
       Object.keys(data).forEach(key => { let r = data[key]; r.id = key; window.allData.push(r); });
       
       window.allData.sort((a, b) => {
-          const dateA = new Date(a.ReportDate).getTime();
-          const dateB = new Date(b.ReportDate).getTime();
+          const dateA = new Date(a.ReportDate).getTime(); const dateB = new Date(b.ReportDate).getTime();
           if (dateA !== dateB) return dateB - dateA;
           const shiftWeight = { 'ดึก': 1, 'เช้า': 2, 'บ่าย': 3 };
           return (shiftWeight[b.Shift] || 0) - (shiftWeight[a.Shift] || 0); 
@@ -617,92 +619,150 @@
 
       window.allData.forEach(function(r) {
         var shiftTxt = r.Shift ? ` <span class="badge bg-secondary ms-1">เวร${r.Shift}</span>` : '';
-        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
+        // ปุ่ม PDF และ JPG ดึงข้อมูลสร้างใหม่สดๆ ทันที ไม่โหลดหนักฐานข้อมูล
+        var imgBtn = `
+            <button class="btn btn-sm btn-outline-danger mb-1" onclick="downloadFromTable('${r.id}', 'pdf')" title="โหลด PDF"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="btn btn-sm btn-outline-success mb-1" onclick="downloadFromTable('${r.id}', 'jpg')" title="โหลดรูป JPG"><i class="fas fa-image"></i> JPG</button>
+        `;
+        
+        tbody.append(`<tr><td class="text-nowrap">${formatDateDisplay(r.ReportDate)}${shiftTxt}</td><td>${r.SupervisorName || '-'}</td><td class="text-center">${imgBtn}</td><td class="text-end text-nowrap"><button class="btn btn-sm btn-warning me-1" onclick="editRecord('${r.id}')"><i class="fas fa-pen"></i></button><button class="btn btn-sm btn-light text-danger" onclick="deleteRecord('${r.id}')"><i class="fas fa-trash"></i></button></td></tr>`);
       });
       $('#dataTable').DataTable({ "order": [], "responsive": true, "language": { "search": "ค้นหา:" } });
       updateDashboardCards(); renderChart();
     });
   }
 
+  // ฟังก์ชันยัดข้อมูลลง Template 
+  function populateCaptureArea(r) {
+        const j = (arr) => arr.filter(v => v).join(', ');
+        
+        $('#c_date').text(formatDateDisplay(r.ReportDate) + (r.Shift ? ` (เวร${r.Shift})` : '')); 
+        $('#c_time').text(r.ShiftTimeDisplay || `${r.StartTime} - ${r.EndTime}`);
+        $('#c_sup').text(r.SupervisorName); $('#c_pos').text(r.Position);
+        $('#c_docER').text(r.DoctorER||'-'); $('#c_docWard').text(r.DoctorWard||'-');
+        $('#c_nurse_er').text(j([r.NurseER1,r.NurseER2,r.NurseER3,r.NurseER4])||'-');
+        $('#c_emt').text(r.EMT||'-'); $('#c_helper_er').text(r.HelperER||'-');
+        $('#c_nurse_lr').text(j([r.NurseLR1,r.NurseLR2])||'-'); $('#c_helper_lr').text(r.HelperLR||'-');
+        $('#c_nurse_ipd2').text(j([r.NurseIPD2_1,r.NurseIPD2_2,r.NurseIPD2_3])||'-'); $('#c_helper_ipd2').text(r.HelperIPD2||'-');
+        $('#c_nurse_ipd3').text(j([r.NurseIPD3_1,r.NurseIPD3_2,r.NurseIPD3_3])||'-'); $('#c_helper_ipd3').text(r.HelperIPD3||'-');
+        $('#c_card').text(j([r.CardStaff1,r.CardStaff2])||'-'); $('#c_porter').text(j([r.Porter1,r.Porter2])||'-');
+        
+        $('#c_stat_er').text(`รวม ${r.StatER_Total||0} | Refer ${r.StatER_Refer||0} | EMS ${r.StatER_EMS||0} | Dead ${r.StatER_Dead||0} | ชันสูตร ${r.StatER_Autopsy||0}`);
+        $('#c_stat_lr').text(`ยกมา ${r.StatLR_Carry||0} | รับ ${r.StatLR_New||0} | ย้าย ${r.StatLR_Move||0} | Ref ${r.StatLR_Refer||0} | D/C ${r.StatLR_DC||0} | คลอด ${r.StatLR_Birth||0} | Dead ${r.StatLR_Dead||0} | คงเหลือ ${r.StatLR_Remain||0}`);
+        $('#c_stat_ipd2').text(`ยกมา ${r.StatIPD2_Carry||0} | รับ ${r.StatIPD2_New||0} | รับย้าย ${r.StatIPD2_RecMove||0} | ย้าย ${r.StatIPD2_Move||0} | Ref ${r.StatIPD2_Refer||0} | D/C ${r.StatIPD2_DC||0} | ปฏิเสธ ${r.StatIPD2_Refuse||0} | Dead ${r.StatIPD2_Dead||0} | คงเหลือ ${r.StatIPD2_Remain||0} | HW ${r.StatIPD2_HW||0}`);
+        $('#c_stat_ipd3').text(`ยกมา ${r.StatIPD3_Carry||0} | รับ ${r.StatIPD3_New||0} | รับย้าย ${r.StatIPD3_RecMove||0} | ย้าย ${r.StatIPD3_Move||0} | Ref ${r.StatIPD3_Refer||0} | D/C ${r.StatIPD3_DC||0} | ปฏิเสธ ${r.StatIPD3_Refuse||0} | Dead ${r.StatIPD3_Dead||0} | คงเหลือ ${r.StatIPD3_Remain||0} | HW ${r.StatIPD3_HW||0}`);
+        
+        var refDet = ""; [r.Ref1, r.Ref2, r.Ref3, r.Ref4, r.Ref5, r.Ref6].forEach((rx, i) => { if(rx) refDet += `รอบ ${i+1}: ${rx}\n`; });
+        $('#c_ref_sum').text(`${r.Refer_Total||0} (ชย:${r.Ref_CP||0}, ภข:${r.Ref_PK||0}, ชพ:${r.Ref_CP2||0}, ขก:${r.Ref_KK||0}, อื่นๆ:${r.Ref_Other||0} ${r.Ref_OtherName||''})`);
+        $('#c_ref_det').text(refDet||'-');
+        
+        var probs = []; for(var i=1; i<=9; i++) { if(r["Prob"+i] === "พบ") probs.push("ข้อ " + i); }
+        $('#c_prob_list').text(probs.length > 0 ? probs.join(", ") : "ไม่พบ");
+        $('#c_prob_det').text(r.Problem_Detail || '-');
+        $('#c_sec').text(r.Security||'-'); $('#c_other').text(r.Other_Detail||'-'); $('#c_comment').text(r.HeadNurse_Comment||'-');
+
+        $('#c_sup_name2').text(r.SupervisorName || '......................................');
+        $('#c_head_name').text(r.HeadNurseName || '......................................');
+        $('#c_head_pos').text(r.HeadNursePos || 'หัวหน้ากลุ่มงาน');
+        $('#c_dir_name').text(r.DirectorName || '......................................');
+        $('#c_dir_pos').text(r.DirectorPos || 'ผู้อำนวยการโรงพยาบาล');
+        
+        if (r.signatureBase64) { $('#c_sig_img').attr('src', r.signatureBase64).show(); } 
+        else { $('#c_sig_img').hide(); }
+  }
+
+  // ระบบดาวน์โหลดจากตารางประวัติ (ดึงสดใหม่ คมชัด)
+  window.downloadFromTable = async function(id, format) {
+      var r = window.allData.find(x => x.id === id);
+      if(!r) return;
+      populateCaptureArea(r);
+      
+      $('#loadingText').text(`กำลังสร้างไฟล์ ${format.toUpperCase()}...`);
+      $('#loadingOverlay').css('display', 'flex');
+      
+      const capArea = document.getElementById('captureArea');
+      capArea.style.left = '0px';
+      capArea.style.zIndex = '-100';
+      
+      try {
+          if (format === 'jpg') {
+              var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, logging: false });
+              var dlLink = document.createElement("a");
+              dlLink.href = capCanvas.toDataURL("image/jpeg", 0.95);
+              dlLink.download = `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.jpg`;
+              document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
+          } else if (format === 'pdf') {
+              var opt = { margin: 0.3, filename: `รายงานเวร_${r.ReportDate}_เวร${r.Shift}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, logging: false }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
+              await html2pdf().set(opt).from(capArea).save();
+          }
+      } catch(e) {
+          console.error("Export Error", e);
+          Swal.fire('ข้อผิดพลาด', 'ดาวน์โหลดไฟล์ไม่สำเร็จ', 'error');
+      }
+      
+      capArea.style.left = '-9999px';
+      $('#loadingOverlay').hide();
+      $('#loadingText').text('กำลังประมวลผล...');
+  }
+
+  // บันทึกฟอร์มใหม่ และ โหลดลงเครื่องทันที
   window.handleFormSubmit = async function(e) {
     e.preventDefault();
+    $('#loadingText').text('กำลังบันทึกและดาวน์โหลดไฟล์...');
     $('#loadingOverlay').css('display', 'flex'); 
     
     try {
       var fd = Object.fromEntries(new FormData(e.target).entries());
-      const j = (arr) => arr.filter(v => v).join(', ');
       
       let headStr = window.dropdownData && window.dropdownData['head'] ? Object.values(window.dropdownData['head'])[0] : '|';
       let dirStr = window.dropdownData && window.dropdownData['director'] ? Object.values(window.dropdownData['director'])[0] : '|';
       let [headName, headPos] = headStr.split('|'); let [dirName, dirPos] = dirStr.split('|');
-      fd.HeadNurseName = headName; fd.DirectorName = dirName;
+      fd.HeadNurseName = headName || ''; fd.HeadNursePos = headPos || 'หัวหน้ากลุ่มงานการพยาบาลฯ';
+      fd.DirectorName = dirName || ''; fd.DirectorPos = dirPos || 'ผู้อำนวยการโรงพยาบาล';
 
-      let dateText = formatDateDisplay(fd.ReportDate);
-      if(fd.Shift) dateText += ` (เวร${fd.Shift})`;
-      $('#c_date').text(dateText); 
-      $('#c_time').text(fd.ShiftTimeDisplay || `${fd.StartTime} - ${fd.EndTime}`);
-      
-      $('#c_sup').text(fd.SupervisorName); $('#c_pos').text(fd.Position);
-      $('#c_docER').text(fd.DoctorER||'-'); $('#c_docWard').text(fd.DoctorWard||'-');
-      $('#c_nurse_er').text(j([fd.NurseER1,fd.NurseER2,fd.NurseER3,fd.NurseER4])||'-');
-      $('#c_emt').text(fd.EMT||'-'); $('#c_helper_er').text(fd.HelperER||'-');
-      $('#c_nurse_lr').text(j([fd.NurseLR1,fd.NurseLR2])||'-'); $('#c_helper_lr').text(fd.HelperLR||'-');
-      $('#c_nurse_ipd2').text(j([fd.NurseIPD2_1,fd.NurseIPD2_2,fd.NurseIPD2_3])||'-'); $('#c_helper_ipd2').text(fd.HelperIPD2||'-');
-      $('#c_nurse_ipd3').text(j([fd.NurseIPD3_1,fd.NurseIPD3_2,fd.NurseIPD3_3])||'-'); $('#c_helper_ipd3').text(fd.HelperIPD3||'-');
-      $('#c_card').text(j([fd.CardStaff1,fd.CardStaff2])||'-'); $('#c_porter').text(j([fd.Porter1,fd.Porter2])||'-');
-      $('#c_stat_er').text(`รวม ${fd.StatER_Total||0} | Refer ${fd.StatER_Refer||0} | EMS ${fd.StatER_EMS||0} | Dead ${fd.StatER_Dead||0} | ชันสูตร ${fd.StatER_Autopsy||0}`);
-      $('#c_stat_lr').text(`ยกมา ${fd.StatLR_Carry||0} | รับ ${fd.StatLR_New||0} | ย้าย ${fd.StatLR_Move||0} | Ref ${fd.StatLR_Refer||0} | D/C ${fd.StatLR_DC||0} | คลอด ${fd.StatLR_Birth||0} | Dead ${fd.StatLR_Dead||0} | คงเหลือ ${fd.StatLR_Remain||0}`);
-      $('#c_stat_ipd2').text(`ยกมา ${fd.StatIPD2_Carry||0} | รับ ${fd.StatIPD2_New||0} | รับย้าย ${fd.StatIPD2_RecMove||0} | ย้าย ${fd.StatIPD2_Move||0} | Ref ${fd.StatIPD2_Refer||0} | D/C ${fd.StatIPD2_DC||0} | ปฏิเสธ ${fd.StatIPD2_Refuse||0} | Dead ${fd.StatIPD2_Dead||0} | คงเหลือ ${fd.StatIPD2_Remain||0} | HW ${fd.StatIPD2_HW||0}`);
-      $('#c_stat_ipd3').text(`ยกมา ${fd.StatIPD3_Carry||0} | รับ ${fd.StatIPD3_New||0} | รับย้าย ${fd.StatIPD3_RecMove||0} | ย้าย ${fd.StatIPD3_Move||0} | Ref ${fd.StatIPD3_Refer||0} | D/C ${fd.StatIPD3_DC||0} | ปฏิเสธ ${fd.StatIPD3_Refuse||0} | Dead ${fd.StatIPD3_Dead||0} | คงเหลือ ${fd.StatIPD3_Remain||0} | HW ${fd.StatIPD3_HW||0}`);
-      
-      var refDet = ""; [fd.Ref1, fd.Ref2, fd.Ref3, fd.Ref4, fd.Ref5, fd.Ref6].forEach((r, i) => { if(r) refDet += `รอบ ${i+1}: ${r}\n`; });
-      $('#c_ref_sum').text(`${fd.Refer_Total||0} (ชย:${fd.Ref_CP||0}, ภข:${fd.Ref_PK||0}, ชพ:${fd.Ref_CP2||0}, ขก:${fd.Ref_KK||0}, อื่นๆ:${fd.Ref_Other||0} ${fd.Ref_OtherName||''})`);
-      $('#c_ref_det').text(refDet||'-');
-      var probs = []; for(var i=1; i<=9; i++) { if(fd["Prob"+i] === "พบ") probs.push("ข้อ " + i); }
-      $('#c_prob_list').text(probs.length > 0 ? probs.join(", ") : "ไม่พบ");
-      $('#c_prob_det').text(fd.Problem_Detail || '-');
-      $('#c_sec').text(fd.Security||'-'); $('#c_other').text(fd.Other_Detail||'-'); $('#c_comment').text(fd.HeadNurse_Comment||'-');
+      fd.signatureBase64 = isCanvasBlank(canvas) ? null : canvas.toDataURL("image/png");
 
-      $('#c_sup_name2').text(fd.SupervisorName || '......................................');
-      $('#c_head_name').text(headName || '......................................');
-      $('#c_head_pos').text(headPos || 'หัวหน้ากลุ่มงาน');
-      $('#c_dir_name').text(dirName || '......................................');
-      $('#c_dir_pos').text(dirPos || 'ผู้อำนวยการโรงพยาบาล');
-      
-      var sigBase64 = null; if (!isCanvasBlank(canvas)) { sigBase64 = canvas.toDataURL("image/png"); $('#c_sig_img').attr('src', sigBase64).show(); } else { $('#c_sig_img').hide(); }
+      // เอาข้อมูลใส่ Template เพื่อเตรียมแคป
+      populateCaptureArea(fd);
+
+      // ดึงตัวแปร Template มาแคป
+      const capArea = document.getElementById('captureArea');
+      capArea.style.left = '0px';
+      capArea.style.zIndex = '-100';
 
       await new Promise(r => setTimeout(r, 200));
-      
-      // 1. แคปภาพความละเอียดสูง
-      var capCanvas = await html2canvas(document.getElementById('captureArea'), { scale: 2 });
-      var dbSnapBase64 = capCanvas.toDataURL("image/jpeg", 0.5); 
-      
-      // 2. ดาวน์โหลด JPEG ลงเครื่องอัตโนมัติ
+
+      // 1. แคปและโหลด JPG 
+      var capCanvas = await html2canvas(capArea, { scale: 2, useCORS: true, logging: false });
       var dlSnapBase64 = capCanvas.toDataURL("image/jpeg", 0.95);
       var dlLink = document.createElement("a");
       dlLink.href = dlSnapBase64;
       dlLink.download = `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.jpg`;
       document.body.appendChild(dlLink); dlLink.click(); document.body.removeChild(dlLink);
 
-      // 3. ดาวน์โหลด PDF ลงเครื่องอัตโนมัติ
+      // 2. แคปและโหลด PDF
       var opt = {
         margin:       0.3,
         filename:     `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
-      await html2pdf().set(opt).from(document.getElementById('captureArea')).save();
+      await html2pdf().set(opt).from(capArea).save();
 
-      // 4. บันทึกลง Firebase (ไม่ต้องพึ่ง Storage)
+      // ซ่อน Template กลับไป
+      capArea.style.left = '-9999px';
+
+      // 3. บันทึกเฉพาะข้อความลง Firebase Database (เบาและไวมาก)
       const recordId = fd.recId || `KSH_${Date.now()}`;
       const finalData = { ...fd, timestamp: new Date().toISOString() };
       delete finalData.recId;
       await set(ref(db, 'reports/' + recordId), finalData);
 
       $('#loadingOverlay').hide();
-      Swal.fire('สำเร็จ', 'บันทึกข้อมูลและดาวน์โหลดไฟล์ลงเครื่องแล้ว', 'success');
+      Swal.fire('สำเร็จ', 'บันทึกข้อมูลและดาวน์โหลดไฟล์เรียบร้อยแล้ว', 'success');
       resetForm(); showSection('table');
+      $('#loadingText').text('กำลังประมวลผล...');
     } catch (err) { 
       $('#loadingOverlay').hide(); 
       console.error(err);
@@ -710,10 +770,14 @@
     }
   }
 
-  window.deleteRecord = (id) => { Swal.fire({ title: 'ลบ?', icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
+  // ---- Functions ----
+  window.deleteRecord = (id) => { Swal.fire({ title: 'ลบข้อมูล?', text: "ไม่สามารถกู้คืนได้", icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
+  
+  // แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100%
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
     resetForm(); $('#recId').val(id); 
+    
     Object.keys(r).forEach(k => { 
         let field = document.forms['mainForm'][k];
         if(field) {
@@ -726,8 +790,9 @@
             }
         }
     });
+    
     if(r.Shift) updateShiftTime();
-    showSection('form'); Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'เข้าสู่โหมดแก้ไข', text: 'กรุณาเซ็นชื่อใหม่ก่อนบันทึก', showConfirmButton: false, timer: 3000 });
+    showSection('form'); Swal.fire({ toast: true, position: 'top-end', icon: 'info', title: 'ดึงข้อมูลเรียบร้อย', text: 'กรุณาเซ็นชื่อใหม่ก่อนกดบันทึก', showConfirmButton: false, timer: 3000 });
   }
 
   window.exportDataPSV = () => {
@@ -799,6 +864,7 @@
   function formatDateDisplay(d) { if(!d) return ''; let dt=new Date(d); return dt.getDate()+'/'+(dt.getMonth()+1)+'/'+(dt.getFullYear()+543); }
   window.resetForm = () => { document.getElementById('mainForm').reset(); $('#recId').val(''); $('.select2-input').val(null).trigger('change'); $('#shiftTimeDisplay').val(''); clearSignature(); }
 
+  // Signature
   var canvas = document.getElementById('signaturePad'), ctx = canvas.getContext('2d'), drawing = false;
   window.resizeCanvas = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; ctx.lineWidth = 2.5; ctx.strokeStyle = "#000"; ctx.lineCap = "round"; }
   canvas.addEventListener('mousedown', (e) => { drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
