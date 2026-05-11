@@ -96,7 +96,7 @@
     .setting-card { border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: none; height: 100%;}
     .setting-header { background: #f8f9fa; padding: 10px 15px; font-weight: 600; border-radius: 10px 10px 0 0; color: var(--primary-color);}
 
-    /* Handout UI (ย่อทิ้งไว้ให้โค้ดสะอาด แต่ระบบทำงานได้ปกติ) */
+    /* Handout UI */
     .ho-bg { background-color: var(--bg-light); font-family: 'Sarabun', sans-serif; }
     .ho-header { background: linear-gradient(to right, #1e40af, #0f766e); color: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;}
     .ho-card { background: white; border-radius: 1rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column; height: 100%; position: relative; border-top: 4px solid var(--primary-color);}
@@ -496,21 +496,20 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+  import { getFirestore, collection, doc, setDoc, onSnapshot, deleteDoc, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBy0aTOwtZRH1cRGRlp7ksYgVoTatkcHrk",
-    authDomain: "supervisorksh.firebaseapp.com",
-    databaseURL: "https://supervisorksh-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "supervisorksh",
-    storageBucket: "supervisorksh.firebasestorage.app",
-    messagingSenderId: "142411004115",
-    appId: "1:142411004115:web:0a9ef5f4017d3b8beebc26"
+    apiKey: "AIzaSyCTrlAOISCyx7pOvtr1xKRyKwG-LmVI0HQ",
+    authDomain: "spervks.firebaseapp.com",
+    projectId: "spervks",
+    storageBucket: "spervks.firebasestorage.app",
+    messagingSenderId: "550022383315",
+    appId: "1:550022383315:web:8da32f4bfad4de14ea3626"
   };
 
   const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  const db = getFirestore(app);
   const auth = getAuth(app);
 
   window.allData = [];
@@ -538,19 +537,19 @@
   }
 
   function loadSettings() {
-    onValue(ref(db, 'settings/dropdowns'), (snap) => {
-      if (!snap.exists()) {
+    onSnapshot(doc(db, 'settings', 'dropdowns'), (docSnap) => {
+      if (!docSnap.exists()) {
           const defaultSettings = {
               supervisors: { 1: "คุณปิยณัฐ", 2: "คุณภูวนัย", 3: "คุณสุวนันท์", 4: "คุณสุรีย์พร", 5: "คุณพรพิมล", 6: "คุณปราณี" },
               positions: { 1: "พยาบาลวิชาชีพชำนาญการพิเศษ", 2: "พยาบาลวิชาชีพชำนาญการ", 3: "พยาบาลวิชาชีพปฏิบัติการ" },
               head: { 1: "หัวหน้ากลุ่มงานการพยาบาล|พยาบาลวิชาชีพชำนาญการพิเศษ" },
               director: { 1: "ผู้อำนวยการโรงพยาบาล|นายแพทย์เชี่ยวชาญ" }
           };
-          set(ref(db, 'settings/dropdowns'), defaultSettings);
+          setDoc(doc(db, 'settings', 'dropdowns'), defaultSettings);
           return; 
       }
 
-      window.dropdownData = snap.val() || {};
+      window.dropdownData = docSnap.data() || {};
       const categories = ['supervisors', 'positions', 'doctors', 'nurses', 'emt', 'helpers', 'porters', 'cardStaff', 'head', 'director'];
       
       categories.forEach(cat => {
@@ -583,7 +582,8 @@
       const input = $(`#add_${category}`); const val = input.val().trim();
       if(!val) return;
       try {
-          await push(ref(db, `settings/dropdowns/${category}`), val);
+          const id = Date.now().toString();
+          await setDoc(doc(db, 'settings', 'dropdowns'), { [category]: { [id]: val } }, { merge: true });
           input.val(''); Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลแล้ว', showConfirmButton: false, timer: 1000 });
       } catch(e) { Swal.fire('Error', e.message, 'error'); }
   }
@@ -594,13 +594,17 @@
       if(!nameVal || !posVal) { Swal.fire('แจ้งเตือน', 'กรุณาระบุทั้งชื่อและตำแหน่ง', 'warning'); return; }
       const val = nameVal + "|" + posVal;
       try {
-          await push(ref(db, `settings/dropdowns/${category}`), val);
+          const id = Date.now().toString();
+          await setDoc(doc(db, 'settings', 'dropdowns'), { [category]: { [id]: val } }, { merge: true });
           nameInput.val(''); posInput.val('');
           Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'เพิ่มข้อมูลเรียบร้อย', showConfirmButton: false, timer: 1000 });
       } catch(err) { Swal.fire('Error', err.message, 'error'); }
   }
 
-  window.deleteDropdownItem = (cat, key) => remove(ref(db, `settings/dropdowns/${cat}/${key}`));
+  window.deleteDropdownItem = (cat, key) => {
+      updateDoc(doc(db, 'settings', 'dropdowns'), { [`${cat}.${key}`]: deleteField() });
+  };
+  
   $(document).on('keypress', '.setting-card input', function(e) { if(e.which == 13) { $(this).siblings('button').click(); } });
 
   function populateCaptureArea(r) {
@@ -645,11 +649,16 @@
   // Data Table (ประวัติ)
   // -------------------------------------------------------------
   function loadTableData() {
-    onValue(ref(db, 'reports'), (snapshot) => {
-      const data = snapshot.val(); window.allData = [];
+    onSnapshot(collection(db, 'reports'), (snapshot) => {
+      const data = {};
+      snapshot.forEach(docSnap => {
+          data[docSnap.id] = docSnap.data();
+      });
+
+      window.allData = [];
       if ($.fn.DataTable.isDataTable('#dataTable')) { $('#dataTable').DataTable().destroy(); }
       var tbody = $('#dataTable tbody').empty();
-      if (!data) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
+      if (Object.keys(data).length === 0) { tbody.append('<tr><td colspan="4" class="text-center text-muted py-4">ไม่พบข้อมูล</td></tr>'); updateDashboardCards(); return; }
       
       Object.keys(data).forEach(key => { let r = data[key]; r.id = key; window.allData.push(r); });
       
@@ -756,11 +765,11 @@
       // โหลดทั้งคู่ PDF และ JPG ลงเครื่อง
       await captureAndDownload('both', `รายงานเวร_${fd.ReportDate}_เวร${fd.Shift}`);
 
-      // บันทึกข้อมูลลงฐานข้อมูล
+      // บันทึกข้อมูลลงฐานข้อมูล Firestore
       const recordId = fd.recId || `KSH_${Date.now()}`;
       const finalData = { ...fd, timestamp: new Date().toISOString() };
       delete finalData.recId;
-      await set(ref(db, 'reports/' + recordId), finalData);
+      await setDoc(doc(db, 'reports', recordId), finalData);
 
       $('#loadingOverlay').hide();
       Swal.fire('สำเร็จ', 'บันทึกและดาวน์โหลดไฟล์สำเร็จ', 'success');
@@ -777,7 +786,11 @@
   // -------------------------------------------------------------
   // แก้ไขข้อมูล ดึงกลับเข้าฟอร์มครบ 100%
   // -------------------------------------------------------------
-  window.deleteRecord = (id) => { Swal.fire({ title: 'ลบข้อมูล?', text: "ไม่สามารถกู้คืนได้", icon: 'warning', showCancelButton: true }).then(async r => { if(r.isConfirmed) await remove(ref(db, 'reports/'+id)); }); }
+  window.deleteRecord = (id) => { 
+      Swal.fire({ title: 'ลบข้อมูล?', text: "ไม่สามารถกู้คืนได้", icon: 'warning', showCancelButton: true }).then(async r => { 
+          if(r.isConfirmed) await deleteDoc(doc(db, 'reports', id)); 
+      }); 
+  }
   
   window.editRecord = (id) => {
     var r = window.allData.find(x => x.id === id); if (!r) return;
